@@ -18,7 +18,7 @@ import jakarta.persistence.Table
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
-sealed class User: BaseEntity() {
+abstract class User: BaseEntity() {
 
     @Column(name = "password", nullable = false)
     val password: String? = null
@@ -27,7 +27,7 @@ sealed class User: BaseEntity() {
     val email: String? = null
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, updatable = false, insertable = false)
     val role: Role? = null
 }
 
