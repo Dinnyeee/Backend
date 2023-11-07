@@ -1,0 +1,279 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1698883816408-1
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 50
+            sequenceName: base_entity_seq
+            startValue: 1
+  - changeSet:
+      id: 1698883816408-2
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_appointment
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: date
+                  type: DATETIME
+            tableName: appointment
+  - changeSet:
+      id: 1698883816408-3
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_case
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: praxis_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: child_id
+                  type: BIGINT
+              - column:
+                  name: appointment_id
+                  type: BIGINT
+            tableName: case
+  - changeSet:
+      id: 1698883816408-4
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_child
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: taj
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nickname
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: family_id
+                  type: BIGINT
+            tableName: child
+  - changeSet:
+      id: 1698883816408-5
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_family
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  name: praxis_id
+                  type: BIGINT
+            tableName: family
+  - changeSet:
+      id: 1698883816408-6
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_praxis
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+            tableName: praxis
+  - changeSet:
+      id: 1698883816408-7
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role
+                  type: INTEGER
+              - column:
+                  name: praxis_id
+                  type: BIGINT
+              - column:
+                  name: family_id
+                  type: BIGINT
+            tableName: user
+  - changeSet:
+      id: 1698883816408-8
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: appointment_id
+            baseTableName: case
+            constraintName: FK_CASE_ON_APPOINTMENT
+            referencedColumnNames: id
+            referencedTableName: appointment
+  - changeSet:
+      id: 1698883816408-9
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: child_id
+            baseTableName: case
+            constraintName: FK_CASE_ON_CHILD
+            referencedColumnNames: id
+            referencedTableName: child
+  - changeSet:
+      id: 1698883816408-10
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: praxis_id
+            baseTableName: case
+            constraintName: FK_CASE_ON_PRAXIS
+            referencedColumnNames: id
+            referencedTableName: praxis
+  - changeSet:
+      id: 1698883816408-11
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: family_id
+            baseTableName: child
+            constraintName: FK_CHILD_ON_FAMILY
+            referencedColumnNames: id
+            referencedTableName: family
+  - changeSet:
+      id: 1698883816408-12
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: praxis_id
+            baseTableName: family
+            constraintName: FK_FAMILY_ON_PRAXIS
+            referencedColumnNames: id
+            referencedTableName: praxis
+  - changeSet:
+      id: 1698883816408-13
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: family_id
+            baseTableName: user
+            constraintName: FK_USER_ON_FAMILY
+            referencedColumnNames: id
+            referencedTableName: family
+  - changeSet:
+      id: 1698883816408-14
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: praxis_id
+            baseTableName: user
+            constraintName: FK_USER_ON_PRAXIS
+            referencedColumnNames: id
+            referencedTableName: praxis
+
