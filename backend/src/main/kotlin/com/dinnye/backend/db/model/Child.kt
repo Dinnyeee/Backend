@@ -13,7 +13,7 @@ import jakarta.persistence.Table
 @Table(name = "child")
 class Child: BaseEntity() {
 
-    @Column(name = "taj", nullable = false)
+    @Column(name = "taj", nullable = false, unique = true)
     val taj: String? = null
 
     @Column(name = "name", nullable = false)

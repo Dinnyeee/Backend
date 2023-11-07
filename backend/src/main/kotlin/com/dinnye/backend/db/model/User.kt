@@ -23,7 +23,7 @@ abstract class User: BaseEntity() {
     @Column(name = "password", nullable = false)
     val password: String? = null
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     val email: String? = null
 
     @Enumerated(EnumType.ORDINAL)
