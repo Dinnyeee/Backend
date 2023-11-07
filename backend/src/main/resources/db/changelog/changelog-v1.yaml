@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1699361717918-3
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: taj
+            constraintName: uc_child_taj
+            tableName: child
+  - changeSet:
+      id: 1699361717918-4
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uc_user_email
+            tableName: user
