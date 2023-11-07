@@ -1,6 +1,7 @@
 package com.dinnye.backend.db.model
 
 import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
@@ -10,6 +11,9 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "praxis")
 class Praxis: BaseEntity() {
+
+    @Column(name = "name", nullable = false)
+    val name: String? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "praxis", cascade = [CascadeType.PERSIST,
         CascadeType.MERGE,

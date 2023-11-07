@@ -14,7 +14,7 @@ import jakarta.persistence.Table
 class Case: BaseEntity() {
 
     @Column(name = "description", nullable = false)
-    val description: String = ""
+    val description: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")

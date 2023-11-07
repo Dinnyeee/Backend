@@ -20,6 +20,9 @@ import jakarta.persistence.Table
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 abstract class User: BaseEntity() {
 
+    @Column(name = "name", nullable = false)
+    val name: String? = null
+
     @Column(name = "password", nullable = false)
     val password: String? = null
 

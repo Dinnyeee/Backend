@@ -1,6 +1,7 @@
 package com.dinnye.backend.db.model
 
 import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
@@ -12,6 +13,9 @@ import jakarta.persistence.Table
 @Entity
 @Table(name = "family")
 class Family: BaseEntity() {
+
+    @Column(name = "name", nullable = false)
+    val name: String? = null
 
     @OneToOne(mappedBy = "family", optional = false, cascade = [CascadeType.MERGE])
     val parent: Parent? = null
