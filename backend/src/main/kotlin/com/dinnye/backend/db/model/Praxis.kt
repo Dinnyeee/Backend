@@ -13,7 +13,7 @@ import jakarta.persistence.Table
 class Praxis: BaseEntity() {
 
     @Column(name = "name", nullable = false)
-    val name: String? = null
+    var name: String? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "praxis", cascade = [CascadeType.PERSIST,
         CascadeType.MERGE,
@@ -24,10 +24,10 @@ class Praxis: BaseEntity() {
     val family: List<Family> = emptyList()
 
     @OneToOne(mappedBy = "praxis", cascade = [CascadeType.MERGE])
-    val doctor: Doctor? = null
+    var doctor: Doctor? = null
 
     @OneToOne(mappedBy = "praxis", cascade = [CascadeType.MERGE])
-    val assistant: Assistant? = null
+    var assistant: Assistant? = null
 
     @OneToMany(mappedBy = "praxis", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     val case: List<Case> = emptyList()

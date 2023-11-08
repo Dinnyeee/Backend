@@ -4,9 +4,6 @@ import jakarta.validation.constraints.NotEmpty
 import jakarta.validation.constraints.NotNull
 import java.io.Serializable
 
-/**
- * DTO for {@link com.dinnye.backend.db.model.Child}
- */
 data class ChildPutDto(
     @field:NotNull val id: Long? = null,
     @field:NotEmpty val taj: String? = null,

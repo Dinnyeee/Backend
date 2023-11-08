@@ -15,15 +15,15 @@ import jakarta.persistence.Table
 class Family: BaseEntity() {
 
     @Column(name = "name", nullable = false)
-    val name: String? = null
+    var name: String? = null
 
     @OneToOne(mappedBy = "family", optional = false, cascade = [CascadeType.MERGE])
-    val parent: Parent? = null
+    var parent: Parent? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "family", cascade = [CascadeType.ALL])
     val children: List<Child> = emptyList()
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")
-    val praxis: Praxis? = null
+    var praxis: Praxis? = null
 }
