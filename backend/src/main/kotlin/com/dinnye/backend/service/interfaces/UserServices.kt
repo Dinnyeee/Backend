@@ -11,20 +11,12 @@ interface UserService: SimpleCrudService<User> {
     fun findParentById(id: Long): Parent
 }
 
-interface DoctorService: UserService {
-    override fun create(entity: User): Doctor
-    override fun update(entity: User): Doctor
+interface DoctorService: SimpleCrudService<Doctor> {
     fun assignPraxis(praxisId: Long): Doctor
 }
-interface AssistantService: UserService {
-    override fun create(entity: User): Assistant
-    override fun update(entity: User): Assistant
+interface AssistantService: SimpleCrudService<Assistant>  {
     fun assignPraxis(praxisId: Long): Assistant
 }
-interface ParentService: UserService {
-    override fun create(entity: User): Parent
-    override fun update(entity: User): Parent
+interface ParentService: SimpleCrudService<Parent> {
     fun assignFamily(familyId: Long): Parent
 }
-
-interface AdminService: UserService {}
