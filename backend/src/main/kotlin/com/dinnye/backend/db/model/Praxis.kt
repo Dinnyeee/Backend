@@ -21,7 +21,7 @@ class Praxis: BaseEntity() {
         CascadeType.REFRESH,
         CascadeType.DETACH]
     )
-    val family: List<Family> = emptyList()
+    val families: List<Family> = emptyList()
 
     @OneToOne(mappedBy = "praxis", cascade = [CascadeType.MERGE])
     var doctor: Doctor? = null
@@ -30,5 +30,5 @@ class Praxis: BaseEntity() {
     var assistant: Assistant? = null
 
     @OneToMany(mappedBy = "praxis", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    val case: List<Case> = emptyList()
+    val cases: List<Case> = emptyList()
 }

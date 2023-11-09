@@ -1,11 +1,12 @@
 package com.dinnye.backend.dto.child
 
-import com.dinnye.backend.dto.ChildInfoDto
+import com.dinnye.backend.dto.CaseInfoDto
 import com.dinnye.backend.dto.FamilyInfoDto
+import com.dinnye.backend.util.Default
 import java.io.Serializable
 import java.util.*
 
-data class ChildGetDto(
+data class ChildGetDto @Default constructor (
     val id: Long? = null,
     val createdAt: Date? = null,
     val updatedAt: Date? = null,
@@ -13,5 +14,5 @@ data class ChildGetDto(
     val name: String? = null,
     val nickname: String? = null,
     val family: FamilyInfoDto? = null,
-    val cases: List<ChildInfoDto> = emptyList()
+    val cases: List<CaseInfoDto> = emptyList()
 ) : Serializable

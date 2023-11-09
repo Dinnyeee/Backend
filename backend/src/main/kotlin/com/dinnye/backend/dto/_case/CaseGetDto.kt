@@ -2,7 +2,7 @@ package com.dinnye.backend.dto._case
 
 import com.dinnye.backend.dto.ChildInfoDto
 import com.dinnye.backend.dto.PraxisInfoDto
-import com.dinnye.backend.mapper.Default
+import com.dinnye.backend.util.Default
 import java.io.Serializable
 import java.util.*
 

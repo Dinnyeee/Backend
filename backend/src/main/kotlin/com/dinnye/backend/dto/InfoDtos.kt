@@ -1,7 +1,7 @@
 package com.dinnye.backend.dto
 
 import com.dinnye.backend.db.model.Role
-import com.dinnye.backend.mapper.Default
+import com.dinnye.backend.util.Default
 import java.io.Serializable
 import java.util.*
 
@@ -23,10 +23,10 @@ data class FamilyInfoDto @Default constructor(
 ) : Serializable
 
 data class UserInfoDto @Default constructor(
-    val id: Long? = null,
-    val name: String? = null,
-    val email: String? = null,
-    val role: Role = Role.PARENT
+    var id: Long? = null,
+    var name: String? = null,
+    var email: String? = null,
+    var role: Role = Role.PARENT
 ) : Serializable
 
 data class CaseInfoDto @Default constructor(
