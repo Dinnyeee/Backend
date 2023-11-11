@@ -12,3 +12,10 @@ inline fun <reified T: BaseEntity> Optional<T>.throwWhenNotFound(id: Long): T {
 inline fun <reified T: BaseEntity> JpaRepository<T, Long>.findByIdOrThrow(id: Long): T {
     return this.findById(id).throwWhenNotFound(id)
 }
+
+inline fun <reified T: BaseEntity> JpaRepository<T, Long>.update(id: Long, update: T.() -> Unit): T {
+    val entity = this.findByIdOrThrow(id)
+    entity.update()
+    return this.saveAndFlush(entity)
+}
+

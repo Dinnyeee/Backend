@@ -1,9 +1,9 @@
 package com.dinnye.backend.service.implementation
 
-import com.dinnye.backend.db.model.Doctor
+import com.dinnye.backend.db.model.Assistant
 import com.dinnye.backend.db.model.Praxis
-import com.dinnye.backend.db.repository.DoctorRepository
-import com.dinnye.backend.service.interfaces.DoctorService
+import com.dinnye.backend.db.repository.AssistantRepository
+import com.dinnye.backend.service.interfaces.AssistantService
 import com.dinnye.backend.service.interfaces.PraxisService
 import com.dinnye.backend.service.interfaces.UserService
 import com.dinnye.backend.util.findByIdOrThrow
@@ -12,37 +12,35 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Transactional
 
-
 @Service
-class DoctorServiceImpl(
-    private val doctorRepository: DoctorRepository,
+class AssistantServiceImpl(
+    private val assistantRepository: AssistantRepository,
     private val userService: UserService,
     private val praxisService: PraxisService
-) : DoctorService {
-
+): AssistantService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun create(entity: Doctor): Doctor {
+    override fun create(entity: Assistant): Assistant {
         if (entity.praxis == null) {
             entity.praxis = Praxis().apply {
                 this.name = "${entity.name}'s praxis"
-                this.doctor = entity
+                this.assistant = entity
             }.also {
                 praxisService.create(it)
             }
         }
-        return userService.create(entity) as Doctor
+        return userService.create(entity) as Assistant
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun get(id: Long): Doctor = doctorRepository.findByIdOrThrow(id)
+    override fun get(id: Long): Assistant = assistantRepository.findByIdOrThrow(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun getAll(): List<Doctor> = doctorRepository.findAll()
+    override fun getAll(): List<Assistant> = assistantRepository.findAll()
 
     @Suppress("DuplicatedCode")
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun update(entity: Doctor): Doctor {
-        return doctorRepository.update(entity.id!!) {
+    override fun update(entity: Assistant): Assistant {
+        return assistantRepository.update(entity.id!!) {
             entity.name?.let { this.name = it }
             entity.password?.let { this.password = it }
             entity.email?.let { this.email = it }
@@ -51,11 +49,11 @@ class DoctorServiceImpl(
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun delete(id: Long) = doctorRepository.deleteById(id)
+    override fun delete(id: Long) = assistantRepository.deleteById(id)
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun assignPraxis(doctorId: Long, praxisId: Long): Doctor {
-        return doctorRepository.update(doctorId) {
+    override fun assignPraxis(assistantId: Long, praxisId: Long): Assistant {
+        return assistantRepository.update(assistantId) {
             this.praxis = praxisService.get(praxisId)
         }
     }

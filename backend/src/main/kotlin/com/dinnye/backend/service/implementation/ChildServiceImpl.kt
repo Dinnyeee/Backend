@@ -4,6 +4,7 @@ import com.dinnye.backend.db.model.Child
 import com.dinnye.backend.db.repository.ChildRepository
 import com.dinnye.backend.service.interfaces.ChildService
 import com.dinnye.backend.util.findByIdOrThrow
+import com.dinnye.backend.util.update
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Transactional
@@ -14,35 +15,23 @@ class ChildServiceImpl(
 ) : ChildService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun create(entity: Child): Child {
-        return childRepository.saveAndFlush(entity)
-    }
+    override fun create(entity: Child): Child = childRepository.saveAndFlush(entity)
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun get(id: Long): Child {
-        return childRepository.findByIdOrThrow(id)
-    }
+    override fun get(id: Long): Child = childRepository.findByIdOrThrow(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun getAll(): List<Child> {
-        return childRepository.findAll()
-    }
+    override fun getAll(): List<Child> = childRepository.findAll()
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun update(entity: Child): Child {
-        return childRepository.findByIdOrThrow(entity.id!!)
-            .apply {
-                entity.taj?.let { this.taj = it }
-                entity.name?.let { this.name = it }
-                entity.nickname?.let { this.nickname = it }
-                entity.family?.let { this.family }
-            }
-            .let {
-                childRepository.saveAndFlush(it)
-            }
+        return childRepository.update(entity.id!!) {
+            entity.taj?.let { this.taj = it }
+            entity.name?.let { this.name = it }
+            entity.nickname?.let { this.nickname = it }
+            entity.family?.let { this.family }
+        }
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun delete(id: Long) {
-        childRepository.deleteById(id)
-    }
+    override fun delete(id: Long) = childRepository.deleteById(id)
 }

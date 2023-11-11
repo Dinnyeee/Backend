@@ -8,6 +8,7 @@ import com.dinnye.backend.db.repository.UserRepository
 import com.dinnye.backend.service.interfaces.UserService
 import com.dinnye.backend.util.findByIdOrThrow
 import com.dinnye.backend.util.throwWhenNotFound
+import com.dinnye.backend.util.update
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Transactional
@@ -18,50 +19,33 @@ class UserServiceImpl(
 ): UserService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun create(entity: User): User {
-        return userRepository.saveAndFlush(entity)
-    }
+    override fun create(entity: User): User = userRepository.saveAndFlush(entity)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun get(id: Long): User {
-        return userRepository.findByIdOrThrow(id)
-    }
+    override fun get(id: Long): User = userRepository.findByIdOrThrow(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun getAll(): List<User> {
-        return userRepository.findAll()
-    }
+    override fun getAll(): List<User> = userRepository.findAll()
 
+    @Suppress("DuplicatedCode")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun update(entity: User): User {
-        return userRepository.findByIdOrThrow(entity.id!!)
-            .apply {
-                entity.name?.let { this.name = it }
-                entity.password?.let { this.password = it }
-                entity.email?.let { this.email = it }
-            }
-            .let {
-                userRepository.saveAndFlush(it)
-            }
+        return userRepository.update(entity.id!!) {
+            entity.name?.let { this.name = it }
+            entity.password?.let { this.password = it }
+            entity.email?.let { this.email = it }
+        }
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun delete(id: Long) {
-        userRepository.deleteById(id)
-    }
+    override fun delete(id: Long) = userRepository.deleteById(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun findAssistantById(id: Long): Assistant {
-        return userRepository.findAssistantById(id).throwWhenNotFound(id)
-    }
+    override fun findAssistantById(id: Long): Assistant = userRepository.findAssistantById(id).throwWhenNotFound(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun findDoctorById(id: Long): Doctor {
-        return userRepository.findDoctorById(id).throwWhenNotFound(id)
-    }
+    override fun findDoctorById(id: Long): Doctor = userRepository.findDoctorById(id).throwWhenNotFound(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun findParentById(id: Long): Parent {
-        return userRepository.findParentById(id).throwWhenNotFound(id)
-    }
+    override fun findParentById(id: Long): Parent = userRepository.findParentById(id).throwWhenNotFound(id)
 }

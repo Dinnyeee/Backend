@@ -12,11 +12,11 @@ interface UserService: SimpleCrudService<User> {
 }
 
 interface DoctorService: SimpleCrudService<Doctor> {
-    fun assignPraxis(praxisId: Long): Doctor
+    fun assignPraxis(doctorId: Long, praxisId: Long): Doctor
 }
 interface AssistantService: SimpleCrudService<Assistant>  {
-    fun assignPraxis(praxisId: Long): Assistant
+    fun assignPraxis(assistantId: Long, praxisId: Long): Assistant
 }
 interface ParentService: SimpleCrudService<Parent> {
-    fun assignFamily(familyId: Long): Parent
+    fun assignFamily(parentId: Long, familyId: Long): Parent
 }
