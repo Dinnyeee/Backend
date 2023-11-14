@@ -5,6 +5,7 @@ import com.dinnye.backend.dto._case.CasePostDto
 import com.dinnye.backend.dto._case.CasePutDto
 import com.dinnye.backend.mapper.CaseMapper
 import com.dinnye.backend.service.interfaces.CaseService
+import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 
-@Controller("/case")
+
+@Controller("/api/case")
 class CaseController(
     private val caseService: CaseService,
     private val mapper: CaseMapper
@@ -32,9 +34,10 @@ class CaseController(
     }
 
     @PostMapping
-    fun create(@Valid @RequestBody caseDto: CasePostDto): ResponseEntity<CaseGetDto> {
+    fun create(@Valid @RequestBody caseDto: CasePostDto): ResponseEntity<Unit> {
         val newCase = mapper.mapFromPost(caseDto)
-        return ResponseEntity.ok(mapper.mapToGet(caseService.create(newCase)))
+        val generatedId = caseService.create(newCase).id!!
+        return created(generatedId)
     }
 
     @PutMapping

@@ -8,7 +8,7 @@ import java.io.Serializable
 import java.util.*
 
 data class CasePutDto @Default constructor(
-    @field:NotNull val id: Long? = null,
+    val id: Long? = null,
     @field:NotBlank val description: String? = null,
     @field:NotNull val praxisId: Long? = null,
     @field:NotNull val childId: Long? = null,
