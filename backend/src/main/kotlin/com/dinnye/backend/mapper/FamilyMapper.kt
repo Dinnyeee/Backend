@@ -15,9 +15,15 @@ import com.dinnye.backend.util.PraxisIdTarget
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants.ComponentModel
+import org.mapstruct.factory.Mappers
 
 @Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, UserService::class, PraxisService::class])
 interface FamilyMapper: CommonMapper<Family, FamilyGetDto, FamilyPostDto, FamilyPutDto> {
+
+    companion object {
+        val INSTANCE: FamilyMapper = Mappers.getMapper(FamilyMapper::class.java)
+    }
+
     override fun mapToGet(entity: Family): FamilyGetDto
 
     @PraxisIdTarget

@@ -12,9 +12,15 @@ import com.dinnye.backend.util.IgnoreId
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants.ComponentModel
+import org.mapstruct.factory.Mappers
 
 @Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, FamilyService::class])
 interface ChildMapper: CommonMapper<Child, ChildGetDto, ChildPostDto, ChildPutDto> {
+
+    companion object {
+        val INSTANCE: ChildMapper = Mappers.getMapper(ChildMapper::class.java)
+    }
+
     override fun mapToGet(entity: Child): ChildGetDto
 
     @FamilyIdTarget

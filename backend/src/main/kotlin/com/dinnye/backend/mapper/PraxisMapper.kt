@@ -14,9 +14,14 @@ import com.dinnye.backend.util.IgnoreId
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants.ComponentModel
+import org.mapstruct.factory.Mappers
 
 @Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, UserService::class])
 interface PraxisMapper: CommonMapper<Praxis, PraxisGetDto, PraxisPostDto, PraxisPutDto> {
+
+    companion object {
+        val INSTANCE: PraxisMapper = Mappers.getMapper(PraxisMapper::class.java)
+    }
 
     override fun mapToGet(entity: Praxis): PraxisGetDto
 
