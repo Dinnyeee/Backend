@@ -16,13 +16,13 @@ abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "base_entity_seq")
     @SequenceGenerator(name = "base_entity_seq")
     @Column(name = "id", nullable = false)
-    val id: Long? = null
+    var id: Long? = null
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
-    val createdAt: Date? = null
+    var createdAt: Date? = null
 
     @UpdateTimestamp
     @Column(name = "updated_at")
-    val updatedAt: Date? = null
+    var updatedAt: Date? = null
 }

@@ -14,17 +14,17 @@ import jakarta.persistence.Table
 class Case: BaseEntity() {
 
     @Column(name = "description", nullable = false)
-    val description: String = ""
+    var description: String? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")
-    val praxis: Praxis? = null
+    var praxis: Praxis? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "child_id")
-    val child: Child? = null
+    var child: Child? = null
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "appointment_id", referencedColumnName = "id")
-    val appointment: Appointment? = null
+    var appointment: Appointment? = null
 }

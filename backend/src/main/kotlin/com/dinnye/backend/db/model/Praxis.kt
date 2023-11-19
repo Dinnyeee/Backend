@@ -1,6 +1,7 @@
 package com.dinnye.backend.db.model
 
 import jakarta.persistence.CascadeType
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
@@ -11,20 +12,23 @@ import jakarta.persistence.Table
 @Table(name = "praxis")
 class Praxis: BaseEntity() {
 
+    @Column(name = "name", nullable = false)
+    var name: String? = null
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "praxis", cascade = [CascadeType.PERSIST,
         CascadeType.MERGE,
         CascadeType.REMOVE,
         CascadeType.REFRESH,
         CascadeType.DETACH]
     )
-    val family: List<Family> = emptyList()
+    val families: List<Family> = emptyList()
 
     @OneToOne(mappedBy = "praxis", cascade = [CascadeType.MERGE])
-    val doctor: Doctor? = null
+    var doctor: Doctor? = null
 
     @OneToOne(mappedBy = "praxis", cascade = [CascadeType.MERGE])
-    val assistant: Assistant? = null
+    var assistant: Assistant? = null
 
     @OneToMany(mappedBy = "praxis", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    val case: List<Case> = emptyList()
+    val cases: List<Case> = emptyList()
 }

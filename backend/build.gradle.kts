@@ -7,6 +7,7 @@ plugins {
     kotlin("plugin.spring") version "1.8.22"
     kotlin("plugin.jpa") version "1.8.22"
     kotlin("plugin.allopen") version "1.8.22"
+    kotlin("kapt") version "1.8.22"
 }
 
 group = "com.dinnye"
@@ -32,12 +33,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.mapstruct:mapstruct:1.5.4.Final")
+    kapt("org.mapstruct:mapstruct-processor:1.5.4.Final")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    //developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")

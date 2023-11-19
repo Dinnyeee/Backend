@@ -20,15 +20,18 @@ import jakarta.persistence.Table
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
 abstract class User: BaseEntity() {
 
+    @Column(name = "name", nullable = false)
+    var name: String? = null
+
     @Column(name = "password", nullable = false)
-    val password: String? = null
+    var password: String? = null
 
     @Column(name = "email", nullable = false, unique = true)
-    val email: String? = null
+    var email: String? = null
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role", nullable = false, updatable = false, insertable = false)
-    val role: Role? = null
+    var role: Role? = null
 }
 
 @Entity
@@ -41,7 +44,7 @@ class Doctor: User() {
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "praxis_id", referencedColumnName = "id")
-    val praxis: Praxis? = null
+    var praxis: Praxis? = null
 }
 
 @Entity
@@ -50,7 +53,7 @@ class Assistant: User() {
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "praxis_id", referencedColumnName = "id")
-    val praxis: Praxis? = null
+    var praxis: Praxis? = null
 }
 
 @Entity
@@ -59,5 +62,5 @@ class Parent: User() {
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "family_id", referencedColumnName = "id")
-    val family: Family? = null
+    var family: Family? = null
 }
