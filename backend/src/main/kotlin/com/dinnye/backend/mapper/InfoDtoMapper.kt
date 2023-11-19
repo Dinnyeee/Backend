@@ -16,10 +16,11 @@ import com.dinnye.backend.dto.UserInfoDto
 import com.dinnye.backend.util.MapperUtil
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
+import org.mapstruct.MappingConstants.ComponentModel
 import org.mapstruct.MappingTarget
 import org.mapstruct.ReportingPolicy
 
-@Mapper(uses = [MapperUtil::class], unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = ComponentModel.SPRING, uses = [MapperUtil::class], unmappedTargetPolicy = ReportingPolicy.IGNORE)
 interface InfoDtoMapper {
     @Mapping(target = "families", ignore = true)
     @Mapping(target = "cases", ignore = true)

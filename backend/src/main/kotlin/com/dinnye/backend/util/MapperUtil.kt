@@ -3,8 +3,10 @@ package com.dinnye.backend.util
 import com.dinnye.backend.db.model.Appointment
 import org.mapstruct.Mapping
 import org.mapstruct.Named
+import org.springframework.stereotype.Component
 import java.util.*
 
+@Component
 object MapperUtil {
     @Named("dateToAppointment")
     fun dateToAppointment(date: Date?): Appointment = Appointment().apply {
