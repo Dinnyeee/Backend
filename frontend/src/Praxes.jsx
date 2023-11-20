@@ -5,6 +5,12 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Grid from '@mui/material/Grid';
+import Text from '@mui/material/ListItemText';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,16 +55,134 @@ export const Praxes = (props) => {
     
     <Container>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Families" {...a11yProps(0)} />
-            <Tab label="Assistants" {...a11yProps(1)} />
-        </Tabs>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tab label="Families" {...a11yProps(0)} />
+              <Tab label="Assistants" {...a11yProps(1)} />
+          </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-        ListOfFamilies
+          <Grid container>
+            <Text>
+              Families in my praxis
+            </Text>
+            <Text>
+              All families
+            </Text>
+          </Grid>
+          <Grid container>
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                position: 'relative',
+                overflow: 'auto',
+                maxHeight: 300,
+                '& ul': { padding: 0 },
+              }}
+              subheader={<li />}
+            >
+              {[0, 1, 2, 3, 4].map((sectionId) => (
+                <li key={`section-${sectionId}`}>
+                  <ul>
+                    <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                    {[0, 1, 2].map((item) => (
+                      <ListItem key={`item-${sectionId}-${item}`}>
+                        <ListItemText primary={`Item ${item}`} />
+                      </ListItem>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </List>
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                position: 'relative',
+                overflow: 'auto',
+                maxHeight: 300,
+                '& ul': { padding: 0 },
+              }}
+              subheader={<li />}
+            >
+              {[0, 1, 2, 3, 4].map((sectionId) => (
+                <li key={`section-${sectionId}`}>
+                  <ul>
+                    <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                    {[0, 1, 2].map((item) => (
+                      <ListItem key={`item-${sectionId}-${item}`}>
+                        <ListItemText primary={`Item ${item}`} />
+                      </ListItem>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </List>
+          </Grid>
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-        ListOfAssistans
+          <Grid container>
+            <Text>
+              Assistant in my praxis
+            </Text>
+            <Text>
+              All Assisstants
+            </Text>
+          </Grid>
+          <Grid container>
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                position: 'relative',
+                overflow: 'auto',
+                maxHeight: 300,
+                '& ul': { padding: 0 },
+              }}
+              subheader={<li />}
+            >
+              {[0, 1, 2, 3, 4].map((sectionId) => (
+                <li key={`section-${sectionId}`}>
+                  <ul>
+                    <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                    {[0, 1, 2].map((item) => (
+                      <ListItem key={`item-${sectionId}-${item}`}>
+                        <ListItemText primary={`Item ${item}`} />
+                      </ListItem>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </List>
+            <List
+              sx={{
+                width: '100%',
+                maxWidth: 360,
+                bgcolor: 'background.paper',
+                position: 'relative',
+                overflow: 'auto',
+                maxHeight: 300,
+                '& ul': { padding: 0 },
+              }}
+              subheader={<li />}
+            >
+              {[0, 1, 2, 3, 4].map((sectionId) => (
+                <li key={`section-${sectionId}`}>
+                  <ul>
+                    <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
+                    {[0, 1, 2].map((item) => (
+                      <ListItem key={`item-${sectionId}-${item}`}>
+                        <ListItemText primary={`Item ${item}`} />
+                      </ListItem>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </List>
+          </Grid>
         </CustomTabPanel>
             
     </Container>
