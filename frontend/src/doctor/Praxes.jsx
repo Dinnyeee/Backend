@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Grid from '@mui/material/Grid';
 import Text from '@mui/material/ListItemText';
-
+import AppBar from '@mui/material/AppBar';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -52,7 +52,50 @@ export const Praxes = (props) => {
     };
 
     return (
-    
+      <div>
+      <AppBar position="static">
+      <Container maxWidth="sm">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            General Practitioner Site
+          </Typography>
+
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            GPApp
+          </Typography>
+        
+        </Toolbar>
+      </Container>
+    </AppBar>
     <Container>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -186,5 +229,6 @@ export const Praxes = (props) => {
         </CustomTabPanel>
             
     </Container>
+    </div>
 );
 }
