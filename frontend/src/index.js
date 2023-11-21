@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Praxes} from './doctor/Praxes';
+import {Appointments} from './doctor/Appointments';
+import {Register} from './login_register/Register';
+import {Login} from './login_register/Login';
+import {AddNewAppointmentForm} from './doctor/AddNewAppointmentForm';
+import { DoctorStart } from './doctor/DoctorStart';
 
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
@@ -19,6 +25,27 @@ const router = createBrowserRouter([
     path: "/praxes",
     element: <Praxes/>
   },
+  {
+    path: "/appointments",
+    element: <Appointments/>
+  },
+  {
+    path: "/login",
+    element: <Login/>
+  },
+  {
+    path: "/register",
+    element: <Register/>
+  },
+  {
+    path: "/addnewappointmentform",
+    element: <AddNewAppointmentForm/>
+  },
+  {
+    path: "/doctorstart",
+    element: <DoctorStart/>
+  },
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

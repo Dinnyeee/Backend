@@ -20,7 +20,7 @@ export const Appointments = (props) => {
     
     return (
       <div>
-            <AppBar position="static">
+          <AppBar position="static">
           <Container maxWidth="sm">
             <Toolbar disableGutters>
               <Typography
@@ -66,7 +66,7 @@ export const Appointments = (props) => {
         <Container>
           <Container>
             <Button>
-              <Link to = '/praxes'>
+              <Link to = '/addnewappointmentform'>
                 Add new appointment dates
               </Link>
               
