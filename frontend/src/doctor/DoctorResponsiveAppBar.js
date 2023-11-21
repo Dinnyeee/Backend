@@ -78,11 +78,39 @@ function DoctorResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                      <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      > 
+                        <Link to = '/praxes'>
+                          Praxes
+                        </Link>
+                        
+                      </Button>
+                      <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      > 
+                        <Link to = '/appointments'>
+                          Appointments
+                        </Link>
+                        
+                      </Button>
+                      <Button
+                        onClick={handleCloseNavMenu}
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                      > 
+                        <Link to = '/cases'>
+                          Cases
+                        </Link>
+                        
+                      </Button>
+                    </Typography>
                 </MenuItem>
-              ))}
+              
             </Menu>
           </Box>
           <Typography
