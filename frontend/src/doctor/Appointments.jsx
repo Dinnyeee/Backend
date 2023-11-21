@@ -64,7 +64,7 @@ export const Appointments = (props) => {
           </Container>
         </AppBar>
         <Container>
-          <Container>
+          <Container maxWidth="sm">
             <Button>
               <Link to = '/addnewappointmentform'>
                 Add new appointment dates
