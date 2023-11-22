@@ -1,13 +1,6 @@
 package com.dinnye.backend.mapper
 
-import com.dinnye.backend.db.model.Admin
-import com.dinnye.backend.db.model.Assistant
-import com.dinnye.backend.db.model.Case
-import com.dinnye.backend.db.model.Child
-import com.dinnye.backend.db.model.Doctor
-import com.dinnye.backend.db.model.Family
-import com.dinnye.backend.db.model.Parent
-import com.dinnye.backend.db.model.Praxis
+import com.dinnye.backend.db.model.*
 import com.dinnye.backend.dto.CaseInfoDto
 import com.dinnye.backend.dto.ChildInfoDto
 import com.dinnye.backend.dto.FamilyInfoDto
@@ -58,6 +51,10 @@ interface InfoDtoMapper {
     fun map(assistant: Assistant, @MappingTarget dto: UserInfoDto)
 
     fun map(parent: Parent, @MappingTarget dto: UserInfoDto)
+
+    fun map(user: User): UserInfoDto
+
+    fun map(userInfoDto: UserInfoDto): User
 
     @Mapping(target = "appointmentDate", source = "appointment.date")
     fun map(dto: Case): CaseInfoDto
