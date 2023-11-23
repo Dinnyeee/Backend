@@ -2,6 +2,7 @@ package com.dinnye.backend.controller
 
 import com.dinnye.backend.db.model.Doctor
 import com.dinnye.backend.dto.UserInfoDto
+import com.dinnye.backend.dto.UserPostDto
 import com.dinnye.backend.mapper.InfoDtoMapper
 import com.dinnye.backend.service.interfaces.DoctorService
 import com.dinnye.backend.util.created
@@ -27,9 +28,9 @@ class DoctorController (
     }
 
     @PostMapping
-    fun create(@Valid @RequestBody userInfoDto: UserInfoDto): ResponseEntity<Unit> {
+    fun create(@Valid @RequestBody userPostDto: UserPostDto): ResponseEntity<Unit> {
         val newDoctor = Doctor()
-        mapper.map(userInfoDto, newDoctor)
+        mapper.map(userPostDto, newDoctor)
         val generatedId = doctorService.create(newDoctor).id!!
         return created(generatedId)
     }

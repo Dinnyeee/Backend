@@ -1,9 +1,9 @@
-package com.dinnye.backend.controller;
+package com.dinnye.backend.controller
 
 import com.dinnye.backend.db.model.Parent
 import com.dinnye.backend.dto.UserInfoDto
-import com.dinnye.backend.mapper.InfoDtoMapper;
-import com.dinnye.backend.service.interfaces.ParentService;
+import com.dinnye.backend.mapper.InfoDtoMapper
+import com.dinnye.backend.service.interfaces.ParentService
 import com.dinnye.backend.util.created
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

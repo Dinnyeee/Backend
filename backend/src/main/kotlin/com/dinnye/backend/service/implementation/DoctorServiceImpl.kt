@@ -22,6 +22,7 @@ class DoctorServiceImpl(
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Doctor): Doctor {
+        userService.create(entity) as Doctor //Ha ez a returnben van akkor TransientPropertyValueException-t dob
         if (entity.praxis == null) {
             entity.praxis = Praxis().apply {
                 this.name = "${entity.name}'s praxis"
@@ -30,7 +31,7 @@ class DoctorServiceImpl(
                 praxisService.create(it)
             }
         }
-        return userService.create(entity) as Doctor
+        return entity
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
