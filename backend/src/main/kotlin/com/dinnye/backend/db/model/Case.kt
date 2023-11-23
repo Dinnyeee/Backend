@@ -10,7 +10,7 @@ import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "case")
+@Table(name = "case_table")
 class Case: BaseEntity() {
 
     @Column(name = "description", nullable = false)
