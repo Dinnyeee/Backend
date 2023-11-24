@@ -20,6 +20,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 
+
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -31,12 +32,14 @@ const rows = [
   createData('Cupcake', 305, 3.7, 4.3),
   createData('Gingerbread', 356, 49, 3.9),
 ];
-function ListChild() {
+export const ListChild = (props) =>  {
+ const children = props.children
+
 return (
 <Container>
           <Container maxWidth="sm">
-            <Button>
-              <Link to = '/addnewchild'>
+            <Button variant="contained">
+              <Link to = '/addchild'>
                 Add new child
               </Link>
               
@@ -44,13 +47,13 @@ return (
           </Container>
           <Grid container>
                 <Text>
-                  Num.
+                  Id
                 </Text>
                 <Text>
-                  Family
+                  Name
                 </Text>
                 <Text>
-                  Date
+                  TAJ
                 </Text>
               </Grid>
           <Grid container>
@@ -66,20 +69,17 @@ return (
               }}
               subheader={<li />}
             >
-              {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
+            
                   <ul>
-                    <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-                    {[0, 1, 2].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
+                    {children.map((item) => (
+                      <ListItem>
+                        <ListItemText primary={`${item.id}`} />
+                        <ListItemText primary={`Item ${item.name}`} />
+                        <ListItemText primary={`Item ${item.taj}`} />
                       </ListItem>
                     ))}
                   </ul>
-                </li>
-              ))}
+               
             </List>
             
           </Grid>

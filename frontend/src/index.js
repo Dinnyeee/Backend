@@ -18,6 +18,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Cases } from './doctor/Cases';
+import AddChild from 'parent/AddChild';
 
 
 
@@ -58,13 +59,18 @@ const router = createBrowserRouter([
     path: "/parent",
     element: <Parent/>,       //a default a case-es oldal lesz, így ennek nem kell külön route
   },
-        {path: "/admin",
-        element: <AdminPage/>
-        },
-        {
-        path: "/myappointments",
-        element: <MyAppointments/>
-        },
+  {
+    path: "/admin",
+    element: <AdminPage/>
+   },
+  {
+    path: "/myappointments",
+    element: <MyAppointments/>
+  },
+  {
+    path: "/addchild",
+    element: <AddChild/>
+  },
       
     
   

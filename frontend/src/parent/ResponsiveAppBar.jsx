@@ -10,12 +10,29 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Link } from "react-router-dom";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+
 
 
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const navigate= useNavigate();
+
+  const navigateToHome = () => {
+    navigate('/parent');
+  }
+  const navigateToAdmin = () => {
+    navigate('/admin');
+  }
+  const navigateToAppointments = () => {
+    navigate('/myappointments');
+  }
+  const navigateToLogin = () => {
+    navigate('/');
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -82,19 +99,19 @@ function ResponsiveAppBar() {
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
                       
-                      <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                        <Link to = '/admin'>Admin</Link>
+                      <Button onClick={navigateToAdmin} sx={{ my: 2, display: 'block' }}> 
+                       Admin
                       </Button>
 
-                       <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                        <Link to = '/cases'>Cases</Link>
+                       <Button onClick={navigateToHome} sx={{ my: 2, display: 'block' }}>
+                     Cases
                       </Button>
                       
-                      <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                         <Link to = '/appointments'>Appointments</Link>
+                      <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
+                       Appointments
                       </Button>
-                    <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                         <Link to = '/'>Log out</Link>  
+                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                        Log out 
                      </Button>
                     
                     </Typography>
@@ -120,25 +137,25 @@ function ResponsiveAppBar() {
           >
             GPApp
           </Typography>
-          <Box sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
+          <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
               
-              <Button onClick={handleCloseNavMenu}sx={{ my: 2, color: 'white', display: 'block' }}> 
-                <Link to = '/admin'> Admin </Link>
+              <Button variant="contained" onClick={navigateToAdmin}> 
+                Admin
               </Button>
 
-              <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                 <Link to = '/cases'>Cases</Link>                
+              <Button variant="contained" onClick={navigateToHome}> 
+              Cases           
               </Button>
 
-              <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                <Link to = '/appointments'>Appointments</Link> 
+              <Button variant="contained" onClick={navigateToAppointments} > 
+              Appointments
               </Button>
 
-              <Button onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}> 
-                <Link to = '/'>Log Out</Link>                 
+              <Button variant="contained" onClick={navigateToLogin}> 
+             Log out   
               </Button>
             
-          </Box>
+          </Container>
 
           
         </Toolbar>
