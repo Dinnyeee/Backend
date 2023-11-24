@@ -17,6 +17,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Cases } from './doctor/Cases';
 
 
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/doctorstart",
     element: <DoctorStart/>
+  },
+  {
+    path: "/cases",
+    element: <Cases/>
   },
   {
     path: "/parent",

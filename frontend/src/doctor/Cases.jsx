@@ -7,19 +7,13 @@ import ListSubheader from '@mui/material/ListSubheader';
 import Grid from '@mui/material/Grid';
 import Text from '@mui/material/ListItemText';
 import { Button } from "@mui/base";
-import { Praxes } from "./Praxes";
 import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
-
-export const Appointments = (props) => {
-    
-    const [value, setValue] = React.useState(0);
-    
-    return (
-      <div>
+export const Cases = (props) => {
+  return (
+    <div>
           <AppBar position="static">
           <Container maxWidth="sm">
             <Toolbar disableGutters>
@@ -64,14 +58,7 @@ export const Appointments = (props) => {
           </Container>
         </AppBar>
         <Container>
-          <Container maxWidth="sm">
-            <Button>
-              <Link to = '/addnewappointmentform'>
-                Add new appointment dates
-              </Link>
-              
-            </Button>
-          </Container>
+          
           <Grid container>
                 <Text>
                   Num.
@@ -81,6 +68,12 @@ export const Appointments = (props) => {
                 </Text>
                 <Text>
                   Date
+                </Text>
+                <Text>
+                  Status
+                </Text>
+                <Text>
+                  Priority
                 </Text>
               </Grid>
           <Grid container>
@@ -96,12 +89,14 @@ export const Appointments = (props) => {
               }}
               subheader={<li />}
             >
-              {[1].map((sectionId) => (
+              {[0].map((sectionId) => (
                 <li key={`section-${sectionId}`}>
                   <ul>
-                   {[1, 2, 3].map((item) => (
+                    {[0, 1, 2, 3, 4].map((item) => (
                       <ListItem key={`item-${sectionId}-${item}`}>
                         <ListItemText primary={`${item}`} />
+                        <ListItemText primary={`Item ${item}`} />
+                        <ListItemText primary={`Item ${item}`} />
                         <ListItemText primary={`Item ${item}`} />
                         <ListItemText primary={`Item ${item}`} />
                       </ListItem>
@@ -114,5 +109,5 @@ export const Appointments = (props) => {
           </Grid>
         </Container>
     </div>
-);
+  );
 }
