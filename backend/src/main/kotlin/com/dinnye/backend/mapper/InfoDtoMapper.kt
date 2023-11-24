@@ -6,7 +6,6 @@ import com.dinnye.backend.dto.ChildInfoDto
 import com.dinnye.backend.dto.FamilyInfoDto
 import com.dinnye.backend.dto.PraxisInfoDto
 import com.dinnye.backend.dto.UserInfoDto
-import com.dinnye.backend.dto.UserPostDto
 import com.dinnye.backend.util.MapperUtil
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
@@ -45,11 +44,11 @@ interface InfoDtoMapper {
 
     fun map(dto: Family): FamilyInfoDto
 
-    fun map(doctor: Doctor): UserInfoDto //ambiguous 2step methods found error fix
+    fun map(doctor: Doctor): UserInfoDto
 
-    fun map(assistant: Assistant): UserInfoDto //ambiguous 2step methods found error fix
+    fun map(assistant: Assistant): UserInfoDto
 
-    fun map(parent: Parent): UserInfoDto //ambiguous 2step methods found error fix
+    fun map(parent: Parent): UserInfoDto
 
     fun map(doctor: Doctor, @MappingTarget dto: UserInfoDto)
 
@@ -60,11 +59,6 @@ interface InfoDtoMapper {
     fun map(parent: Parent, @MappingTarget dto: UserInfoDto)
 
     fun map(user: User): UserInfoDto
-
-    //The return type User is an abstract class or interface. Provide a non abstract / non interface result type or a factory method.
-    //fun map(userInfoDto: UserInfoDto): User
-
-    fun map(userPostDto: UserPostDto, @MappingTarget doctor: Doctor)
 
     @Mapping(target = "appointmentDate", source = "appointment.date")
     fun map(dto: Case): CaseInfoDto

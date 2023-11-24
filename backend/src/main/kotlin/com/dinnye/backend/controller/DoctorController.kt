@@ -2,7 +2,10 @@ package com.dinnye.backend.controller
 
 import com.dinnye.backend.db.model.Doctor
 import com.dinnye.backend.dto.UserInfoDto
-import com.dinnye.backend.dto.UserPostDto
+import com.dinnye.backend.dto.doctor.DoctorGetDto
+import com.dinnye.backend.dto.doctor.DoctorPostDto
+import com.dinnye.backend.dto.doctor.DoctorPutDto
+import com.dinnye.backend.mapper.DoctorMapper
 import com.dinnye.backend.mapper.InfoDtoMapper
 import com.dinnye.backend.service.interfaces.DoctorService
 import com.dinnye.backend.util.created
@@ -14,23 +17,22 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/doctor")
 class DoctorController (
     private val doctorService: DoctorService,
-    private val mapper: InfoDtoMapper
+    private val mapper: DoctorMapper
 ) {
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<UserInfoDto>> {
-        return ResponseEntity.ok(doctorService.getAll().map { mapper.map(it) })
+    fun getAll(): ResponseEntity<List<DoctorGetDto>> {
+        return ResponseEntity.ok(doctorService.getAll().map { mapper.mapToGet(it) })
     }
 
     @GetMapping("/{id}")
-    fun get(@PathVariable id: Long): ResponseEntity<UserInfoDto> {
-        return ResponseEntity.ok(mapper.map(doctorService.get(id)))
+    fun get(@PathVariable id: Long): ResponseEntity<DoctorGetDto> {
+        return ResponseEntity.ok(mapper.mapToGet(doctorService.get(id)))
     }
 
     @PostMapping
-    fun create(@Valid @RequestBody userPostDto: UserPostDto): ResponseEntity<Unit> {
-        val newDoctor = Doctor()
-        mapper.map(userPostDto, newDoctor)
+    fun create(@Valid @RequestBody doctorPostDto: DoctorPostDto): ResponseEntity<Unit> {
+        val newDoctor = mapper.mapFromPost(doctorPostDto)
         val generatedId = doctorService.create(newDoctor).id!!
         return created(generatedId)
     }
@@ -41,10 +43,9 @@ class DoctorController (
         return ResponseEntity.ok("Delete was successful")
     }
 
-    @PutMapping("/{id}")
-    fun update(@PathVariable id: Long, userInfoDto: UserInfoDto): ResponseEntity<UserInfoDto> {
-        val newDoctor = Doctor()
-        mapper.map(userInfoDto, newDoctor)
-        return ResponseEntity.ok(mapper.map(doctorService.update(newDoctor)))
+    @PutMapping
+    fun update(@Valid @RequestBody doctorPutDto: DoctorPutDto): ResponseEntity<DoctorGetDto> {
+        val newDoctor = mapper.mapFromPut(doctorPutDto)
+        return ResponseEntity.ok(mapper.mapToGet(doctorService.update(newDoctor)))
     }
 }

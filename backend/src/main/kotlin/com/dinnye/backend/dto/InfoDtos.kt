@@ -35,9 +35,3 @@ data class CaseInfoDto @Default constructor(
     val appointmentDate: Date? = null
 ) : Serializable
 
-data class UserPostDto @Default constructor( //Szóval ez Doctor post csak szenved a refactor-rename, meg tudom h nem ide kell
-    var name: String? = null,
-    var email: String? = null,
-    var password: String? = null,
-    var praxisId: Long? = null,
-) : Serializable

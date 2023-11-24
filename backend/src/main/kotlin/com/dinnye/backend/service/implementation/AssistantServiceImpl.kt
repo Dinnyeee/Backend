@@ -20,6 +20,7 @@ class AssistantServiceImpl(
 ): AssistantService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Assistant): Assistant {
+        userService.create(entity) as Assistant
         if (entity.praxis == null) {
             entity.praxis = Praxis().apply {
                 this.name = "${entity.name}'s praxis"
@@ -28,7 +29,7 @@ class AssistantServiceImpl(
                 praxisService.create(it)
             }
         }
-        return userService.create(entity) as Assistant
+        return entity
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
