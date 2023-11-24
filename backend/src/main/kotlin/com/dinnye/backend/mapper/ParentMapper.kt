@@ -7,6 +7,7 @@ import com.dinnye.backend.dto.parent.ParentPutDto
 import com.dinnye.backend.service.interfaces.FamilyService
 import com.dinnye.backend.util.*
 import org.mapstruct.Mapper
+import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants
 import org.mapstruct.factory.Mappers
 
@@ -17,6 +18,7 @@ interface ParentMapper: CommonMapper<Parent, ParentGetDto, ParentPostDto, Parent
             val INSTANCE: ParentMapper = Mappers.getMapper(ParentMapper::class.java)
         }
 
+        @Mapping(target = "familyId", source = "family.id")
         override fun mapToGet(entity: Parent): ParentGetDto
 
         @FamilyIdTarget

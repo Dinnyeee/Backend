@@ -7,6 +7,7 @@ import com.dinnye.backend.dto.doctor.DoctorPutDto
 import com.dinnye.backend.service.interfaces.PraxisService
 import com.dinnye.backend.util.*
 import org.mapstruct.Mapper
+import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants
 import org.mapstruct.factory.Mappers
 
@@ -16,6 +17,8 @@ interface DoctorMapper: CommonMapper<Doctor, DoctorGetDto, DoctorPostDto, Doctor
     companion object {
         val INSTANCE: DoctorMapper = Mappers.getMapper(DoctorMapper::class.java)
     }
+
+    @Mapping(target="praxisId", source="praxis.id")
 
     override fun mapToGet(entity: Doctor): DoctorGetDto
 

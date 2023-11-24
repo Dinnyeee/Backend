@@ -18,7 +18,7 @@ interface AssistantMapper: CommonMapper<Assistant, AssistantGetDto, AssistantPos
             val INSTANCE: AssistantMapper = Mappers.getMapper(AssistantMapper::class.java)
         }
 
-        //@Mapping(target="praxisId", source="praxis.id")
+        @Mapping(target="praxisId", source="praxis.id")
         override fun mapToGet(entity: Assistant): AssistantGetDto
 
         @PraxisIdTarget

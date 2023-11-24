@@ -8,5 +8,5 @@ data class AssistantGetDto @Default constructor(
     val id: Long? = null,
     val name: String? = null,
     val email: String? = null,
-    val praxisId: PraxisInfoDto? = null
+    val praxisId: Long? = null
 ) : Serializable

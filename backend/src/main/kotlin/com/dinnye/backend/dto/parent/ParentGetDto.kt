@@ -8,5 +8,5 @@ data class ParentGetDto @Default constructor (
     val id: Long? = null,
     val name: String? = null,
     val email: String? = null,
-    val familyId: FamilyInfoDto? = null
+    val familyId: Long? = null
 ) : Serializable
