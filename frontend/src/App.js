@@ -24,8 +24,8 @@ function App() {
               
     <div className="App">
       <div>
-       <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
-      </div>
+       <SimpleAppBar></SimpleAppBar>
+  </div>
       {
         currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
       }
