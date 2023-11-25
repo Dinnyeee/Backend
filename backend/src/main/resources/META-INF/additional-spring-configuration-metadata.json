@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "backend.chat-app.allowed-origin",
+      "type": "java.lang.String",
+      "description": "Allowed origin for chat app."
+    },
+    {
+      "name": "backend.chat-app.appId",
+      "type": "java.lang.String",
+      "description": "AppId for pusher."
+    },
+    {
+      "name": "backend.chat-app.key",
+      "type": "java.lang.String",
+      "description": "Key for pusher."
+    },
+    {
+      "name": "backend.chat-app.secret",
+      "type": "java.lang.String",
+      "description": "Secret for pusher."
+    },
+    {
+      "name": "backend.chat-app.cluster",
+      "type": "java.lang.String",
+      "description": "Cluster for pusher."
+    }
+  ]
+}
