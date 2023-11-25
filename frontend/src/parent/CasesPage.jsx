@@ -1,11 +1,16 @@
 import React from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
-import { Visibility } from "@mui/icons-material";
+import { Height, Visibility } from "@mui/icons-material";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { useNavigate } from "react-router-dom";
 
 
 
 export const CasesPage = (props) => {
+
+    const navigate= useNavigate();
+
 
   const options = ['Option 1', 'Option 2'];
   const [childValue, setChildValue] = React.useState('');
@@ -17,6 +22,10 @@ export const CasesPage = (props) => {
   const handleChange = (event) => {
     setPrio(event.target.value);
   };
+
+  const handleAddNewCase = (e) => {
+    navigate('/addcase');
+  }
 
 
   const cases = [
@@ -34,13 +43,18 @@ export const CasesPage = (props) => {
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             style={{ minHeight: '80vh' }}
         >
 
             <Grid item xs={3}>
 
 <div className="search-field">
+
+        <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={handleAddNewCase}>
+          Add
+        </Button>
+
         <Autocomplete 
             
             value={childValue}
@@ -66,11 +80,12 @@ export const CasesPage = (props) => {
               id="demo-simple-select"
               value={status}
               label="Status"
-              onChange={handleChange}
+              onChange={(e) => setStatus(e.target.value)}
             >
-                <MenuItem value={10}>NEW</MenuItem>
-                <MenuItem value={20}>IN PROGRESS</MenuItem>
-                <MenuItem value={30}>CLOSED</MenuItem>
+                <MenuItem value={"New"}>New</MenuItem>
+                <MenuItem value={"In Progress"}>In Progress</MenuItem>
+                <MenuItem value={"Closed"}>Closed</MenuItem>
+                <MenuItem value={"All"}>All</MenuItem>
             </Select>
         </FormControl>
 

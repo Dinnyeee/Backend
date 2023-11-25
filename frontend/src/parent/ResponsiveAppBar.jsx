@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
     navigate('/parent');
   }
   const navigateToAdmin = () => {
-    navigate('/admin');
+    navigate('/adminparent');
   }
   const navigateToAppointments = () => {
     navigate('/myappointments');

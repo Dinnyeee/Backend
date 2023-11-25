@@ -9,12 +9,30 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import {Routes, Route, useNavigate} from 'react-router-dom';
+
+
 
 
 function AdminResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const navigate= useNavigate();
+
+  const navigateToHome = () => {
+    navigate('/administration');
+  }
+  const navigateToAdmin = () => {
+    navigate('/admin');
+  }
+  const navigateToAppointments = () => {
+    navigate('/myappointments');
+  }
+  const navigateToLogin = () => {
+    navigate('/');
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -80,15 +98,21 @@ function AdminResponsiveAppBar() {
               
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
-                      > 
-                        <Link to = '/logout'>
-                          Log Out
-                        </Link>
-                        
+                      
+                      <Button onClick={navigateToAdmin} sx={{ my: 2, display: 'block' }}> 
+                       Admin
                       </Button>
+
+                       <Button onClick={navigateToHome} sx={{ my: 2, display: 'block' }}>
+                     Cases
+                      </Button>
+                      
+                      <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
+                       Appointments
+                      </Button>
+                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                        Log out 
+                     </Button>
                     
                     </Typography>
                 </MenuItem>
@@ -113,18 +137,25 @@ function AdminResponsiveAppBar() {
           >
             GPApp
           </Typography>
-          <Box sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
-           
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              > 
-                <Link to = '/'>
-                  Log out
-                </Link>
-                
+          <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
+              
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAdmin}> 
+                Admin
               </Button>
-          </Box>
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToHome}> 
+              Cases           
+              </Button>
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAppointments} > 
+              Appointments
+              </Button>
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
+             Log out   
+              </Button>
+            
+          </Container>
 
           
         </Toolbar>

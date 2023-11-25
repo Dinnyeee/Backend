@@ -21,6 +21,9 @@ import { Cases } from './doctor/Cases';
 import AddChild from 'parent/AddChild';
 import EditChild from 'parent/EditChild';
 import TestComponent from 'services/test';
+import BookAppointment from 'parent/BookAppointment';
+import AddCase from 'parent/AddCase';
+
 
 
 
@@ -62,7 +65,7 @@ const router = createBrowserRouter([
     element: <Parent/>,       //a default a case-es oldal lesz, így ennek nem kell külön route
   },
   {
-    path: "/admin",
+    path: "/adminparent",
     element: <AdminPage/>
    },
   {
@@ -85,9 +88,16 @@ const router = createBrowserRouter([
     
   
   {
+    path: "/addcase",
+    element: <AddCase/>
+  },
+  {
+    path: "/bookappointment",
+    element: <BookAppointment/>
+  },
+  {
     path: "/administration",
     element: <AdminHome/>,
-
   }
   
 ]);

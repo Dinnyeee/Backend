@@ -63,6 +63,15 @@
   padding: 30px;
   margin: 30px;
 }
+.mycard-case-form{
+  display: flex;
+  padding: 50px;
+}
+.mycard-case-form .description{
+  min-width: 400px;
+}
+
+
 .myform{
   display: flex;
   justify-content: center;
@@ -94,17 +103,35 @@
 }
 
 .admin-parent{
-  margin:20px;
+  margin-top:20px;
 }
 .admin-parent  .add-new-button{
   margin-bottom:30px;
 }
 
 .cases-parent{
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .search-field{
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.book-appointment-container{
+  width: max-content;
+  display: flex;
+  justify-content:space-around;
+  margin:20px;
+  padding:20px;
+}
+
+.fix-center-card{
+  display: flex;
+  justify-content: center;
+}
+.date-picker-container{
+  width:max-content;
+  margin:30px;  
 }

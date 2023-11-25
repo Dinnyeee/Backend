@@ -11,14 +11,14 @@ export default function AddChild(){
     const [name, setName] = useState('');
     const [taj, setTaj] = useState('');
     const [birth, setBirth] = useState('');
-     const [nameError, setNameError] = useState(false); 
+    const [nameError, setNameError] = useState(false); 
     const [tajError, setTajError] = useState(false); 
     const [birthError, setBirthError] = useState(false); 
     
     const navigate = useNavigate();
     
-    const navigateToHome = () => {
-        navigate('/admin');
+    const navigateToHome = () => { 
+        navigate('/adminparent');
   }
      const handleSubmit = (e) => {
         e.preventDefault()
@@ -57,7 +57,7 @@ export default function AddChild(){
             spacing={0}
             direction="column"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             style={{ minHeight: '80vh' }}
         >
 
