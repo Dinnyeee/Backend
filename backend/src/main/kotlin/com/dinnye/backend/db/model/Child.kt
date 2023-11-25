@@ -7,6 +7,7 @@ import jakarta.persistence.FetchType
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import java.util.*
 
 
 @Entity
@@ -21,6 +22,9 @@ class Child: BaseEntity() {
 
     @Column(name = "nickname", nullable = false)
     var nickname: String? = null
+
+    @Column(name = "birthday", nullable = false)
+    var birthday: Date? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     var family: Family? = null

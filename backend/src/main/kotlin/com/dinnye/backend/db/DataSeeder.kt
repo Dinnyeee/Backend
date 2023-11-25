@@ -79,6 +79,7 @@ class DataSeeder(
             this.taj = "TEST1"
             this.name = "Test Child 1"
             this.nickname = "Test Child 1"
+            this.birthday = Date().now()
             this.family = family
             this.cases.add(createCase(this, praxis))
         },
@@ -86,6 +87,7 @@ class DataSeeder(
             this.taj = "TEST2"
             this.name = "Test Child 2"
             this.nickname = "Test Child 2"
+            this.birthday = Date().now()
             this.family = family
             this.cases.add(createCase(this, praxis))
         } ,
@@ -93,6 +95,7 @@ class DataSeeder(
             this.taj = "TEST3"
             this.name = "Test Child 3"
             this.nickname = "Test Child 3"
+            this.birthday = Date().now()
             this.family = family
             this.cases.add(createCase(this, praxis))
         }
