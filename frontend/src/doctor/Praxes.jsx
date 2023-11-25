@@ -59,11 +59,25 @@ export const Praxes = (props) => {
       { id:3, name: "Peter"},
       { id:4, name: "Nemeth"},
     ])
+    const [allfamilies, setAllFamily] = useState([
+      { id:1, name: "Fabian"},
+      { id:2, name: "Fekete"},
+      { id:3, name: "Peter"},
+      { id:4, name: "Nemeth"},
+      { id:5, name: "Auuuu"},
+    ])
     const [assistants, setAssistant] = useState([
       { id:1, name: "Fabian"},
       { id:2, name: "Fekete"},
       { id:3, name: "Peter"},
       { id:4, name: "Nemeth"},
+    ])
+    const [allassistants, setAllAssistant] = useState([
+      { id:1, name: "Fabian"},
+      { id:2, name: "Fekete"},
+      { id:3, name: "Peter"},
+      { id:4, name: "Nemeth"},
+      { id:5, name: "Auuuu"},
     ])
 
     return (
@@ -76,19 +90,15 @@ export const Praxes = (props) => {
               <Tab label="Assistants" {...a11yProps(1)} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
+        <CustomTabPanel value={value} index={0} >
           <Grid container>
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table">
+          <TableContainer component={Paper} sx={{ width: 400 }} >
+          <Table aria-label="simple table" sx={{ width: 400 }} >
               <TableHead>
                 <TableCell align="center"><b>Families in my praxis</b></TableCell>
+                <TableCell><b></b></TableCell>
               </TableHead>
               <TableHead>
-                <TableRow>
-                  <TableCell><b>Id</b></TableCell>
-                  <TableCell align="right"><b>Family</b></TableCell>
-                  <TableCell align="right"><b></b></TableCell>
-                </TableRow>
               </TableHead>
               <TableBody>
                 {families.map((family) => (
@@ -96,10 +106,7 @@ export const Praxes = (props) => {
                     key={family.id}
                     sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
-                      {family.id}
-                    </TableCell>
-                    <TableCell align="right">{family.name}</TableCell>
+                    <TableCell>{family.name}</TableCell>
                     <TableCell align="right">
                       <IconButton>
                         <Visibility fontSize="small"/>
@@ -111,34 +118,26 @@ export const Praxes = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead>
+            <TableContainer component={Paper} sx={{ width: 400 }} >
+            <Table aria-label="simple table" sx={{ width: 400 }} >
+              <TableHead >
                 <TableCell align="center"><b>All families</b></TableCell>
+                <TableCell><b></b></TableCell>
               </TableHead>
               <TableHead>
-                <TableRow>
-                  <TableCell><b>Id</b></TableCell>
-                  <TableCell align="right"><b>Family</b></TableCell>
-                  <TableCell align="right"><b></b></TableCell>
-                </TableRow>
               </TableHead>
               <TableBody>
-                {families.map((family) => (
+                {allfamilies.map((family) => (
                   <TableRow
                     key={family.id}
                     sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
                   >
-                    <TableCell component="th" scope="row">
-                      {family.id}
-                    </TableCell>
-                    <TableCell align="right">{family.name}</TableCell>
+                    <TableCell>{family.name}</TableCell>
                     <TableCell align="right">
                       <IconButton>
                         <Visibility fontSize="small"/>
                       </IconButton>
                     </TableCell>
-                    
                   </TableRow>
                 ))}
               </TableBody>
@@ -149,28 +148,21 @@ export const Praxes = (props) => {
           
         <CustomTabPanel value={value} index={1}>
           <Grid container>
-            <TableContainer component={Paper}>
-              <Table aria-label="simple table">
+            <TableContainer component={Paper} sx={{ width: 400 }} >
+              <Table aria-label="simple table" sx={{ width: 400 }} >
                 <TableHead>
                   <TableCell align="center"><b>Assistant in my praxis</b></TableCell>
+                  <TableCell align="right"><b></b></TableCell> 
                 </TableHead>
                 <TableHead>
-                  <TableRow>
-                    <TableCell><b>Id</b></TableCell>
-                    <TableCell align="right"><b>Assistant</b></TableCell>
-                    <TableCell align="right"><b></b></TableCell>
-                  </TableRow>
                 </TableHead>
                 <TableBody>
-                  {assistants.map((assistant) => (
+                  {families.map((assistant) => (
                     <TableRow
                       key={assistant.id}
                       sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
-                        {assistant.id}
-                      </TableCell>
-                      <TableCell align="right">{assistant.name}</TableCell>
+                      <TableCell>{assistant.name}</TableCell>
                       <TableCell align="right">
                         <IconButton>
                           <Visibility fontSize="small"/>
@@ -182,28 +174,21 @@ export const Praxes = (props) => {
                 </TableBody>
               </Table>
             </TableContainer>
-            <TableContainer component={Paper}>
-              <Table aria-label="simple table">
+            <TableContainer component={Paper} sx={{ width: 400 }} >
+              <Table aria-label="simple table" sx={{ width: 400 }} >
                 <TableHead>
                   <TableCell align="center"><b>All assistants</b></TableCell>
+                  <TableCell><b></b></TableCell>
                 </TableHead>
                 <TableHead>
-                  <TableRow>
-                    <TableCell><b>Id</b></TableCell>
-                    <TableCell align="right"><b>Assistant</b></TableCell>
-                    <TableCell align="right"><b></b></TableCell>
-                  </TableRow>
                 </TableHead>
                 <TableBody>
-                  {assistants.map((assistant) => (
+                  {allassistants.map((assistant) => (
                     <TableRow
                       key={assistant.id}
                       sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">
-                        {assistant.id}
-                      </TableCell>
-                      <TableCell align="right">{assistant.name}</TableCell>
+                      <TableCell>{assistant.name}</TableCell>
                       <TableCell align="right">
                         <IconButton>
                           <Visibility fontSize="small"/>

@@ -14,7 +14,10 @@ export const Cases = (props) => {
   const [priority, setPrio] = React.useState('');
   const [status, setStatus] = React.useState('');
 
-  const handleChange = (event) => {
+  const handleChange_1 = (event) => {
+    setStatus(event.target.value);
+  };
+  const handleChange_2 = (event) => {
     setPrio(event.target.value);
   };
   const [cases, setFamily] = useState([
@@ -61,7 +64,20 @@ export const Cases = (props) => {
             renderInput={(params) => <TextField {...params} label="Family" />}
       />
 
-      
+        <FormControl sx={{ width: 250 }}>
+            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={status}
+              label="Status"
+              onChange={handleChange_1}
+            >
+                <MenuItem value={10}>NEW</MenuItem>
+                <MenuItem value={20}>IN PROGRESS</MenuItem>
+                <MenuItem value={30}>CLOSED</MenuItem>
+            </Select>
+        </FormControl>
 
         <FormControl 
               sx={{ width: 250 }}>
@@ -71,7 +87,7 @@ export const Cases = (props) => {
               id="demo-simple-select"
               value={priority}
               label="Priority"
-              onChange={handleChange}
+              onChange={handleChange_2}
             >
             <MenuItem value={10}>TOP</MenuItem>
             <MenuItem value={20}>MEDIUM</MenuItem>
@@ -89,6 +105,7 @@ export const Cases = (props) => {
             <TableCell><b>Id</b></TableCell>
             <TableCell align="right"><b>Family</b></TableCell>
             <TableCell align="right"><b>Date</b></TableCell>
+            <TableCell align="right"><b>Status</b></TableCell>
             <TableCell align="right"><b>Priority</b></TableCell>
             <TableCell align="right"><b></b></TableCell>
           </TableRow>
@@ -104,6 +121,9 @@ export const Cases = (props) => {
               </TableCell>
               <TableCell align="right">{family.name}</TableCell>
               <TableCell align="right">{family.date}</TableCell>
+              <TableCell align="right">
+                  {family.status}
+                </TableCell>
               <TableCell align="right">
                   {family.priority}
                 </TableCell>
