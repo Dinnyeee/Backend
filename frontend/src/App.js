@@ -11,6 +11,7 @@ import { Appointments } from './doctor/Appointments';
 import { DoctorStart } from './doctor/DoctorStart';
 import AuthContext from './context/AuthContext'; //KELL EGY ILYEN CUCC
 import { Link } from "react-router-dom";
+import DoctorResponsiveAppBar from 'doctor/DoctorResponsiveAppBar';
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
               
     <div className="App">
       <div>
-       <SimpleAppBar></SimpleAppBar>
+       <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
       </div>
       {
         currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />

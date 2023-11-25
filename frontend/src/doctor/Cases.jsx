@@ -1,113 +1,130 @@
 import React, { useState } from "react";
-import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import Grid from '@mui/material/Grid';
-import Text from '@mui/material/ListItemText';
-import { Button } from "@mui/base";
-import { Link } from "react-router-dom";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
+import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Visibility } from "@mui/icons-material";
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
+
 export const Cases = (props) => {
+
+  const [familyValue, setFamilyValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');
+
+  const [priority, setPrio] = React.useState('');
+  const [status, setStatus] = React.useState('');
+
+  const handleChange = (event) => {
+    setPrio(event.target.value);
+  };
+  const [cases, setFamily] = useState([
+    { id:1, name: "Fabian", date: '2023-12-02', status: "new", priority: "TOP" },
+    { id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
+    { id:3, name: "Peter", date: '2023-11-12', status: "new", priority: "medium" },
+    { id:4, name: "Nemeth", date: '2023-11-02', status: "new", priority: "TOP" },
+  ])
+  const  handleDelete = (id) => {
+    const newList = cases.filter((family) => family.id !== id);
+    setFamily(newList);
+    //TODO controller needs to be called to make the removal permanent
+ }
+
   return (
     <div>
-          <AppBar position="static">
-          <Container maxWidth="sm">
-            <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                General Practitioner Site
-              </Typography>
+     <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
 
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'flex', md: 'none' },
-                  flexGrow: 1,
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                GPApp
-              </Typography>
+      <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ minHeight: '50vh' }}
+        >
+
+            <Grid item xs={3}>
+
+<div className="search-field">
+        <Autocomplete 
             
-            </Toolbar>
-          </Container>
-        </AppBar>
-        <Container>
-          
-          <Grid container>
-                <Text>
-                  Num.
-                </Text>
-                <Text>
-                  Family
-                </Text>
-                <Text>
-                  Date
-                </Text>
-                <Text>
-                  Status
-                </Text>
-                <Text>
-                  Priority
-                </Text>
-              </Grid>
-          <Grid container>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: '100%',
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
+            value={familyValue}
+            onChange={(event, newValue) => {
+              setFamilyValue(newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            id="controllable-states-demo"
+            options={['Family 1', 'Family 2']}
+            sx={{ width: 250 }}
+            renderInput={(params) => <TextField {...params} label="Family" />}
+      />
+
+      
+
+        <FormControl 
+              sx={{ width: 250 }}>
+          <InputLabel id="demo-simple-select-label">Priority</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={priority}
+              label="Priority"
+              onChange={handleChange}
             >
-              {[0].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                    {[0, 1, 2, 3, 4].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
-            
-          </Grid>
-        </Container>
+            <MenuItem value={10}>TOP</MenuItem>
+            <MenuItem value={20}>MEDIUM</MenuItem>
+            <MenuItem value={30}>LOW</MenuItem>
+          </Select>
+        </FormControl>
+
+</div>
+    
+ 
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell><b>Id</b></TableCell>
+            <TableCell align="right"><b>Family</b></TableCell>
+            <TableCell align="right"><b>Date</b></TableCell>
+            <TableCell align="right"><b>Priority</b></TableCell>
+            <TableCell align="right"><b></b></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cases.map((family) => (
+            <TableRow
+              key={family.id}
+              sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {family.id}
+              </TableCell>
+              <TableCell align="right">{family.name}</TableCell>
+              <TableCell align="right">{family.date}</TableCell>
+              <TableCell align="right">
+                  {family.priority}
+                </TableCell>
+              <TableCell align="right">
+                 <IconButton>
+                  <Visibility fontSize="small"/>
+                 </IconButton>
+                <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
+                    <DeleteIcon fontSize="small" />
+                </IconButton>
+              </TableCell>
+              
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+ 
+</Grid>
+</Grid>
+
     </div>
   );
 }

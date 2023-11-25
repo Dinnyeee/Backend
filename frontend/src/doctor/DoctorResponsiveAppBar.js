@@ -9,13 +9,29 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
-const pages = ['Praxes', 'Appointments', 'Cases'];
+
+
 
 function DoctorResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const navigate= useNavigate();
+
+  const navigateToHome = () => {
+    navigate('/cases');
+  }
+  const navigateToPraxes = () => {
+    navigate('/praxes');
+  }
+  const navigateToAppointments = () => {
+    navigate('/appointments');
+  }
+  const navigateToLogin = () => {
+    navigate('/');
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -81,33 +97,22 @@ function DoctorResponsiveAppBar() {
               
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
-                      > 
-                        <Link to = '/praxes'>
-                          Praxes
-                        </Link>
-                        
+                      
+                      <Button onClick={navigateToPraxes} sx={{ my: 2, display: 'block' }}> 
+                       Praxes
                       </Button>
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
-                      > 
-                        <Link to = '/appointments'>
-                          Appointments
-                        </Link>
-                        
+
+                       <Button onClick={navigateToHome} sx={{ my: 2, display: 'block' }}>
+                     Cases
                       </Button>
-                      <Button
-                        onClick={handleCloseNavMenu}
-                        sx={{ my: 2, color: 'white', display: 'block' }}
-                      > 
-                        <Link to = '/cases'>
-                          Cases
-                        </Link>
-                        
+                      
+                      <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
+                       Appointments
                       </Button>
+                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                        Log out 
+                     </Button>
+                    
                     </Typography>
                 </MenuItem>
               
@@ -131,35 +136,25 @@ function DoctorResponsiveAppBar() {
           >
             GPApp
           </Typography>
-          <Box sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
-            <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              > 
-                <Link to = '/praxes'>
-                  Praxes
-                </Link>
-                
+          <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
+              
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToPraxes}> 
+                Praxes
               </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              > 
-                <Link to = '/appointments'>
-                  Appointments
-                </Link>
-                
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToHome}> 
+              Cases           
               </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              > 
-                <Link to = '/cases'>
-                  Cases
-                </Link>
-                
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAppointments} > 
+              Appointments
               </Button>
-          </Box>
+
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
+             Log out   
+              </Button>
+            
+          </Container>
 
           
         </Toolbar>

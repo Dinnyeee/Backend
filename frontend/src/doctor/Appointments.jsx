@@ -1,118 +1,97 @@
 import React, { useState } from "react";
-import Container from '@mui/material/Container';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
 import Grid from '@mui/material/Grid';
-import Text from '@mui/material/ListItemText';
-import { Button } from "@mui/base";
-import { Praxes } from "./Praxes";
-import { Link } from "react-router-dom";
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import { Button, IconButton } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 
 export const Appointments = (props) => {
     
     const [value, setValue] = React.useState(0);
+    const navigate = useNavigate();
+
+      const navigateToAddNewAppointment = () => {
+        navigate('/addnewappointmentform');
+      }
+    const handleAddAppointmentClicked = (e) => {
+      navigateToAddNewAppointment();
+  }
+  const [appointments, setFamily] = useState([  // WE SHOULD GET THE DATA FROM A CONTROLLER
+        { id: 1, family: "Fabian", date:'2023-12-25'  },
+        { id: 2, family: "Peter", date:'2023-12-25'   },
+        { id: 3, family: "Nemeth", date:'2023-12-25'   },
+        { id: 4, family: "Fekete", date:'2023-12-25'   },
+    ])
+    const  handleDelete = (id) => {
+      const newList = appointments.filter((family) => family.id !== id);
+      setFamily(newList);
+      //TODO controller needs to be called to make the removal permanent
+   }
     
     return (
       <div>
-          <AppBar position="static">
-          <Container maxWidth="sm">
-            <Toolbar disableGutters>
-              <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                General Practitioner Site
-              </Typography>
-
-              <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'flex', md: 'none' },
-                  flexGrow: 1,
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                GPApp
-              </Typography>
-            
-            </Toolbar>
-          </Container>
-        </AppBar>
-        <Container>
-          <Container maxWidth="sm">
-            <Button>
-              <Link to = '/addnewappointmentform'>
-                Add new appointment dates
-              </Link>
-              
+        <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
+        <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ minHeight: '50vh' }}
+        >
+            <Grid item xs={3}>
+            <Button onClick={handleAddAppointmentClicked} variant="contained"  color='secondary' className='add-new-button'>
+                Add new appointment
             </Button>
-          </Container>
-          <Grid container>
-                <Text>
-                  Num.
-                </Text>
-                <Text>
-                  Family
-                </Text>
-                <Text>
-                  Date
-                </Text>
-              </Grid>
-          <Grid container>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: '100%',
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
+            </Grid>
+            <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell><b>Id</b></TableCell>
+            <TableCell align="right"><b>Name</b></TableCell>
+            <TableCell align="right"><b>Date</b></TableCell>
+            <TableCell align="right"><b>Actions</b></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {appointments.map((family) => (
+            <TableRow
+              key={family.id}
+              sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
             >
-              {[1].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                   {[1, 2, 3].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
+              <TableCell component="th" scope="row">
+                {family.id}
+              </TableCell>
+              <TableCell align="right">{family.family}</TableCell>
+              <TableCell align="right">{family.date}</TableCell>
+              <TableCell align="right">
+                <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
+                    <DeleteIcon fontSize="small" />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+
+
+
             
-          </Grid>
-        </Container>
+        
+      </Grid>
     </div>
 );
 }

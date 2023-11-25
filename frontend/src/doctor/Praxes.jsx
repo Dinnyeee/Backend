@@ -1,17 +1,14 @@
+// @ts-nocheck
 import React, { useState } from "react";
-import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import Grid from '@mui/material/Grid';
-import Text from '@mui/material/ListItemText';
-import AppBar from '@mui/material/AppBar';
+import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
+import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Visibility } from "@mui/icons-material";
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -44,6 +41,7 @@ function a11yProps(index: number) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
+
 export const Praxes = (props) => {
     
     const [value, setValue] = React.useState(0);
@@ -51,52 +49,26 @@ export const Praxes = (props) => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
+    const [familyValue, setFamilyValue] = React.useState('');
+    const [assistantValue, setAssistantValue] = React.useState('');
+    const [inputValue, setInputValue] = React.useState('');
+
+    const [families, setFamily] = useState([
+      { id:1, name: "Fabian"},
+      { id:2, name: "Fekete"},
+      { id:3, name: "Peter"},
+      { id:4, name: "Nemeth"},
+    ])
+    const [assistants, setAssistant] = useState([
+      { id:1, name: "Fabian"},
+      { id:2, name: "Fekete"},
+      { id:3, name: "Peter"},
+      { id:4, name: "Nemeth"},
+    ])
 
     return (
       <div>
-      <AppBar position="static">
-      <Container maxWidth="sm">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            General Practitioner Site
-          </Typography>
-
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            GPApp
-          </Typography>
-        
-        </Toolbar>
-      </Container>
-    </AppBar>
+      <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
     <Container>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -106,122 +78,143 @@ export const Praxes = (props) => {
         </Box>
         <CustomTabPanel value={value} index={0}>
           <Grid container>
-            <Text>
-              Families in my praxis
-            </Text>
-            <Text>
-              All families
-            </Text>
-          </Grid>
-          <Grid container>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: 360,
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
-            >
-              {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                    {[0, 1, 2].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: 360,
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
-            >
-              {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                    {[0, 1, 2].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableCell align="center"><b>Families in my praxis</b></TableCell>
+              </TableHead>
+              <TableHead>
+                <TableRow>
+                  <TableCell><b>Id</b></TableCell>
+                  <TableCell align="right"><b>Family</b></TableCell>
+                  <TableCell align="right"><b></b></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {families.map((family) => (
+                  <TableRow
+                    key={family.id}
+                    sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {family.id}
+                    </TableCell>
+                    <TableCell align="right">{family.name}</TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <Visibility fontSize="small"/>
+                      </IconButton>
+                    </TableCell>
+                    
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TableContainer component={Paper}>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableCell align="center"><b>All families</b></TableCell>
+              </TableHead>
+              <TableHead>
+                <TableRow>
+                  <TableCell><b>Id</b></TableCell>
+                  <TableCell align="right"><b>Family</b></TableCell>
+                  <TableCell align="right"><b></b></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {families.map((family) => (
+                  <TableRow
+                    key={family.id}
+                    sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {family.id}
+                    </TableCell>
+                    <TableCell align="right">{family.name}</TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <Visibility fontSize="small"/>
+                      </IconButton>
+                    </TableCell>
+                    
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
           </Grid>
         </CustomTabPanel>
+          
         <CustomTabPanel value={value} index={1}>
           <Grid container>
-            <Text>
-              Assistant in my praxis
-            </Text>
-            <Text>
-              All Assisstants
-            </Text>
-          </Grid>
-          <Grid container>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: 360,
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
-            >
-              {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                    {[0, 1, 2].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
-            <List
-              sx={{
-                width: '100%',
-                maxWidth: 360,
-                bgcolor: 'background.paper',
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-                '& ul': { padding: 0 },
-              }}
-              subheader={<li />}
-            >
-              {[0, 1, 2, 3, 4].map((sectionId) => (
-                <li key={`section-${sectionId}`}>
-                  <ul>
-                    {[0, 1, 2].map((item) => (
-                      <ListItem key={`item-${sectionId}-${item}`}>
-                        <ListItemText primary={`Item ${item}`} />
-                      </ListItem>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </List>
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableCell align="center"><b>Assistant in my praxis</b></TableCell>
+                </TableHead>
+                <TableHead>
+                  <TableRow>
+                    <TableCell><b>Id</b></TableCell>
+                    <TableCell align="right"><b>Assistant</b></TableCell>
+                    <TableCell align="right"><b></b></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {assistants.map((assistant) => (
+                    <TableRow
+                      key={assistant.id}
+                      sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {assistant.id}
+                      </TableCell>
+                      <TableCell align="right">{assistant.name}</TableCell>
+                      <TableCell align="right">
+                        <IconButton>
+                          <Visibility fontSize="small"/>
+                        </IconButton>
+                      </TableCell>
+                      
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableCell align="center"><b>All assistants</b></TableCell>
+                </TableHead>
+                <TableHead>
+                  <TableRow>
+                    <TableCell><b>Id</b></TableCell>
+                    <TableCell align="right"><b>Assistant</b></TableCell>
+                    <TableCell align="right"><b></b></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {assistants.map((assistant) => (
+                    <TableRow
+                      key={assistant.id}
+                      sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {assistant.id}
+                      </TableCell>
+                      <TableCell align="right">{assistant.name}</TableCell>
+                      <TableCell align="right">
+                        <IconButton>
+                          <Visibility fontSize="small"/>
+                        </IconButton>
+                      </TableCell>
+                      
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Grid>
         </CustomTabPanel>
             
