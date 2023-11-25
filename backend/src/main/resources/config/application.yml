@@ -20,3 +20,11 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     changeLog: "classpath:db/changelog/changelog-master.yaml"
+
+backend:
+  chat-app:
+    allowed-origin: "http://localhost:3000"
+    appId: "1702394"
+    key: "d59e879f73837467b4fe"
+    secret: "b5a6032bb0c054699e57"
+    cluster: "eu"
