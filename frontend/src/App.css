@@ -92,3 +92,10 @@
     margin-bottom: 20;
     display:'block';
 }
+
+.admin-parent{
+  margin:20px;
+}
+.admin-parent  .add-new-button{
+  margin-bottom:30px;
+}

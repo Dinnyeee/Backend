@@ -13,11 +13,15 @@ import ListItemText from '@mui/material/ListItemText';
 import Text from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Grid from '@mui/material/Grid';
-import { Button } from "@mui/base";
+import { Button, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 import { Link } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 
 
@@ -25,27 +29,89 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Ice cream sandwich', 237, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24),
-  createData('Cupcake', 305, 3.7, 4.3),
-  createData('Gingerbread', 356, 49, 3.9),
-];
-export const ListChild = (props) =>  {
- const children = props.children
+
+export const ListChild = () =>{
+   
+  const navigate = useNavigate();
+
+   const navigateToAdmin = () => {
+    navigate('/addchild');
+  }
+    const [children, setChildren] = useState([  // WE SHOULD GET THE DATA FROM A CONTROLLER
+        { id: 1, name: "Mario", taj:1231  },
+        { id: 2, name: "David", taj:1231  },
+        { id: 3, name: "Marta", taj:1231  },
+        { id: 4, name: "Mache", taj:1231  },
+    ])
+
+  const handleAddChild = (e) => {
+        navigateToAdmin();
+    }
 
 return (
-<Container>
-          <Container maxWidth="sm">
-            <Button variant="contained">
-              <Link to = '/addchild'>
+
+  <div className='admin-parent'>
+    <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '80vh' }}
+        >
+
+            <Grid item xs={3}>
+<Button onClick={handleAddChild} variant="contained" color='secondary' className='add-new-button'>
                 Add new child
-              </Link>
-              
+            </Button>
+ 
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell><b>Id</b></TableCell>
+            <TableCell align="right"><b>Name</b></TableCell>
+            <TableCell align="right"><b>TAJ</b></TableCell>
+            <TableCell align="right"><b>Date of birth</b></TableCell>
+            <TableCell align="right"><b>Actions</b></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {children.map((child) => (
+            <TableRow
+              key={child.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {child.id}
+              </TableCell>
+              <TableCell align="right">{child.name}</TableCell>
+              <TableCell align="right">{child.taj}</TableCell>
+              <TableCell align="right">1999.08.26</TableCell>
+              <TableCell align="right">
+               <IconButton aria-label="edit" size="small">
+                    <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton aria-label="delete" size="small">
+                    <DeleteIcon fontSize="small" />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+ 
+</Grid>
+</Grid>
+</div>
+/*<Container>
+          <Container maxWidth="sm">
+            <Button onClick={handleAddChild} variant="contained">
+                Add new child
             </Button>
           </Container>
-          <Grid container>
+           <Grid container>
                 <Text>
                   Id
                 </Text>
@@ -83,7 +149,8 @@ return (
             </List>
             
           </Grid>
-        </Container>
+        </Container>*/
+
 
   /*   <TableContainer component={Paper} className='container'>
       <Table sx={{ minWidth: 650 }} aria-label="simple table" >
