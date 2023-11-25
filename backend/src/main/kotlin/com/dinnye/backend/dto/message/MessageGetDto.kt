@@ -8,7 +8,7 @@ import java.util.*
 data class MessageGetDto @Default constructor(
     val id: Long? = null,
     val user: UserInfoDto? = null,
-    val case: CaseInfoDto? = null,
+    val caseDto: CaseInfoDto? = null,
     val message: String = "",
     val createdAt: Date? = null,
 )

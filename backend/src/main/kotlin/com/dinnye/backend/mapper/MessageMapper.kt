@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired
 
 @Mapper(componentModel = ComponentModel.SPRING, uses = [CaseService::class])
 abstract class MessageMapper {
+
     companion object {
         val INSTANCE: MessageMapper = Mappers.getMapper(MessageMapper::class.java)
     }
@@ -25,7 +26,7 @@ abstract class MessageMapper {
     @Autowired
     protected lateinit var userService: UserService
 
-    @Mapping(target = "case", expression = "java(infoDtoMapper.map(entity.getCase()))")
+    @Mapping(target = "caseDto", expression = "java(infoDtoMapper.map(entity.getCase()))")
     abstract fun mapToGet(entity: Message): MessageGetDto
 
     @IgnoreId
