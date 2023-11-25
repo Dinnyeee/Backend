@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-const instance = axios.create({
-    baseURL: 'http://localhost:8080/api'
-})
+import instance from './BaseURL';
 
 export const getAllAssistants = async () => {
     try{
@@ -31,9 +27,9 @@ export const createAssistant = async (assistant) => {
     }
 }
 
-export const updateAssistant = async (id, assistant) => {
+export const updateAssistant = async (assistant) => {
     try{
-        const response = await instance.put(`/assistant/${id}`, assistant);
+        const response = await instance.put(`/assistant`, assistant);
         return response.data;
     }catch(error){
         console.error('Error updating assistant', error);

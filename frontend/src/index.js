@@ -20,6 +20,7 @@ import {
 import { Cases } from './doctor/Cases';
 import AddChild from 'parent/AddChild';
 import EditChild from 'parent/EditChild';
+import TestComponent from 'services/test';
 
 
 
@@ -76,7 +77,11 @@ const router = createBrowserRouter([
     path: "/editchild",
     element: <EditChild/>
   },
-      
+  
+  {
+    path: "/test",
+    element: <TestComponent/>
+  },
     
   
   {
