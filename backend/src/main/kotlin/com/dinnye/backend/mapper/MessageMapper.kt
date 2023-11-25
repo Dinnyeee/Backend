@@ -13,16 +13,19 @@ import org.mapstruct.MappingConstants.ComponentModel
 import org.mapstruct.factory.Mappers
 import org.springframework.beans.factory.annotation.Autowired
 
-@Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, CaseService::class])
+@Mapper(componentModel = ComponentModel.SPRING, uses = [CaseService::class])
 abstract class MessageMapper {
     companion object {
         val INSTANCE: MessageMapper = Mappers.getMapper(MessageMapper::class.java)
     }
 
     @Autowired
+    protected lateinit var infoDtoMapper: InfoDtoMapper
+
+    @Autowired
     protected lateinit var userService: UserService
 
-    @Mapping(source = "case", target = "case")
+    @Mapping(target = "case", expression = "java(infoDtoMapper.map(entity.getCase()))")
     abstract fun mapToGet(entity: Message): MessageGetDto
 
     @IgnoreId
