@@ -9,15 +9,13 @@ import ListChild from './ListChild';
 
 
 export const Parent = (props) => {
-    let location = useLocation();
-    let content;
     
   return (
     <div>
      
      <ResponsiveAppBar></ResponsiveAppBar>
 
-        <h2>HomeSite</h2>
+        <CasesPage></CasesPage>
     </div>
   );
 }

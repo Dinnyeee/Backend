@@ -99,3 +99,12 @@
 .admin-parent  .add-new-button{
   margin-bottom:30px;
 }
+
+.cases-parent{
+  margin-top: 40px;
+}
+.search-field{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
