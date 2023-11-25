@@ -119,6 +119,14 @@
   align-items: center;
 }
 
+.search-field-doctor{
+   margin-bottom: 20px;
+   margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .book-appointment-container{
   width: max-content;
   display: flex;

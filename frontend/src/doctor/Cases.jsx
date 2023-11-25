@@ -3,6 +3,7 @@ import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
 import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 
@@ -20,6 +21,10 @@ export const Cases = (props) => {
   const handleChange_2 = (event) => {
     setPrio(event.target.value);
   };
+  const handleSearch = () => {
+    //TODO send data and fetch the search result!! and update the list of cases based on that
+  }
+
   const [cases, setFamily] = useState([
     { id:1, name: "Fabian", date: '2023-12-02', status: "new", priority: "TOP" },
     { id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
@@ -47,7 +52,7 @@ export const Cases = (props) => {
 
             <Grid item xs={3}>
 
-<div className="search-field">
+<div className="search-field-doctor">
         <Autocomplete 
             
             value={familyValue}
@@ -60,11 +65,11 @@ export const Cases = (props) => {
             }}
             id="controllable-states-demo"
             options={['Family 1', 'Family 2']}
-            sx={{ width: 250 }}
+            sx={{ width: 250, margin:1 }}
             renderInput={(params) => <TextField {...params} label="Family" />}
       />
 
-        <FormControl sx={{ width: 250 }}>
+        <FormControl sx={{ width: 250, margin:1}}>
             <InputLabel id="demo-simple-select-label">Status</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -80,7 +85,7 @@ export const Cases = (props) => {
         </FormControl>
 
         <FormControl 
-              sx={{ width: 250 }}>
+              sx={{ width: 250, margin:1 }}>
           <InputLabel id="demo-simple-select-label">Priority</InputLabel>
             <Select
               labelId="demo-simple-select-label"
@@ -94,6 +99,9 @@ export const Cases = (props) => {
             <MenuItem value={30}>LOW</MenuItem>
           </Select>
         </FormControl>
+
+        <Button sx={{ margin:1}} variant="contained" startIcon={<SearchIcon/>} onClick={handleSearch}> Search
+        </Button>
 
 </div>
     
