@@ -42,4 +42,10 @@ class ParentController (
         val newParent = mapper.mapFromPut(parentPutDto)
         return ResponseEntity.ok(mapper.mapToGet(parentService.update(newParent)))
     }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): ResponseEntity<Unit> {
+        parentService.delete(id)
+        return ResponseEntity.noContent().build()
+    }
 }
