@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1700952305809-3
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: priority
+                  type: SMALLINT
+                  defaultValue: "0"
+              - column:
+                  name: status
+                  type: SMALLINT
+                  defaultValue: "0"
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+            tableName: case_table
+  - changeSet:
+      id: 1700952305809-4
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: priority
+            tableName: case_table
+  - changeSet:
+      id: 1700952305809-6
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: status
+            tableName: case_table
+  - changeSet:
+      id: 1700952305809-8
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: title
+            tableName: case_table
+

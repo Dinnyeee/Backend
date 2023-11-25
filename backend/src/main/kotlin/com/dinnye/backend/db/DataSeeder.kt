@@ -102,6 +102,7 @@ class DataSeeder(
         this.description = "${child.name} case"
         this.praxis = praxis
         this.child = child
+        this.title = "${child.name}'s Case"
         this.appointment = Appointment().apply {
             date = Date().now()
         }
