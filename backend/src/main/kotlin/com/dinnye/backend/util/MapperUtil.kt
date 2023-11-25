@@ -61,7 +61,7 @@ annotation class FamilyIdTarget
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-@Mapping(target = "family.id", source = "familyId")
+@Mapping(target = "family", source = "familyId")
 annotation class FamilyIdSource
 
 @Target(AnnotationTarget.FUNCTION)

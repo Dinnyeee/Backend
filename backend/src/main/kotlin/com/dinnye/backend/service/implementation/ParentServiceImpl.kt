@@ -20,15 +20,13 @@ class ParentServiceImpl(
 ): ParentService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Parent): Parent {
-        userService.create(entity) as Parent
         if (entity.family == null) {
             entity.family = Family().apply {
                 this.name = "${entity.name}'s family"
                 this.parent = entity
-            }.also {
-                familyService.create(it)
             }
         }
+        userService.create(entity) as Parent
         return entity
     }
 
