@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.net.URI
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 inline fun <reified T: BaseEntity> Optional<T>.throwWhenNotFound(id: Long): T {
@@ -20,6 +22,10 @@ inline fun <reified T: BaseEntity> JpaRepository<T, Long>.update(id: Long, updat
     val entity = this.findByIdOrThrow(id)
     entity.update()
     return this.saveAndFlush(entity)
+}
+
+fun Date.now(): Date {
+    return Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())
 }
 
 fun created(id: Long): ResponseEntity<Unit> {

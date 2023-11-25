@@ -26,6 +26,6 @@ class Child: BaseEntity() {
     var family: Family? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "child", cascade = [CascadeType.ALL])
-    val cases: List<Case> = emptyList()
+    val cases: MutableList<Case> = mutableListOf()
 
 }

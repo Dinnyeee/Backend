@@ -40,6 +40,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.mapstruct:mapstruct:1.5.4.Final")
     implementation("com.pusher:pusher-http-java:1.3.3")
+    implementation("io.github.oshai:kotlin-logging-jvm:5.1.0")
     kapt("org.mapstruct:mapstruct-processor:1.5.4.Final")
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
