@@ -21,7 +21,7 @@ class Family: BaseEntity() {
     var parent: Parent? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "family", cascade = [CascadeType.ALL])
-    val children: List<Child> = emptyList()
+    val children: MutableList<Child> = mutableListOf()
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")
