@@ -8,18 +8,26 @@ import com.dinnye.backend.service.interfaces.UserService
 import com.dinnye.backend.util.IgnoreAuditing
 import com.dinnye.backend.util.IgnoreId
 import org.mapstruct.Mapper
+import org.mapstruct.Mapping
 import org.mapstruct.MappingConstants.ComponentModel
 import org.mapstruct.factory.Mappers
+import org.springframework.beans.factory.annotation.Autowired
 
-@Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, UserService::class, CaseService::class])
-interface MessageMapper {
+@Mapper(componentModel = ComponentModel.SPRING, uses = [InfoDtoMapper::class, CaseService::class])
+abstract class MessageMapper {
     companion object {
         val INSTANCE: MessageMapper = Mappers.getMapper(MessageMapper::class.java)
     }
 
-    fun mapToGet(entity: Message): MessageGetDto
+    @Autowired
+    protected lateinit var userService: UserService
+
+    @Mapping(source = "case", target = "case")
+    abstract fun mapToGet(entity: Message): MessageGetDto
 
     @IgnoreId
     @IgnoreAuditing
-    fun mapFromPost(entity: MessagePostDto): Message
+    @Mapping(target = "user", expression = "java(userService.get(entity.getUserId()))")
+    @Mapping(target = "case", source = "caseId")
+    abstract fun mapFromPost(entity: MessagePostDto): Message
 }

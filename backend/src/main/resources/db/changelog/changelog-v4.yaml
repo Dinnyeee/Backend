@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1700947030783-3
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_message
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_at
+                  type: DATETIME
+              - column:
+                  name: updated_at
+                  type: DATETIME
+              - column:
+                  constraints:
+                    nullable: false
+                  name: message
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: case_id
+                  type: BIGINT
+            tableName: message
+  - changeSet:
+      id: 1700947030783-4
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: case_id
+            baseTableName: message
+            constraintName: FK_MESSAGE_ON_CASE
+            referencedColumnNames: id
+            referencedTableName: case_table
+  - changeSet:
+      id: 1700947030783-5
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: message
+            constraintName: FK_MESSAGE_ON_USER
+            referencedColumnNames: id
+            referencedTableName: user_table
+

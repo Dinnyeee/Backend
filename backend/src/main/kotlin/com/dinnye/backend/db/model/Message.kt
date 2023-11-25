@@ -17,7 +17,7 @@ class Message: BaseEntity() {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "user_id")
-    var sender: User? = null
+    var user: User? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "case_id")
