@@ -139,19 +139,19 @@ function ResponsiveAppBar() {
           </Typography>
           <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
               
-              <Button variant="contained" onClick={navigateToAdmin}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAdmin}> 
                 Admin
               </Button>
 
-              <Button variant="contained" onClick={navigateToHome}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToHome}> 
               Cases           
               </Button>
 
-              <Button variant="contained" onClick={navigateToAppointments} > 
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAppointments} > 
               Appointments
               </Button>
 
-              <Button variant="contained" onClick={navigateToLogin}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
              Log out   
               </Button>
             

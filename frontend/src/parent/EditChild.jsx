@@ -5,22 +5,21 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import ResponsiveAppBar from './ResponsiveAppBar';
 
 
-
-
-export default function AddChild(){
-    const [name, setName] = useState('');
-    const [taj, setTaj] = useState('');
+export default function EditChild(props){
+    const [name, setName] = useState('NameToEdit');
+    const [taj, setTaj] = useState('TAJToEdit'); 
     const [birth, setBirth] = useState('');
-     const [nameError, setNameError] = useState(false); 
+    const [nameError, setNameError] = useState(false); 
     const [tajError, setTajError] = useState(false); 
     const [birthError, setBirthError] = useState(false); 
+
     
     const navigate = useNavigate();
     
     const navigateToHome = () => {
         navigate('/admin');
   }
-     const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         setNameError(false)
         setTajError(false)
@@ -44,10 +43,13 @@ export default function AddChild(){
 
         }
        
-        //TODO calling controller to add it to the list without id
+        //TODO calling controller to edit the corresponding item on the list in the backend
         // only after that succeeds do we navigate back 
         // navigate back to listchild component where the new item will show as well
     }
+
+   
+
     return (
 
     <div>
@@ -67,6 +69,7 @@ export default function AddChild(){
                             <div>
                                 <TextField 
                                     label="Name"
+                                    value={name}
                                     variant='outlined'
                                     required
                                     error={nameError}
@@ -77,6 +80,7 @@ export default function AddChild(){
                             <div>
                                 <TextField 
                                     label="TAJ"
+                                    value={taj}
                                     variant='outlined'
                                     required
                                     error={tajError}
@@ -87,10 +91,9 @@ export default function AddChild(){
                                 <TextField 
                                     helperText="Birthdate"
                                     variant='outlined'
+                                    value={"2000-12-08"}
                                     required
-                                    error={birthError}
                                     type='date'
-                                    onChange={(e) => {setBirth(e.target.value);}}
                                 />
                             </div> 
 

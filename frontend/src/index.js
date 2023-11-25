@@ -19,6 +19,7 @@ import {
 } from "react-router-dom";
 import { Cases } from './doctor/Cases';
 import AddChild from 'parent/AddChild';
+import EditChild from 'parent/EditChild';
 
 
 
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/addchild",
     element: <AddChild/>
+  },
+   {
+    path: "/editchild",
+    element: <EditChild/>
   },
       
     
