@@ -129,9 +129,33 @@
 
 .fix-center-card{
   display: flex;
+  height:90vh;
   justify-content: center;
+  align-items: center;
 }
 .date-picker-container{
   width:max-content;
   margin:30px;  
+}
+.time-picker-container {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.time-picker-form-field{
+  margin-bottom: 30px !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+
+.MuiDialogActions-root{
+  visibility: hidden;
+}
+
+.book-button-save {
+  margin-bottom: 10px;
 }
