@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DoctorResponsiveAppBar from './doctor/DoctorResponsiveAppBar';
-import { Chat } from "@mui/icons-material";
+import Chat from "./chat/Chat";
 
 
 
