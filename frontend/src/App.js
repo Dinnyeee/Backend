@@ -13,7 +13,7 @@ import AuthContext from './context/AuthContext'; //KELL EGY ILYEN CUCC
 import { Link } from "react-router-dom";
 import DoctorResponsiveAppBar from 'doctor/DoctorResponsiveAppBar';
 import { DetailedCase } from 'DetailedCase';
-import  App2  from './src2/App';
+
 
 /*
 function App() {
@@ -51,7 +51,7 @@ function App() {
   return (
   
     <div>
-        <App2></App2>
+        <DetailedCase></DetailedCase>
     </div>
   );
 }
