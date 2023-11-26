@@ -19,4 +19,7 @@ interface UserRepository: JpaRepository<User, Long> {
 
     @Query("select parent from Parent parent where parent.id = :id")
     fun findParentById(id: Long): Optional<Parent>
+
+    @Query("select user from User user where user.email = :email")
+    fun findByEmail(email: String): Optional<User>
 }

@@ -13,18 +13,21 @@ import jakarta.persistence.InheritanceType
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
 @Table(name = "user_table")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.INTEGER)
-abstract class User: BaseEntity() {
+abstract class User: BaseEntity(), UserDetails {
 
     @Column(name = "name", nullable = false)
     var name: String? = null
 
     @Column(name = "password", nullable = false)
-    var password: String? = null
+    var pw: String? = null
 
     @Column(name = "email", nullable = false, unique = true)
     var email: String? = null
@@ -32,6 +35,35 @@ abstract class User: BaseEntity() {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role", nullable = false, updatable = false, insertable = false)
     var role: Role? = null
+
+    override fun getUsername(): String {
+        return email ?: throw IllegalStateException("Email not set for the user")
+    }
+
+    override fun getPassword(): String {
+        return pw ?: throw IllegalStateException("Password not set for the user")
+    }
+
+    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+        // Customize this based on your Role structure
+        return mutableListOf(SimpleGrantedAuthority("ROLE_${role?.name}"))
+    }
+
+    override fun isEnabled(): Boolean {
+        return true // You can customize this based on your logic
+    }
+
+    override fun isCredentialsNonExpired(): Boolean {
+        return true // You can customize this based on your logic
+    }
+
+    override fun isAccountNonExpired(): Boolean {
+        return true // You can customize this based on your logic
+    }
+
+    override fun isAccountNonLocked(): Boolean {
+        return true // You can customize this based on your logic
+    }
 }
 
 @Entity

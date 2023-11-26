@@ -41,7 +41,7 @@ class ParentServiceImpl(
     override fun update(entity: Parent): Parent {
         return parentRepository.update(entity.id!!) {
             entity.name?.let { this.name = it }
-            entity.password?.let { this.password = it }
+            entity.pw?.let { this.pw = it }
             entity.email?.let { this.email = it }
             entity.family?.let { this.family = it }
         }

@@ -46,7 +46,7 @@ class DoctorServiceImpl(
     override fun update(entity: Doctor): Doctor {
         return doctorRepository.update(entity.id!!) {
             entity.name?.let { this.name = it }
-            entity.password?.let { this.password = it }
+            entity.pw?.let { this.pw = it }
             entity.email?.let { this.email = it }
             entity.praxis?.let { this.praxis = it }
         }

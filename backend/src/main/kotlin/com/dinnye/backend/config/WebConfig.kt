@@ -13,4 +13,5 @@ class WebConfig : WebMvcConfigurer {
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowedOrigins("http://localhost:3000")
     }
+
 }
