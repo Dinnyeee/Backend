@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import DoctorResponsiveAppBar from "./DoctorResponsiveAppBar";
 import { Card, CardActions, CardContent, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from "@mui/material";
+import { getCaseById } from "services/CaseApi";
 
 export const DetailedCase = (props) => {
+
+    const getData = async () => {
+      try{
+        console.log("Hellothere!")
+        const result = await getCaseById(1);
+        console.log(result);
+        setCaseDetails(result);
+      } catch(error){
+        console.error('Error getDetails data', error);
+      }
+    }; 
+
 
     const [caseDetails, setCaseDetails] = useState({
         id:1,

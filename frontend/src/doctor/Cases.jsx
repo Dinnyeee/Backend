@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
 import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
+import { deleteCase, getAllCases } from "services/CaseApi";
+import { getAllFamilies } from "services/FamilyApi";
 
 
 
 export const Cases = (props) => {
+
+  useEffect(() => {
+    const getData = async () => {
+      try{
+        console.log("Hellothere!")
+        const result = await getAllCases();
+        console.log(result);
+        setCases(result);
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
+
+  const fetchFamilies = async () => {
+    try{
+      const res = await getAllFamilies();
+      setFamilies(res);
+    }catch (error){
+        console.error('Error getAllFamilies data', error);
+
+    }
+  }
+    getData();
+    fetchFamilies();
+  }, [])
 
   const navigate = useNavigate();
   const [familyValue, setFamilyValue] = React.useState('');
@@ -16,6 +43,7 @@ export const Cases = (props) => {
 
   const [priority, setPrio] = React.useState('');
   const [status, setStatus] = React.useState('');
+  const [families, setFamilies] = React.useState('');
 
   const handleChange_1 = (event) => {
     setStatus(event.target.value);
@@ -30,16 +58,17 @@ export const Cases = (props) => {
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
 
-  const [cases, setFamily] = useState([
+  const [cases, setCases] = useState(
+    [
     { id:1, name: "Fabian", date: '2023-12-02', status: "new", priority: "TOP" },
     { id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
     { id:3, name: "Peter", date: '2023-11-12', status: "new", priority: "medium" },
     { id:4, name: "Nemeth", date: '2023-11-02', status: "new", priority: "TOP" },
   ])
-  const  handleDelete = (id) => {
-    const newList = cases.filter((family) => family.id !== id);
-    setFamily(newList);
-    //TODO controller needs to be called to make the removal permanent
+    const  handleDelete = (id) => {
+      const newList = cases.filter((family) => family.id !== id);
+      //TODO controller needs to be called to make the removal permanent
+      deleteCase(id).then(() =>setCases(newList));
  }
 
   return (
@@ -69,7 +98,7 @@ export const Cases = (props) => {
               setInputValue(newInputValue);
             }}
             id="controllable-states-demo"
-            options={['Family 1', 'Family 2']}
+            options={families}
             sx={{ width: 250, margin:1 }}
             renderInput={(params) => <TextField {...params} label="Family" />}
       />
