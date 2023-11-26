@@ -32,12 +32,12 @@ export default function BookAppointment(){
     const isAvailable = (date) => {
         console.log(dayjs(date).format('DD/MM/YYYY'));
         console.log("Last Monday "+dayjs(lastMonday).format('DD/MM/YYYY'));
-    if(appointments.includes(dayjs(date))){
-        return true;
-    }
-    return false;
+        if(appointments.includes(dayjs(date))){
+            return true;
+        }
+        return false;
    
-};
+    };
     return (
     <div> 
         <ResponsiveAppBar></ResponsiveAppBar>

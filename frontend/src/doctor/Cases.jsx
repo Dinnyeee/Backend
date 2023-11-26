@@ -111,10 +111,11 @@ export const Cases = (props) => {
         <TableHead>
           <TableRow>
             <TableCell><b>Id</b></TableCell>
-            <TableCell align="right"><b>Family</b></TableCell>
-            <TableCell align="right"><b>Date</b></TableCell>
+            <TableCell align="right"><b>Patient</b></TableCell>
+            <TableCell align="right"><b>Opened</b></TableCell>
             <TableCell align="right"><b>Status</b></TableCell>
             <TableCell align="right"><b>Priority</b></TableCell>
+            <TableCell align="right"><b>Appointment</b></TableCell>
             <TableCell align="right"><b></b></TableCell>
           </TableRow>
         </TableHead>
@@ -135,6 +136,8 @@ export const Cases = (props) => {
               <TableCell align="right">
                   {family.priority}
                 </TableCell>
+              <TableCell align="right">date + time</TableCell>
+
               <TableCell align="right">
                  <IconButton>
                   <Visibility fontSize="small"/>
