@@ -155,3 +155,39 @@
   display: flex;
   flex-direction: column;
 }
+
+.tabs-box{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.MuiBox-root{
+  display: flex;
+  justify-content: center;
+}
+.MuiPaper-root{
+  width: max-content;
+}
+
+.doctor-appointments-table {
+  display: flex;
+  justify-content: center;
+  width: max-content!important;
+  margin-top:30px;
+}
+
+.button-and-table-doctor-appointment{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.button-and-table-doctor-appointment .button{
+  margin-bottom: 20px !important;
+}
+
+.add-new-button{
+  margin-bottom:30px!important;
+}

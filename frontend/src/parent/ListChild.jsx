@@ -72,10 +72,10 @@ return (
         <TableHead>
           <TableRow>
             <TableCell><b>Id</b></TableCell>
-            <TableCell align="right"><b>Name</b></TableCell>
-            <TableCell align="right"><b>TAJ</b></TableCell>
-            <TableCell align="right"><b>Date of birth</b></TableCell>
-            <TableCell align="right"><b>Actions</b></TableCell>
+            <TableCell align="left"><b>Name</b></TableCell>
+            <TableCell align="left"><b>TAJ</b></TableCell>
+            <TableCell align="left"><b>Date of birth</b></TableCell>
+            <TableCell align="left"><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -87,10 +87,10 @@ return (
               <TableCell component="th" scope="row">
                 {child.id}
               </TableCell>
-              <TableCell align="right">{child.name}</TableCell>
-              <TableCell align="right">{child.taj}</TableCell>
-              <TableCell align="right">1999.08.26</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{child.name}</TableCell>
+              <TableCell align="left">{child.taj}</TableCell>
+              <TableCell align="left">1999.08.26</TableCell>
+              <TableCell align="left">
                <IconButton aria-label="edit" size="small" onClick={() => handleEdit(child.id)}>
                     <EditIcon fontSize="small" />
                 </IconButton>

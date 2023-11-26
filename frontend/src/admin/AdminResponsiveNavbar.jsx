@@ -97,19 +97,9 @@ function AdminResponsiveAppBar() {
             >
               
                 <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
+                  <Typography textAlign="right">
                       
-                      <Button onClick={navigateToAdmin} sx={{ my: 2, display: 'block' }}> 
-                       Admin
-                      </Button>
-
-                       <Button onClick={navigateToHome} sx={{ my: 2, display: 'block' }}>
-                     Cases
-                      </Button>
-                      
-                      <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
-                       Appointments
-                      </Button>
+                     
                     <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
                         Log out 
                      </Button>
@@ -137,19 +127,9 @@ function AdminResponsiveAppBar() {
           >
             GPApp
           </Typography>
-          <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' } }}>
+          <Container sx={{ flexGrow:1, display: { xs: 'none', md: 'flex' }, justifyContent:'flex-end' }}>
               
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAdmin}> 
-                Admin
-              </Button>
-
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToHome}> 
-              Cases           
-              </Button>
-
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToAppointments} > 
-              Appointments
-              </Button>
+             
 
               <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
              Log out   

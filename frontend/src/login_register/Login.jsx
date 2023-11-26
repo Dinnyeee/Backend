@@ -69,7 +69,7 @@ export const Login = (props) => {
                     <Card className='mycard'>
                         
                             <form noValidate autoComplete='off' className='myform' onSubmit={handleSubmit}>
-                                <h1>Welcome! Log in!</h1>
+                                <h1>Log in</h1>
                                 <div>
                                     <TextField 
                                         label="Email"

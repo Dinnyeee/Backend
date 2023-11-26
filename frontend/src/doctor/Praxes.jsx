@@ -84,7 +84,7 @@ export const Praxes = (props) => {
       <div>
       <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
     <Container>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box className="tabs-box" sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="Families" {...a11yProps(0)} />
               <Tab label="Assistants" {...a11yProps(1)} />

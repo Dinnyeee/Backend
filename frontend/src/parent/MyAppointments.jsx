@@ -81,10 +81,10 @@ export const MyAppointments = () => {
         <TableHead>
           <TableRow>
             <TableCell><b>CaseId</b></TableCell>
-            <TableCell align="right"><b>Child</b></TableCell>
-            <TableCell align="right"><b>Date</b></TableCell>
-            <TableCell align="right"><b>Time</b></TableCell>
-            <TableCell align="right"><b>Details</b></TableCell>
+            <TableCell align="left"><b>Child</b></TableCell>
+            <TableCell align="left"><b>Date</b></TableCell>
+            <TableCell align="left"><b>Time</b></TableCell>
+            <TableCell align="left"><b>Details</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -96,12 +96,12 @@ export const MyAppointments = () => {
               <TableCell component="th" scope="row">
                 {child.id}
               </TableCell>
-              <TableCell align="right">{child.name}</TableCell>
-              <TableCell align="right">{child.date}</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{child.name}</TableCell>
+              <TableCell align="left">{child.date}</TableCell>
+              <TableCell align="left">
                   {child.status}
                 </TableCell>
-              <TableCell align="right">
+              <TableCell align="left">
                  <IconButton>
                   <Visibility fontSize="small"/>
                  </IconButton>

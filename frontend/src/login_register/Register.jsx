@@ -118,7 +118,7 @@ export const Register = (props) => {
                                 
 
                                 <div className='buttons-in-form'>
-                                    <Button variant='contained' color='secondary' type='submit'>Sign up!</Button>  
+                                    <Button variant='contained' color='secondary' type='submit'>Sign up</Button>  
                                     <Button variant='outlined' color="secondary" onClick={() => props.onFormSwitch('login')}>Already have an account? Log in here.</Button>
                                 </div>
                             </form>

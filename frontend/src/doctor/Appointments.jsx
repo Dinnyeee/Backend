@@ -41,7 +41,7 @@ export const Appointments = (props) => {
       <div>
         <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
         <Grid
-            container
+          container
             spacing={0}
             direction="column"
             alignItems="center"
@@ -49,18 +49,24 @@ export const Appointments = (props) => {
             style={{ minHeight: '50vh' }}
         >
             <Grid item xs={3}>
-            <Button onClick={handleAddAppointmentClicked} variant="contained"  color='secondary' className='add-new-button'>
+      
+           
+            </Grid>
+
+       <div className="button-and-table-doctor-appointment">
+        
+     
+       <Button onClick={handleAddAppointmentClicked} variant="contained"  color='secondary' className='add-new-button'>
                 Add new appointment
             </Button>
-            </Grid>
-            <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="doctor-appointments-table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell><b>Id</b></TableCell>
-            <TableCell align="right"><b>Name</b></TableCell>
-            <TableCell align="right"><b>Date</b></TableCell>
-            <TableCell align="right"><b>Actions</b></TableCell>
+            <TableCell align="left"><b>Name</b></TableCell>
+            <TableCell align="left"><b>Date</b></TableCell>
+            <TableCell align="left"><b>Actions</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -72,9 +78,9 @@ export const Appointments = (props) => {
               <TableCell component="th" scope="row">
                 {family.id}
               </TableCell>
-              <TableCell align="right">{family.family}</TableCell>
-              <TableCell align="right">{family.date}</TableCell>
-              <TableCell align="right">
+              <TableCell align="left">{family.family}</TableCell>
+              <TableCell align="left">{family.date}</TableCell>
+              <TableCell align="left">
                 <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
                     <DeleteIcon fontSize="small" />
                 </IconButton>
@@ -84,6 +90,7 @@ export const Appointments = (props) => {
         </TableBody>
       </Table>
     </TableContainer>
+       </div>   
 
 
 
