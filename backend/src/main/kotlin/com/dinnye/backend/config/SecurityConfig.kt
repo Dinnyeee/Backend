@@ -22,7 +22,10 @@ class SecurityConfig(
             csrf { disable() }
             authorizeHttpRequests {
                 authorize("/auth/**", permitAll)
+                authorize("/api/doctor", hasAnyRole("DOCTOR"))
+                authorize("/api/assistant", hasAnyRole("ASSISTANT"))
             }
+            addFilterBefore(jwtAuthfilter, UsernamePasswordAuthenticationFilter::class.java)
         }
         return http.build()
     }
