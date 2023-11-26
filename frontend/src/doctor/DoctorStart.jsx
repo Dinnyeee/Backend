@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
 import Text from '@mui/material/ListItemText'
+import { Cases } from "./Cases";
 
 export const DoctorStart = (props) => {
   return (
     <div>
-        <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
-        <Text>Please choose tab from the menu!</Text>
+        <Cases></Cases>
     </div>
   );
 }

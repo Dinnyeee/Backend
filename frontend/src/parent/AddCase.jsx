@@ -1,7 +1,22 @@
-import { Grid, Card, TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Grid, Card, TextField, FormControl, InputLabel, MenuItem, Select, Button } from "@mui/material";
 import React, { useState } from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { useNavigate } from "react-router-dom";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import styled from "@emotion/styled";
+
+
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 export default function AddCase(){
     const navigate = useNavigate();
@@ -95,6 +110,10 @@ return(
                                 />
                             </div>
                          
+                            <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+                                Upload file
+                                <VisuallyHiddenInput type="file" />
+                            </Button>
 
                             <div className='buttons-in-form'>
                                 <Button variant='contained' color='secondary' type='submit'>Save</Button>  

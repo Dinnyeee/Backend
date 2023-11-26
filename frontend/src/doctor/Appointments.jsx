@@ -64,9 +64,11 @@ export const Appointments = (props) => {
         <TableHead>
           <TableRow>
             <TableCell><b>Id</b></TableCell>
-            <TableCell align="left"><b>Name</b></TableCell>
+            <TableCell align="left"><b>Case</b></TableCell>
+            <TableCell align="left"><b>Patient</b></TableCell>
             <TableCell align="left"><b>Date</b></TableCell>
-            <TableCell align="left"><b>Actions</b></TableCell>
+            <TableCell align="left"><b>Time</b></TableCell>
+            <TableCell align="center"><b>Action</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -79,8 +81,10 @@ export const Appointments = (props) => {
                 {family.id}
               </TableCell>
               <TableCell align="left">{family.family}</TableCell>
+              <TableCell align="left">{family.family}</TableCell>
               <TableCell align="left">{family.date}</TableCell>
-              <TableCell align="left">
+              <TableCell align="left">{"15:00"}</TableCell>
+              <TableCell align="center">
                 <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
                     <DeleteIcon fontSize="small" />
                 </IconButton>

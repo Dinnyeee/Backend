@@ -81,6 +81,7 @@ export const MyAppointments = () => {
         <TableHead>
           <TableRow>
             <TableCell><b>CaseId</b></TableCell>
+            <TableCell align="left"><b>Case</b></TableCell>
             <TableCell align="left"><b>Child</b></TableCell>
             <TableCell align="left"><b>Date</b></TableCell>
             <TableCell align="left"><b>Time</b></TableCell>
@@ -96,6 +97,7 @@ export const MyAppointments = () => {
               <TableCell component="th" scope="row">
                 {child.id}
               </TableCell>
+              <TableCell align="left">{"Case Title"}</TableCell>
               <TableCell align="left">{child.name}</TableCell>
               <TableCell align="left">{child.date}</TableCell>
               <TableCell align="left">

@@ -52,7 +52,7 @@ export const CasesPage = (props) => {
 <div className="search-field">
 
         <Button variant="contained" color="secondary" startIcon={<AddCircleIcon />} onClick={handleAddNewCase}>
-          Add
+          New case
         </Button>
 
         <Autocomplete 
@@ -97,9 +97,11 @@ export const CasesPage = (props) => {
         <TableHead>
           <TableRow>
             <TableCell><b>Id</b></TableCell>
+            <TableCell align="left"><b>Case</b></TableCell>
             <TableCell align="left"><b>Child</b></TableCell>
-            <TableCell align="left"><b>Date</b></TableCell>
+            <TableCell align="left"><b>Opened</b></TableCell>
             <TableCell align="left"><b>Status</b></TableCell>
+            <TableCell align="left"><b>Appointment</b></TableCell>
             <TableCell align="left"><b></b></TableCell>
           </TableRow>
         </TableHead>
@@ -112,15 +114,12 @@ export const CasesPage = (props) => {
               <TableCell component="th" scope="row">
                 {child.id}
               </TableCell>
+              <TableCell align="left">{"CASE TITLE"}</TableCell>
               <TableCell align="left">{child.name}</TableCell>
               <TableCell align="left">{child.date}</TableCell>
-              <TableCell align="left">
-                  {child.status}
-                </TableCell>
-              <TableCell align="left">
-                 <IconButton>
-                  <Visibility fontSize="small"/>
-                 </IconButton>
+              <TableCell align="left">{child.status}</TableCell>
+              <TableCell align="left">{"YYYY.MM.DD.HH:MM"}</TableCell>
+              <TableCell align="left"><IconButton><Visibility fontSize="small"/></IconButton>
               </TableCell>
               
             </TableRow>

@@ -64,7 +64,7 @@ return (
 
             <Grid item xs={3}>
 <Button onClick={handleAddChildClicked} variant="contained" color='secondary' className='add-new-button'>
-                Add new child
+                Add New child
             </Button>
  
     <TableContainer component={Paper}>
