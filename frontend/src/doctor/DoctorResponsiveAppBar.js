@@ -46,7 +46,7 @@ function DoctorResponsiveAppBar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters >
           <Typography
             variant="h6"
             noWrap
@@ -55,14 +55,14 @@ function DoctorResponsiveAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'serif',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            General Practitioner Site
+            General Practitioner
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -127,7 +127,7 @@ function DoctorResponsiveAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'serif',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',

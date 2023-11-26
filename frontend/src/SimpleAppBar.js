@@ -23,7 +23,7 @@ function SimpleAppBar() {
   return (
     <AppBar position="static">
       <Container maxWidth="sm">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters className='myToolbar'>
           <Typography
             variant="h6"
             noWrap
@@ -32,14 +32,14 @@ function SimpleAppBar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'serif',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            General Practitioner Site
+            General Practitioner
           </Typography>
 
           <Typography
@@ -51,7 +51,7 @@ function SimpleAppBar() {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'serif',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
