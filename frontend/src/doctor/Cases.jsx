@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteCase, getAllCases } from "services/CaseApi";
 import { getAllFamilies } from "services/FamilyApi";
 import dayjs from "dayjs";
+import { getDoctorById } from "services/DoctorApi";
 
 
 
@@ -16,7 +17,7 @@ export const Cases = (props) => {
   useEffect(() => {
     const getData = async () => {
       try{
-        console.log("Hellothere!")
+        //const docById = await get
         const result = await getAllCases();
         console.log(result);
         setCases(result);
@@ -28,6 +29,7 @@ export const Cases = (props) => {
   const fetchFamilies = async () => {
     try{
       const res = await getAllFamilies();
+      console.log(res);
       setFamilies(res);
     }catch (error){
         console.error('Error getAllFamilies data', error);
@@ -44,7 +46,7 @@ export const Cases = (props) => {
 
   const [priority, setPrio] = React.useState('');
   const [status, setStatus] = React.useState('');
-  const [families, setFamilies] = React.useState('');
+  const [families, setFamilies] = React.useState([]);
 
   const handleChange_1 = (event) => {
     setStatus(event.target.value);
@@ -59,17 +61,10 @@ export const Cases = (props) => {
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
 
-  const [cases, setCases] = useState(
-    [
-    { id:1, child: { name:"Fabian"}, date: '2023-12-02', status: "new", priority: "TOP" },
-//{ id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
-  //  { id:3, name: "Peter", date: '2023-11-12', status: "new", priority: "medium" },
-    { id:4, child:{name: "Nemeth"}, date: '2023-11-02', status: "new", priority: "TOP" },
-  ])
-    const  handleDelete = (id) => {
-      const newList = cases.filter((family) => family.id !== id);
-      //TODO controller needs to be called to make the removal permanent
-      deleteCase(id).then(() =>setCases(newList));
+  const [cases, setCases] = useState([])
+  const  handleDelete = (id) => {
+    const newList = cases.filter((family) => family.id !== id);
+    deleteCase(id).then(() =>setCases(newList));
  }
 
   return (
@@ -99,7 +94,7 @@ export const Cases = (props) => {
               setInputValue(newInputValue);
             }}
             id="controllable-states-demo"
-            options={families}
+            options={families.map(f=>f.name)}
             sx={{ width: 250, margin:1 }}
             renderInput={(params) => <TextField {...params} label="Family" />}
       />

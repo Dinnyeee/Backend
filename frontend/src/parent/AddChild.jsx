@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button, Card, Grid, TextField } from '@mui/material';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import ResponsiveAppBar from './ResponsiveAppBar';
+import { createChild } from 'services/ChildApi';
 
 
 
@@ -40,7 +41,16 @@ export default function AddChild(){
 
         if(name && taj && birth){
             console.log(name, taj);
-            navigateToHome();
+            let child = {
+                id: 1,
+                name: name,
+                nickname: "Dórika",
+                family: null,
+                taj: taj,
+                birthday: birth
+            }
+            createChild(child).then(() =>navigateToHome())
+ 
 
         }
        

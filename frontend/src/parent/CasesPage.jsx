@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Height, Visibility } from "@mui/icons-material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from "react-router-dom";
+import { getAllCases } from "services/CaseApi";
 
 
 
@@ -11,6 +12,19 @@ export const CasesPage = (props) => {
 
     const navigate= useNavigate();
 
+  useEffect(() => {
+    const getData = async () => {
+      try{
+        //const docById = await get
+        const result = await getAllCases();
+        console.log(result);
+        setCases(result);
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
+    getData();
+  }, [])
 
   const options = ['Option 1', 'Option 2'];
   const [childValue, setChildValue] = React.useState('');
@@ -32,12 +46,7 @@ export const CasesPage = (props) => {
   }
 
 
-  const cases = [
-    { id:1, name: "Kovács", date: '2023-12-02', status: "new", priority: "TOP" },
-    { id:2, name: "Kiss", date: '2023-10-22', status: "inprogress", priority: "low" },
-    { id:3, name: "Shwarz", date: '2023-11-12', status: "new", priority: "medium" },
-    { id:4, name: "Bali", date: '2023-11-02', status: "new", priority: "TOP" },
-  ]
+  const [cases, setCases] = useState([]);
   return (
     <div className="cases-parent">
      

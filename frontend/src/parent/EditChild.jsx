@@ -1,18 +1,41 @@
 import Container from '@mui/material/Container';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Grid, TextField } from '@mui/material';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import ResponsiveAppBar from './ResponsiveAppBar';
+import { getChildById, updateChild } from 'services/ChildApi';
 
 
 export default function EditChild(props){
-    const [name, setName] = useState('NameToEdit');
-    const [taj, setTaj] = useState('TAJToEdit'); 
+    const [name, setName] = useState('');
+    const [taj, setTaj] = useState(''); 
     const [birth, setBirth] = useState('');
     const [nameError, setNameError] = useState(false); 
     const [tajError, setTajError] = useState(false); 
     const [birthError, setBirthError] = useState(false); 
 
+
+    const [child, setChild] = useState({
+        name:"valami",
+        taj:1233479138,
+        birthday: new Date(),
+        
+    });
+
+    useEffect(() => {
+    const getChild = async () => {
+      try{
+        //const docById = await get
+        const result = await getChildById(152);
+        console.log(result);
+        setChild(result);
+      } catch(error){
+        console.error(error.response.data);
+      }
+    }; 
+
+    getChild();
+  }, [])
     
     const navigate = useNavigate();
     
@@ -38,9 +61,7 @@ export default function EditChild(props){
         }
 
         if(name && taj && birth){
-            console.log(name, taj);
-            navigateToHome();
-
+        updateChild(child).then(() =>navigateToHome());
         }
        
         //TODO calling controller to edit the corresponding item on the list in the backend
@@ -69,7 +90,7 @@ export default function EditChild(props){
                             <div>
                                 <TextField 
                                     label="Name"
-                                    value={name}
+                                    value={child.name}
                                     variant='outlined'
                                     required
                                     error={nameError}
@@ -80,7 +101,7 @@ export default function EditChild(props){
                             <div>
                                 <TextField 
                                     label="TAJ"
-                                    value={taj}
+                                    value={child.taj}
                                     variant='outlined'
                                     required
                                     error={tajError}
@@ -91,9 +112,11 @@ export default function EditChild(props){
                                 <TextField 
                                     helperText="Birthdate"
                                     variant='outlined'
-                                    value={"2000-12-08"}
+                                    value={child.birthday}
                                     required
                                     type='date'
+                                    onChange={(e) => {setBirth(e.target.value);}}
+
                                 />
                             </div> 
 
