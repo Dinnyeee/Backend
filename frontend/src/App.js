@@ -12,8 +12,10 @@ import { DoctorStart } from './doctor/DoctorStart';
 import AuthContext from './context/AuthContext'; //KELL EGY ILYEN CUCC
 import { Link } from "react-router-dom";
 import DoctorResponsiveAppBar from 'doctor/DoctorResponsiveAppBar';
+import { DetailedCase } from 'DetailedCase';
+import  App2  from './src2/App';
 
-
+/*
 function App() {
   const [currentForm, setCurrentForm] = useState('appointments');
  // const {userRole} = useContext(AuthContext);
@@ -33,7 +35,7 @@ function App() {
      
     </div>
   );
-}
+}*/
 /*
 
       {userRole === 'doctor' && <li><Link to="/admin">Praxes</Link></li>}
@@ -45,15 +47,14 @@ function App() {
       */
 
 
-/*function App() {
+function App() {
   return (
   
     <div>
-       <ResponsiveAppBar></ResponsiveAppBar>
-        <AdminPage></AdminPage>
+        <App2></App2>
     </div>
   );
-}*/
+}
 /*
 function App() {
   
