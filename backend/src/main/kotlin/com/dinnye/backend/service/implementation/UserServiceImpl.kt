@@ -25,6 +25,9 @@ class UserServiceImpl(
     override fun get(id: Long): User = userRepository.findByIdOrThrow(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
+    override fun getByEmail(email: String): User = userRepository.findByEmail(email).orElseThrow()
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     override fun getAll(): List<User> = userRepository.findAll()
 
     @Suppress("DuplicatedCode")

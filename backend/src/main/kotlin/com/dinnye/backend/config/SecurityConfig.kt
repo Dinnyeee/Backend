@@ -2,6 +2,7 @@ package com.dinnye.backend.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -24,6 +25,7 @@ class SecurityConfig(
                 authorize("/auth/**", permitAll)
                 authorize("/api/doctor", hasAnyRole("DOCTOR"))
                 authorize("/api/assistant", hasAnyRole("ASSISTANT"))
+                authorize(HttpMethod.PUT, "/api/parent/{familyId}/addChild", hasAnyRole("PARENT"))
             }
             addFilterBefore(jwtAuthfilter, UsernamePasswordAuthenticationFilter::class.java)
         }

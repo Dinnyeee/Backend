@@ -1,8 +1,11 @@
 package com.dinnye.backend.service.implementation
 
+import com.dinnye.backend.db.model.Child
 import com.dinnye.backend.db.model.Family
 import com.dinnye.backend.db.model.Parent
 import com.dinnye.backend.db.repository.ParentRepository
+import com.dinnye.backend.dto.child.ChildPostDto
+import com.dinnye.backend.service.interfaces.ChildService
 import com.dinnye.backend.service.interfaces.FamilyService
 import com.dinnye.backend.service.interfaces.ParentService
 import com.dinnye.backend.service.interfaces.UserService
@@ -16,7 +19,9 @@ import org.springframework.transaction.annotation.Transactional
 class ParentServiceImpl(
     private val parentRepository: ParentRepository,
     private val userService: UserService,
-    private val familyService: FamilyService
+    private val jwtService: JwtService,
+    private val familyService: FamilyService,
+    private val childService: ChildService
 ): ParentService {
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Parent): Parent {
@@ -54,6 +59,16 @@ class ParentServiceImpl(
     override fun assignFamily(parentId: Long, familyId: Long): Parent {
         return parentRepository.update(parentId) {
             this.family = familyService.get(familyId)
+        }
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    override fun addChild(token: String, child: Child): Parent {
+        val email = jwtService.extractUsername(token)
+        val parentId = userService.getByEmail(email).id!!
+
+        return parentRepository.update(parentId) {
+            this.family?.children?.add(child)
         }
     }
 }

@@ -21,14 +21,7 @@ class AssistantServiceImpl(
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Assistant): Assistant {
         userService.create(entity) as Assistant
-        if (entity.praxis == null) {
-            entity.praxis = Praxis().apply {
-                this.name = "${entity.name}'s praxis"
-                this.assistant = entity
-            }.also {
-                praxisService.create(it)
-            }
-        }
+
         return entity
     }
 
