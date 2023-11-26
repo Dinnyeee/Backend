@@ -31,6 +31,11 @@ annotation class IgnoreId
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
+@Mapping(target = "role", ignore = true)
+annotation class IgnoreRole
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
 @Mapping(target = "parentId", source = "parent.id")
 annotation class ParentIdTarget
 
@@ -56,7 +61,7 @@ annotation class FamilyIdTarget
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-@Mapping(target = "family.id", source = "familyId")
+@Mapping(target = "family", source = "familyId")
 annotation class FamilyIdSource
 
 @Target(AnnotationTarget.FUNCTION)

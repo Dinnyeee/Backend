@@ -1,6 +1,7 @@
 package com.dinnye.backend.util
 
 import com.dinnye.backend.db.model.BaseEntity
+import com.dinnye.backend.db.model.User
 import com.dinnye.backend.exception.BackendExceptions
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.ResponseEntity

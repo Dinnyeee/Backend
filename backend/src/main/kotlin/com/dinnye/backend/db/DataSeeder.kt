@@ -39,25 +39,25 @@ class DataSeeder(
         val admin = Admin().applyAndSave(userRepository) {
             name = "Admin User"
             email = "admin@example.com"
-            password = "adminPassword"
+            pw = "adminPassword"
         }
 
         val doctor = Doctor().applyAndSave(doctorRepository) {
             name = "Doctor User"
             email = "doctor@example.com"
-            password = "doctorPassword"
+            pw = "doctorPassword"
         }
 
         val assistant = Assistant().applyAndSave(assistantRepository) {
             name = "Assistant User"
             email = "assistant@example.com"
-            password = "assistantPassword"
+            pw = "assistantPassword"
         }
 
         val parent = Parent().applyAndSave(parentRepository){
             name = "Parent User"
             email = "parent@example.com"
-            password = "parentPassword"
+            pw = "parentPassword"
         }
 
         val praxis = Praxis().applyAndSave(praxisRepository) {

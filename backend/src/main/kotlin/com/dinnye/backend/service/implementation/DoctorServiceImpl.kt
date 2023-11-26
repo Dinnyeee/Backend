@@ -22,6 +22,8 @@ class DoctorServiceImpl(
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun create(entity: Doctor): Doctor {
+        userService.create(entity) as Doctor
+
         if (entity.praxis == null) {
             entity.praxis = Praxis().apply {
                 this.name = "${entity.name}'s praxis"
@@ -30,7 +32,7 @@ class DoctorServiceImpl(
                 praxisService.create(it)
             }
         }
-        return userService.create(entity) as Doctor
+        return entity
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
@@ -44,7 +46,7 @@ class DoctorServiceImpl(
     override fun update(entity: Doctor): Doctor {
         return doctorRepository.update(entity.id!!) {
             entity.name?.let { this.name = it }
-            entity.password?.let { this.password = it }
+            entity.pw?.let { this.pw = it }
             entity.email?.let { this.email = it }
             entity.praxis?.let { this.praxis = it }
         }

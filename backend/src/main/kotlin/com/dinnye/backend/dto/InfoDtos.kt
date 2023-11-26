@@ -34,3 +34,4 @@ data class CaseInfoDto @Default constructor(
     val description: String? = null,
     val appointmentDate: Date? = null
 ) : Serializable
+

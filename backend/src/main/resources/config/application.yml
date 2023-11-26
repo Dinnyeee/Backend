@@ -1,6 +1,13 @@
 server:
   port: 8080
 
+logging:
+  level:
+    root: INFO
+    org.springframework: DEBUG
+
+secret: d1b5513f1cd32fbb45cf152aacd85e1d7174d22120d0761b253a9107e619e8c1
+
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/haziorvos

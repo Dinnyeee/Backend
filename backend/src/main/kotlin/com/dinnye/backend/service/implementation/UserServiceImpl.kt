@@ -25,6 +25,9 @@ class UserServiceImpl(
     override fun get(id: Long): User = userRepository.findByIdOrThrow(id)
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
+    override fun getByEmail(email: String): User = userRepository.findByEmail(email).orElseThrow()
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     override fun getAll(): List<User> = userRepository.findAll()
 
     @Suppress("DuplicatedCode")
@@ -32,7 +35,7 @@ class UserServiceImpl(
     override fun update(entity: User): User {
         return userRepository.update(entity.id!!) {
             entity.name?.let { this.name = it }
-            entity.password?.let { this.password = it }
+            entity.pw?.let { this.pw = it }
             entity.email?.let { this.email = it }
         }
     }
