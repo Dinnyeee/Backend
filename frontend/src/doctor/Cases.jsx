@@ -7,6 +7,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from "react-router-dom";
 import { deleteCase, getAllCases } from "services/CaseApi";
 import { getAllFamilies } from "services/FamilyApi";
+import dayjs from "dayjs";
 
 
 
@@ -60,10 +61,10 @@ export const Cases = (props) => {
 
   const [cases, setCases] = useState(
     [
-    { id:1, name: "Fabian", date: '2023-12-02', status: "new", priority: "TOP" },
-    { id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
-    { id:3, name: "Peter", date: '2023-11-12', status: "new", priority: "medium" },
-    { id:4, name: "Nemeth", date: '2023-11-02', status: "new", priority: "TOP" },
+    { id:1, child: { name:"Fabian"}, date: '2023-12-02', status: "new", priority: "TOP" },
+//{ id:2, name: "Fekete", date: '2023-10-22', status: "inprogress", priority: "low" },
+  //  { id:3, name: "Peter", date: '2023-11-12', status: "new", priority: "medium" },
+    { id:4, child:{name: "Nemeth"}, date: '2023-11-02', status: "new", priority: "TOP" },
   ])
     const  handleDelete = (id) => {
       const newList = cases.filter((family) => family.id !== id);
@@ -162,15 +163,15 @@ export const Cases = (props) => {
               <TableCell component="th" scope="row">
                 {family.id}
               </TableCell>
-              <TableCell align="right">{family.name}</TableCell>
-              <TableCell align="right">{family.date}</TableCell>
+              <TableCell align="right">{family.child.name}</TableCell>
+              <TableCell align="right">{dayjs(family.createdAt).format('YYYY/MM/DD hh:MM')}</TableCell>
               <TableCell align="right">
                   {family.status}
                 </TableCell>
               <TableCell align="right">
                   {family.priority}
                 </TableCell>
-              <TableCell align="right">date + time</TableCell>
+              <TableCell align="right">{dayjs(family.appointmentDate).format('YYYY/MM/DD hh:MM')}</TableCell>
 
               <TableCell align="right">
                  <IconButton onClick={handleViewDetail}>
