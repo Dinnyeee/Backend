@@ -1,18 +1,24 @@
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';const React = require("react");
+import EditIcon from '@mui/icons-material/Edit';import { useNavigate } from 'react-router-dom';
+const React = require("react");
 const { Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton } = require("@mui/material");
 const { useState } = require("react");
 
 export default function ListOfPraxes(){
 
+    const navigate = useNavigate();
     const [praxes ,setPraxes] = useState([
         {id:1, doctor:"Dr.Kovács", name:"XI.kerület"},
         {id:2, doctor:"Dr.Péter", name: "V.kerület"},
         {id:3, doctor:"Dr.Fekete", name: "Erzsébet városrész"},
     ])
-    const handleAddPraxisClicked =(e) => {}
-    const handleEdit =(e) => {}
+    const handleAddPraxisClicked =(e) => {
+      navigate("/addpraxis");
+    }
+    const handleEdit =(e) => {
+      navigate("/editpraxis");
+    }
     const handleDelete =(id) => {
           const newList = praxes.filter((p) => p.id !== id);
             setPraxes(newList);

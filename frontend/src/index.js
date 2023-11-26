@@ -23,6 +23,8 @@ import EditChild from 'parent/EditChild';
 import TestComponent from 'services/test';
 import BookAppointment from 'parent/BookAppointment';
 import AddCase from 'parent/AddCase';
+import { AddNewPraxis } from 'admin/AddNewPraxis';
+import EditPraxis from 'admin/EditPraxis';
 
 
 
@@ -99,6 +101,14 @@ const router = createBrowserRouter([
   {
     path: "/administration",
     element: <AdminHome/>,
+  },
+  {
+    path: "/addpraxis",
+    element: <AddNewPraxis/>,
+  },
+  {
+    path: "/editpraxis",
+    element: <EditPraxis/>,
   }
   
 ]);

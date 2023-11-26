@@ -8,6 +8,10 @@ import Typography from '@mui/material/Typography';
 import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
 import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonOffIcon from '@mui/icons-material/PersonOff';
+import Tooltip from '@mui/material/Tooltip';
+
 
 
 interface TabPanelProps {
@@ -49,6 +53,19 @@ export const Praxes = (props) => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
+    const handleRemoveFamily = (id) => {
+        //TODO MAGIC SERVICE-EN KERESZTÜL TÖRÖLNI A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A A FRISS LISTÁKKAL
+    }
+    const handleAddFamily = (id) => {
+        //TODO MAGIC SERVICE-EN KERESZTÜL HOZZÁADNI  A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A FRISS LISTÁKKAL
+    }
+    const handleRemoveAssistant = (id) => {
+        //TODO MAGIC SERVICE-EN KERESZTÜL TÖRÖLNI A PRAXISBÓL AZ ASSZISZTENST, MAJD VISSZATÉRNI A A FRISS LISTÁKKAL
+    }
+    const handleAddAssistant = (id) => {
+        //TODO MAGIC SERVICE-EN KERESZTÜL HOZZÁADNI  A PRAXISBÓL AZ ASSZISZTENST, MAJD VISSZATÉRNI A FRISS LISTÁKKAL
+    }
+
     const [familyValue, setFamilyValue] = React.useState('');
     const [assistantValue, setAssistantValue] = React.useState('');
     const [inputValue, setInputValue] = React.useState('');
@@ -108,9 +125,12 @@ export const Praxes = (props) => {
                   >
                     <TableCell>{family.name}</TableCell>
                     <TableCell align="right">
-                      <IconButton>
-                        <Visibility fontSize="small"/>
-                      </IconButton>
+                      <Tooltip title="Remove from praxis">
+                         <IconButton onClick={() => handleRemoveFamily(family.id)}>
+                            <PersonOffIcon fontSize="small"/>
+                         </IconButton>
+                      </Tooltip>
+                     
                     </TableCell>
                     
                   </TableRow>
@@ -134,9 +154,11 @@ export const Praxes = (props) => {
                   >
                     <TableCell>{family.name}</TableCell>
                     <TableCell align="right">
-                      <IconButton>
-                        <Visibility fontSize="small"/>
+                       <Tooltip title="Add to praxis">
+                      <IconButton  onClick={() => handleAddFamily(family.id)}>
+                        <PersonAddAlt1Icon fontSize="small"/>
                       </IconButton>
+                      </Tooltip>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -164,9 +186,11 @@ export const Praxes = (props) => {
                     >
                       <TableCell>{assistant.name}</TableCell>
                       <TableCell align="right">
-                        <IconButton>
-                          <Visibility fontSize="small"/>
+                         <Tooltip title="Remove praxis"> 
+                        <IconButton onClick={() => handleAddAssistant(assistant.id)}>
+                          <PersonOffIcon fontSize="small"/>
                         </IconButton>
+                        </Tooltip>
                       </TableCell>
                       
                     </TableRow>
@@ -190,9 +214,11 @@ export const Praxes = (props) => {
                     >
                       <TableCell>{assistant.name}</TableCell>
                       <TableCell align="right">
-                        <IconButton>
-                          <Visibility fontSize="small"/>
+                       <Tooltip title="Add to praxis"> 
+                        <IconButton onClick={() => handleRemoveAssistant(assistant.id)}>
+                          <PersonAddAlt1Icon fontSize="small"/>
                         </IconButton>
+                        </Tooltip>
                       </TableCell>
                       
                     </TableRow>

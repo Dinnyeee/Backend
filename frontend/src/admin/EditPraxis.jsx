@@ -1,15 +1,13 @@
-import { Grid, Card, TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Grid, Card, TextField, FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import React, { useState } from "react";
-import AdminResponsiveAppBar from "./AdminResponsiveNavbar";
 import { useNavigate } from "react-router-dom";
+import AdminResponsiveAppBar from "./AdminResponsiveNavbar";
 
-
-export function AddNewPraxis(){
-
+export default function EditPraxis(){
     
-    const [selectedDoctor, setSelectedDoctor] = useState('');
+    const [selectedDoctor, setSelectedDoctor] = useState(''); //FETCH IT BASED ON URL OR PROPS?
     
-    const [name, setName] = useState(''); 
+    const [name, setName] = useState(''); //TODO TO GET IT FROM ID. IT COULD BE PASSED FROM PROPS OR IDK
     const [nameError, setNameError] = useState(false); 
     const [doctorError, setDoctorError] = useState(false); 
     
@@ -63,7 +61,7 @@ export function AddNewPraxis(){
             <Grid item xs={3}>
                 <Card className='mycard'>
                         <form noValidate autoComplete='off' className='myform' onSubmit={handleSubmit}>
-                            <div className="title-of-form"><h2>Create praxis</h2></div>
+                            <div className="title-of-form"><h2>Edit praxis</h2></div>
                             <div>
                                 <TextField 
                                     label="Name of praxis"
