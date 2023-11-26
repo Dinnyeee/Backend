@@ -23,6 +23,10 @@ export const CasesPage = (props) => {
     setPrio(event.target.value);
   };
 
+  const handleViewDetail =(e) => {
+    //navigate("/detailedcase");
+  }
+
   const handleAddNewCase = (e) => {
     navigate('/addcase');
   }
@@ -119,7 +123,10 @@ export const CasesPage = (props) => {
               <TableCell align="left">{child.date}</TableCell>
               <TableCell align="left">{child.status}</TableCell>
               <TableCell align="left">{"YYYY.MM.DD.HH:MM"}</TableCell>
-              <TableCell align="left"><IconButton><Visibility fontSize="small"/></IconButton>
+              <TableCell align="left">
+                  <IconButton onClick={handleViewDetail}>
+                    <Visibility fontSize="small"/>
+                  </IconButton>
               </TableCell>
               
             </TableRow>

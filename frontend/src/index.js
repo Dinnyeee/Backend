@@ -25,6 +25,7 @@ import BookAppointment from 'parent/BookAppointment';
 import AddCase from 'parent/AddCase';
 import { AddNewPraxis } from 'admin/AddNewPraxis';
 import EditPraxis from 'admin/EditPraxis';
+import { DetailedCase } from 'doctor/DetailedCase';
 
 
 
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: "/cases",
     element: <Cases/>
+  },
+  {
+    path: "/detailedcase",
+    element: <DetailedCase/>
   },
   {
     path: "/parent",

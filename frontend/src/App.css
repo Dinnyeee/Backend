@@ -197,3 +197,24 @@
 .title-of-form{
   text-align: center;
 }
+
+.case-detailed-container{
+  display: flex;
+  justify-content: center;
+  margin-top:30px;
+}
+
+
+
+.detailed-case-paper{
+  padding:30px;
+  width:50%;
+}
+
+.prio-status-setter{
+  display: flex;
+  justify-content: space-evenly;
+}
+ .prio-status-setter h3{
+  margin-left:10px;
+ }

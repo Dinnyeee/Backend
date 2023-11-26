@@ -4,11 +4,13 @@ import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuIt
 import { Visibility } from "@mui/icons-material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from "react-router-dom";
 
 
 
 export const Cases = (props) => {
 
+  const navigate = useNavigate();
   const [familyValue, setFamilyValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
 
@@ -21,6 +23,9 @@ export const Cases = (props) => {
   const handleChange_2 = (event) => {
     setPrio(event.target.value);
   };
+  const handleViewDetail =(e) => {
+    navigate("/detailedcase");
+  }
   const handleSearch = () => {
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
@@ -139,7 +144,7 @@ export const Cases = (props) => {
               <TableCell align="right">date + time</TableCell>
 
               <TableCell align="right">
-                 <IconButton>
+                 <IconButton onClick={handleViewDetail}>
                   <Visibility fontSize="small"/>
                  </IconButton>
                 <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
