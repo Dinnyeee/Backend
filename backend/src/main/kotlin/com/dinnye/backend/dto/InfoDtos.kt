@@ -38,5 +38,5 @@ data class CaseInfoDto @Default constructor(
     val title: String? = null,
     val priority: Priority = Priority.LOW,
     val status: Status = Status.NEW,
-    val appointmentDate: Date? = null,
+    val appointmentDate: Date? = null
 ) : Serializable
