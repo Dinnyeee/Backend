@@ -1,7 +1,10 @@
 package com.dinnye.backend.service.interfaces
 
-import com.dinnye.backend.db.model.*
-import com.dinnye.backend.dto.child.ChildPostDto
+import com.dinnye.backend.db.model.Assistant
+import com.dinnye.backend.db.model.Child
+import com.dinnye.backend.db.model.Doctor
+import com.dinnye.backend.db.model.Parent
+import com.dinnye.backend.db.model.User
 
 interface UserService: SimpleCrudService<User> {
     fun findAssistantById(id: Long): Assistant
@@ -19,5 +22,5 @@ interface AssistantService: SimpleCrudService<Assistant>  {
 }
 interface ParentService: SimpleCrudService<Parent> {
     fun assignFamily(parentId: Long, familyId: Long): Parent
-    fun addChild(token: String, child: Child): Parent
+    fun addChild(email: String, child: Child): Parent
 }

@@ -29,18 +29,6 @@ class CaseServiceImpl(
     override fun getAll(): List<Case> = caseRepository.findAll()
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun getAll(token: String): List<Case> {
-        val email = jwtService.extractEmail(token)
-        val user = userService.getByEmail(email)
-        return when(user.role) {
-            Role.PARENT -> (user as Parent).family?.let { caseRepository.findAllByChildFamilyId(it.id!!) } ?: emptyList()
-            Role.DOCTOR -> (user as Doctor).praxis?.let { caseRepository.findAllByPraxisId(it.id!!) } ?: emptyList()
-            Role.ASSISTANT -> (user as Assistant).praxis?.let { caseRepository.findAllByPraxisId(it.id!!) } ?: emptyList()
-            else -> emptyList()
-        }
-    }
-
-    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     override fun getAllByEmail(email: String): List<Case> {
         val user = userService.getByEmail(email)
         return when(user.role) {

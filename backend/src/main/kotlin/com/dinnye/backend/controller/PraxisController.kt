@@ -5,10 +5,20 @@ import com.dinnye.backend.dto.praxis.PraxisPostDto
 import com.dinnye.backend.dto.praxis.PraxisPutDto
 import com.dinnye.backend.mapper.PraxisMapper
 import com.dinnye.backend.service.interfaces.PraxisService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.security.core.Authentication
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin("*")
@@ -48,14 +58,18 @@ class PraxisController(
     }
 
     @PostMapping("/removeFamily/{familyId}")
-    fun removeFamily(@RequestHeader token: String, @PathVariable familyId: Long): ResponseEntity<String> {
-        praxisService.removeFamily(token, familyId)
+    fun removeFamily(auth: Authentication?, @PathVariable familyId: Long): ResponseEntity<String> {
+        auth?.asUser()?.let {
+            praxisService.removeFamily(it.email ?: "", familyId)
+        }
         return ResponseEntity.ok("Removal of $familyId family was successful")
     }
 
     @PostMapping("/addFamily/{familyId}")
-    fun addFamily(@RequestHeader token: String, @PathVariable familyId: Long): ResponseEntity<String> {
-        praxisService.addFamily(token, familyId)
+    fun addFamily(auth: Authentication?, @PathVariable familyId: Long): ResponseEntity<String> {
+        auth?.asUser()?.let {
+            praxisService.addFamily(it.email ?: "", familyId)
+        }
         return ResponseEntity.ok("$familyId family was successfully added")
     }
 }

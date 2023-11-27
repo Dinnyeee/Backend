@@ -7,11 +7,20 @@ import com.dinnye.backend.dto.parent.ParentPutDto
 import com.dinnye.backend.mapper.ChildMapper
 import com.dinnye.backend.mapper.ParentMapper
 import com.dinnye.backend.service.interfaces.ParentService
-import com.dinnye.backend.service.interfaces.UserService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.security.core.Authentication
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin("*")
@@ -52,7 +61,11 @@ class ParentController (
     }
 
     @PutMapping("/addChild")
-    fun addChild(@Valid @RequestBody childDto: ChildPostDto, @RequestHeader token: String): ResponseEntity<ParentGetDto> {
-        return ResponseEntity.ok(mapper.mapToGet(parentService.addChild(token, childMapper.mapFromPost(childDto))))
+    fun addChild(auth: Authentication?, @Valid @RequestBody childDto: ChildPostDto): ResponseEntity<ParentGetDto> {
+        return ResponseEntity.ok(
+            auth?.asUser()?.let {
+                mapper.mapToGet(parentService.addChild(it.email ?: "", childMapper.mapFromPost(childDto)))
+            }
+        )
     }
 }

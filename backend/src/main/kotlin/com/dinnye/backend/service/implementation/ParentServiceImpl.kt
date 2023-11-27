@@ -62,10 +62,8 @@ class ParentServiceImpl(
     }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    override fun addChild(token: String, child: Child): Parent {
-        val email = jwtService.extractEmail(token)
+    override fun addChild(email: String, child: Child): Parent {
         val parentId = userService.getByEmail(email).id!!
-
         return parentRepository.update(parentId) {
             this.family?.children?.add(child)
         }

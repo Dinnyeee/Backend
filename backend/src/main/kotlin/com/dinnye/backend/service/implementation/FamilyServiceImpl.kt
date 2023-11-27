@@ -31,8 +31,7 @@ class FamilyServiceImpl(
     override fun getAll(): List<Family> = familyRepository.findAll()
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    override fun getAll(token: String): List<Family> {
-        val email = jwtService.extractEmail(token)
+    override fun getAll(email: String): List<Family> {
         val user = userService.getByEmail(email)
         return when(user.role) {
             Role.PARENT -> (user as Parent).family?.let { listOf(it) } ?: emptyList()
