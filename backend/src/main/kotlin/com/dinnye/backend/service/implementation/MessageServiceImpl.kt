@@ -1,6 +1,6 @@
 package com.dinnye.backend.service.implementation
 
-import com.dinnye.backend.configuration.ChatConfigurationProperties
+import com.dinnye.backend.config.ChatConfigurationProperties
 import com.dinnye.backend.db.model.Message
 import com.dinnye.backend.db.repository.MessageRepository
 import com.dinnye.backend.mapper.MessageMapper

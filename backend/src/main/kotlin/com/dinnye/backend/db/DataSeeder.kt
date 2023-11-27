@@ -36,7 +36,7 @@ class DataSeeder(
     }
 
     private fun seedData() {
-        val admin = Admin().applyAndSave(userRepository) {
+        Admin().applyAndSave(userRepository) {
             name = "Admin User"
             email = "admin@example.com"
             pw = "adminPassword"
@@ -66,7 +66,7 @@ class DataSeeder(
             this.doctor = doctor
         }
 
-        val family = Family().applyAndSave(familyRepository) {
+        Family().applyAndSave(familyRepository) {
             this.name = "Test Family"
             this.children.addAll(createChildren(this, praxis))
             this.praxis = praxis

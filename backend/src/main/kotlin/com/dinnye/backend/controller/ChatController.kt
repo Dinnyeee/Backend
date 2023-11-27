@@ -1,6 +1,6 @@
 package com.dinnye.backend.controller
 
-import com.dinnye.backend.configuration.ChatConfigurationProperties
+import com.dinnye.backend.config.ChatConfigurationProperties
 import com.dinnye.backend.dto.message.MessageGetDto
 import com.dinnye.backend.dto.message.MessagePostDto
 import com.dinnye.backend.mapper.MessageMapper

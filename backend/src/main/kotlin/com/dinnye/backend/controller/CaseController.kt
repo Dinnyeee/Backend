@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -26,8 +27,8 @@ class CaseController(
 ) {
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<CaseGetDto>> {
-        return ResponseEntity.ok(caseService.getAll().map { mapper.mapToGet(it) })
+    fun getAll(@RequestHeader token: String): ResponseEntity<List<CaseGetDto>> {
+        return ResponseEntity.ok(caseService.getAll(token).map { mapper.mapToGet(it) })
     }
 
     @GetMapping("/{id}")
