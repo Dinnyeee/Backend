@@ -5,9 +5,11 @@ import com.dinnye.backend.dto.child.ChildPostDto
 import com.dinnye.backend.dto.child.ChildPutDto
 import com.dinnye.backend.mapper.ChildMapper
 import com.dinnye.backend.service.interfaces.ChildService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -19,8 +21,11 @@ class ChildController (
 ){
 
     @GetMapping
-    fun getAll(): ResponseEntity<List<ChildGetDto>> {
-        return ResponseEntity.ok(childService.getAll().map { mapper.mapToGet(it) })
+    fun getAll(auth: Authentication): ResponseEntity<List<ChildGetDto>> {
+        auth?.asUser()?.let { user ->
+            return ResponseEntity.ok(childService.getAllByEmail(user.email ?: "")
+                .map { mapper.mapToGet(it) })
+        } ?: return ResponseEntity.ok(listOf())
     }
 
     @GetMapping("/{id}")

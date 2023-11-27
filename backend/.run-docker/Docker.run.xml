@@ -4,13 +4,13 @@
       <settings>
         <option name="envFilePath" value="" />
         <option name="commandLineOptions" value="--build" />
-        <option name="sourceFilePath" value="docker-compose.yml" />
+        <option name="sourceFilePath" value="backend/docker-compose.yml" />
         <option name="upForceRecreate" value="true" />
         <option name="upRenewAnonVolumes" value="true" />
       </settings>
     </deployment>
     <method v="2">
-      <option name="Gradle.BeforeRunTask" enabled="false" tasks="clean build" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+      <option name="Gradle.BeforeRunTask" enabled="false" tasks="clean build" externalProjectPath="$PROJECT_DIR$/backend" vmOptions="" scriptParameters="" />
     </method>
   </configuration>
 </component>

@@ -1,6 +1,6 @@
 package com.dinnye.backend.service.implementation
 
-import com.dinnye.backend.db.model.Child
+import com.dinnye.backend.db.model.*
 import com.dinnye.backend.db.repository.ChildRepository
 import com.dinnye.backend.service.interfaces.ChildService
 import com.dinnye.backend.util.findByIdOrThrow
@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 class ChildServiceImpl(
-    private val childRepository: ChildRepository
+    private val childRepository: ChildRepository,
+    private val userService: UserServiceImpl
 ) : ChildService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -21,6 +22,12 @@ class ChildServiceImpl(
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     override fun getAll(): List<Child> = childRepository.findAll()
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
+    override fun getAllByEmail(email: String): List<Child> {
+        val user = userService.getByEmail(email)
+        return (user as Parent).family?.let{ childRepository.findAllByFamilyId(it.id!!) } ?: emptyList()
+    }
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun update(entity: Child): Child {

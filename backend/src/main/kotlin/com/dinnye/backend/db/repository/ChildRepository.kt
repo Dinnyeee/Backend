@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface ChildRepository: JpaRepository<Child, Long> {
+    fun findAllByFamilyId(familyId: Long): List<Child>
 }
