@@ -37,7 +37,7 @@ class SecurityConfig(
                 authorize("/api/parent/**", hasAnyRole("DOCTOR", "ADMIN"))
                 authorize("/api/case/**", hasAnyRole("DOCTOR", "ASSISTANT", "PARENT","ADMIN"))
                 authorize("/ws/**", hasAnyRole("DOCTOR", "ASSISTANT", "PARENT","ADMIN"))
-                authorize("/api/child/**", hasAnyRole("DOCTOR", "ADMIN"))
+                authorize("/api/child/**", hasAnyRole("DOCTOR", "ADMIN", "PARENT"))
                 authorize("/api/family/**", hasAnyRole("DOCTOR", "ADMIN", "ASSISTANT", "PARENT"))
                 authorize("/api/praxis/**", hasAnyRole("DOCTOR", "ADMIN", "ASSISTANT"))
                 authorize(HttpMethod.PUT, "/api/parent/{familyId}/addChild", hasAnyRole("PARENT"))
