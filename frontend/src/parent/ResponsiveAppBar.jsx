@@ -21,6 +21,12 @@ function ResponsiveAppBar() {
 
   const navigate= useNavigate();
 
+    const LogOut=()=>{
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    navigate("/login");
+  }
+
   const navigateToHome = () => {
     navigate('/parent');
   }
@@ -110,7 +116,7 @@ function ResponsiveAppBar() {
                       <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
                        Appointments
                       </Button>
-                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                    <Button onClick={LogOut} sx={{ my: 2,  display: 'block' }}> 
                         Log out 
                      </Button>
                     
@@ -151,7 +157,7 @@ function ResponsiveAppBar() {
               Appointments
               </Button>
 
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={LogOut}> 
              Log out   
               </Button>
             

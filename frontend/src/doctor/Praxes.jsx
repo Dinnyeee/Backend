@@ -49,12 +49,19 @@ function a11yProps(index: number) {
 }
 
 export const Praxes = (props) => {
+   
+  const[isAssistant, setIfAssistant] = useState(false); 
+
+        if (sessionStorage.getItem("role") == "ASSISSTANT"){
+          setIfAssistant(true);
+         } 
+        
+    
+ 
     
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setValue(newValue);
-    };
+    
 
      useEffect(() => {
     const fetchMyFamilies = async () => {
@@ -103,6 +110,10 @@ export const Praxes = (props) => {
     fetchAllFamilies();
     fetchAllAssistants();
   }, [])
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+      setValue(newValue);
+    };
 
     const handleRemoveFamily = (id) => {
 
@@ -195,7 +206,9 @@ export const Praxes = (props) => {
           </TableContainer>
           </Grid>
         </CustomTabPanel>
-          
+
+   
+
         <CustomTabPanel value={value} index={1}>
           <Grid container>
             <TableContainer component={Paper} sx={{ width: 400 }} >
@@ -256,6 +269,8 @@ export const Praxes = (props) => {
             </TableContainer>
           </Grid>
         </CustomTabPanel>
+
+                 
             
     </Container>
     </div>

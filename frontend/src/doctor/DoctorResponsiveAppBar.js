@@ -20,6 +20,12 @@ function DoctorResponsiveAppBar() {
 
   const navigate= useNavigate();
 
+  const LogOut=()=>{
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    navigate('/login');
+  }
+
   const navigateToHome = () => {
     navigate('/cases');
   }
@@ -29,10 +35,6 @@ function DoctorResponsiveAppBar() {
   const navigateToAppointments = () => {
     navigate('/appointments');
   }
-  const navigateToLogin = () => {
-    navigate('/');
-  }
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -109,7 +111,7 @@ function DoctorResponsiveAppBar() {
                       <Button onClick={navigateToAppointments} sx={{ my: 2,  display: 'block' }}> 
                        Appointments
                       </Button>
-                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                    <Button onClick={LogOut} sx={{ my: 2,  display: 'block' }}> 
                         Log out 
                      </Button>
                     
@@ -150,7 +152,7 @@ function DoctorResponsiveAppBar() {
               Appointments
               </Button>
 
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={LogOut}> 
              Log out   
               </Button>
             

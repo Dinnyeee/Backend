@@ -14,19 +14,19 @@ import { getDoctorById } from "services/DoctorApi";
 
 export function Cases(props){
   const [cases, setCases] = useState([])
-  const [families, setFamilies] = React.useState([]);
+  //const [families, setFamilies] = React.useState([]);
 
   const getData = async () => {
     try{
       const result = await getAllCases();
-      console.log(" getallcases eredménye: "+result);
       setCases(result);
+      console.log(result);
     } catch(error){
       console.error('Error getAllCases data', error);
     }
   }; 
 
-  const fetchFamilies = async () => {
+  /*const fetchFamilies = async () => {
     try{
       const res = await getAllFamilies();
       console.log("getallfamilies eredménye: "+res);
@@ -35,12 +35,12 @@ export function Cases(props){
         console.error('Error getAllFamilies data', error);
 
     }
-  }
+  }*/
 
 
   useEffect(() => {
     getData();
-    fetchFamilies();
+    //fetchFamilies();
   }, [])
 
   const navigate = useNavigate();
@@ -57,23 +57,23 @@ export function Cases(props){
     setPrio(event.target.value);
   };
   const handleViewDetail =(e) => {
-    navigate("/detailedcase");
+    navigate("/detailedcase/"+e);
   }
   const handleSearch = () => {
     const getRes = async () => {
       try{
-        const result = await getAllCases();
-        
-        let filteredList = result;
-        if(priority !== ''){
-          filteredList = result.filter(r=>r.priority == priority);
-        }
-        if(status !== ''){
-          filteredList = filteredList.filter(r=> r.status == status)
-        }
-        setCases(filteredList);
-      } catch(error){
-        console.error('Error getAllCases data', error);
+          const result = await getAllCases();
+          let filteredList = result;
+          
+          if(priority !== "" && priority !== "ALL"){
+            filteredList = result.filter(r=>r.priority == priority);
+          }
+          if(status !== '' && status !== "ALL"){
+            filteredList = filteredList.filter(r=> r.status == status)
+          }
+          setCases(filteredList);
+        } catch(error){
+          console.error('Error getAllCases data', error);
       }
     }; 
       getRes();
@@ -81,9 +81,9 @@ export function Cases(props){
   }
 
   
-  const  handleDelete = (id) => {
-    const newList = cases.filter((family) => family.id !== id);
-    deleteCase(id).then(() =>setCases(newList));
+  const  handleDelete =(id) => {
+    const newList = cases.filter((c) => c.id !== id);
+   deleteCase(id).then(() =>setCases(newList));
  }
   return (
     <div>
@@ -114,6 +114,7 @@ export function Cases(props){
                 <MenuItem value={"NEW"}>NEW</MenuItem>
                 <MenuItem value={"IN PROGRES"}>IN PROGRESS</MenuItem>
                 <MenuItem value={"CLOSED"}>CLOSED</MenuItem>
+                <MenuItem value={"ALL"}>ALL</MenuItem>
             </Select>
         </FormControl>
 
@@ -127,9 +128,10 @@ export function Cases(props){
               label="Priority"
               onChange={handleChange_2}
             >
-            <MenuItem value={10}>TOP</MenuItem>
-            <MenuItem value={20}>MEDIUM</MenuItem>
-            <MenuItem value={30}>LOW</MenuItem>
+            <MenuItem value={"HIGH"}>HIGH</MenuItem>
+            <MenuItem value={"MEDIUM"}>MEDIUM</MenuItem>
+            <MenuItem value={"LOW"}>LOW</MenuItem>
+            <MenuItem value={"ALL"}>ALL</MenuItem>
           </Select>
         </FormControl>
 
@@ -153,29 +155,29 @@ export function Cases(props){
           </TableRow>
         </TableHead>
         <TableBody>
-          {cases?.map((family) => (
+          {cases?.map((c) => (
             <TableRow
-              key={family.id}
+              key={c.id}
               sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {family.id}
+                {c.id}
               </TableCell>
-              <TableCell align="right">{family.child.name}</TableCell>
-              <TableCell align="right">{dayjs(family.createdAt).format('YYYY/MM/DD hh:MM')}</TableCell>
+              <TableCell align="right">{c.child.name}</TableCell>
+              <TableCell align="right">{dayjs(c.createdAt).format('YYYY/MM/DD hh:MM')}</TableCell>
               <TableCell align="right">
-                  {family.status}
+                  {c.status}
                 </TableCell>
               <TableCell align="right">
-                  {family.priority}
+                  {c.priority}
                 </TableCell>
-              <TableCell align="right">{dayjs(family.appointmentDate).format('YYYY/MM/DD hh:MM')}</TableCell>
+              <TableCell align="right">{dayjs(c.appointmentDate).format('YYYY/MM/DD hh:MM')}</TableCell>
 
               <TableCell align="right">
-                 <IconButton onClick={handleViewDetail}>
+                 <IconButton onClick={()=>handleViewDetail(c.id)}>
                   <Visibility fontSize="small"/>
                  </IconButton>
-                <IconButton aria-label="delete" size="small" onClick={() => handleDelete(family.id)}>
+                <IconButton aria-label="delete" size="small" onClick={() => handleDelete(c.id)}>
                     <DeleteIcon fontSize="small" />
                 </IconButton>
               </TableCell>

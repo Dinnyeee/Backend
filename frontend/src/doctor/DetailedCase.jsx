@@ -7,17 +7,18 @@ import {useParams} from "react-router-dom";
 export const DetailedCase = (props) => {
 
     const {id} = useParams();
-    const [caseDetails, setCaseDetails] = useState([]);
+    const [caseDetails, setCaseDetails] = useState({name: "faijf", id: 2451});
+
 
     useEffect(() => {
-    
+        console.log("res"+caseDetails);
         getData(id);
   }, []);   
   
   const getData = async (i) => {
       try{
         const result = await getCaseById(i);
-        console.log(result);
+        console.log("detailed ccase reult: "+result);
         setCaseDetails(result);
       } catch(error){
         console.error('Error getDetails data', error);

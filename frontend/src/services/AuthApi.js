@@ -41,6 +41,7 @@ export const loginFetch = async (credentials) => {
 
 export const register = async (credentials) => {
     try {
+        console.log("Register: " + credentials)
         const response = await instance.post(`/register`, credentials);
         sessionStorage.setItem('token', response.data.accessToken);
         sessionStorage.setItem('role', response.data.role);

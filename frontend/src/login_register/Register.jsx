@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import { Grid, Card, TextField, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import isEmail from 'validator/lib/isEmail';
+import { register } from "services/AuthApi";
 
 
 export const Register = (props) => {
@@ -15,6 +15,24 @@ export const Register = (props) => {
     const [emailError, setEmailError] = useState(false);
     const [passError, setPassError] = useState(false);
     const [roleError, setRoleError] = useState(false);
+
+    const navigate = useNavigate();
+     const navigateToLogin = () =>{
+        navigate("/login") ;
+    }
+
+     const Register = async(e) => {
+        e.preventDefault();
+        const ReginJSON = {
+            'name': name,
+            'email': email,
+            'password': pass,
+            'role': role
+        }
+        console.log("submit json " + ReginJSON);
+        await register(ReginJSON);
+
+        }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -44,6 +62,12 @@ export const Register = (props) => {
         if(name && email && role && pass){
             //DO SOME MAGIC, API CALLING CREATING NEW USER
             //THEN NAVIGATE TO CORRECT PAGE
+            console.log(name)
+            console.log(email)
+            console.log(role)
+            console.log(pass)
+            
+            Register();
         }
     }
 
@@ -118,8 +142,8 @@ export const Register = (props) => {
                                 
 
                                 <div className='buttons-in-form'>
-                                    <Button variant='contained' color='secondary' type='submit'>Sign up</Button>  
-                                    <Button variant='outlined' color="secondary" onClick={() => props.onFormSwitch('login')}>Already have an account? Log in here.</Button>
+                                    <Button variant='contained' color='secondary' type='submit' onClick={handleSubmit} >Sign up</Button>  
+                                    <Button variant='outlined' color="secondary" onClick={navigateToLogin}>Already have an account? Log in here.</Button>
                                 </div>
                             </form>
                     </Card>

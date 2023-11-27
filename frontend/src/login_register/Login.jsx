@@ -8,11 +8,14 @@ import { login } from "services/AuthApi";
 export const Login = (props) => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-     const [emailError, setEmailError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
     const [passError, setPassError] = useState(false);
-    const [role, setRole] = useState('');
-
+    
     const navigate = useNavigate();
+    const navigateToRegister = () =>{
+        navigate("/register") ;
+    }
+
     const handleSubmit = async(e) => {
         e.preventDefault();
         setEmailError(false)
@@ -36,14 +39,7 @@ export const Login = (props) => {
             }
          await login(LoginJSON);       
         
-            const role = sessionStorage.getItem('role');
-            //DO SOME MAGIC, API CALLING CREATING NEW USER
-            //THEN NAVIGATE TO CORRECT PAGE
-            console.log("ROLEEE " + role)
-        
-        console.log("role: " + role)
-        //TODO log in API - based on result navigate to appropriate site
-        //get the role of the received user and then...
+        const role = sessionStorage.getItem('role');
         switch(role){
             case "DOCTOR":
                 navigate("/doctorstart");
@@ -54,13 +50,18 @@ export const Login = (props) => {
             case "ASSISTANT":
                 navigate("/administration");
                 break;
-            default: break;
+            case "ADMIN":
+                navigate("/doctorstart");
+                break;
+            default:
+                
+                 break;
         }
     }}
 
-    const navigateToHome  = (e) => {
-        navigate("/doctorstart")
-    }
+   
+       
+    
 
     return (
      
@@ -108,7 +109,7 @@ export const Login = (props) => {
 
                                 <div className='buttons-in-form'>
                                     <Button variant='contained' color='secondary' type='submit'>Log in</Button>  
-                                    <Button variant='outlined' color="secondary" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</Button>
+                                    <Button variant='outlined' color="secondary" onClick={navigateToRegister}>Don't have an account? Register here.</Button>
                                 </div>
                             </form>
                     </Card>
