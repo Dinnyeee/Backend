@@ -8,7 +8,7 @@ import {
 import {
     getAllDoctors
 } from './DoctorApi.js'
-import { login } from './AuthApi.js'
+import { login, loginFetch } from './AuthApi.js'
 
 
 
@@ -26,9 +26,14 @@ function TestComponent () {
     const [loginka, setLogin] = useState({email: '', password: ''});
 
     useEffect(() => {
-        fetchDoctors();
+        //fetchDoctors();
 
-        
+        /*const LoginJSON = {
+            'email': 'doctor2@example.com',
+            'password': 'doctorPassword'
+        }
+        console.log("fetch json: " + LoginJSON);
+        login(LoginJSON);*/
     }, []);
 
     const fetchAssistants = async() => {
@@ -74,18 +79,19 @@ function TestComponent () {
         fetchAssistants();
     }
 
-    const handleLogin = async() => {
+    const handleLogin = async(e) => {
+        e.preventDefault();
         const LoginJSON = {
             'email': loginka.email,
             'password': loginka.password
         }
-        console.log(LoginJSON);
+        console.log("submit json " + LoginJSON);
         console.log("Hello");
-        await login(LoginJSON);
+        await loginFetch(LoginJSON);
     }
 
-    const handleInputChange = (event) => {
-        setLogin({
+    const handleInputChange = async (event) => {
+        await setLogin({
             ...loginka,
             [event.target.name]: event.target.value
         });
