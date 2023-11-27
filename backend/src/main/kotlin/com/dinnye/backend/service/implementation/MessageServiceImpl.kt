@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class MessageServiceImpl(
-    private val messageRepository: MessageRepository,
-    private val config: ChatConfigurationProperties,
-    private val messageMapper: MessageMapper
+        private val messageRepository: MessageRepository,
+        private val config: ChatConfigurationProperties,
+        private val messageMapper: MessageMapper
 ) : MessageService {
     override fun newMessage(newMessage: Message): Message {
         val message = messageRepository.save(newMessage)

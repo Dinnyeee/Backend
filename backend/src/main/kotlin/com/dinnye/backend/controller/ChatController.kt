@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/ws/message")
 class ChatController(
-    private val config: ChatConfigurationProperties,
-    private val messageService: MessageService,
-    private val messageMapper: MessageMapper
+        private val config: ChatConfigurationProperties,
+        private val messageService: MessageService,
+        private val messageMapper: MessageMapper
 ) {
 
     @PostMapping
