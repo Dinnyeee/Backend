@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer
 import org.springframework.security.config.annotation.web.invoke
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.SecurityFilterChain
@@ -29,8 +30,14 @@ class SecurityConfig(
             authorizeHttpRequests {
                 authorize("/auth/**", permitAll)
                 authorize(HttpMethod.OPTIONS, "/**", permitAll)
-                authorize("/api/doctor", hasAnyRole("DOCTOR"))
-                authorize("/api/assistant", hasAnyRole("ASSISTANT"))
+                authorize("/api/doctor", hasAnyRole("ADMIN"))
+                authorize("/api/assistant", hasAnyRole("DOCTOR", "ADMIN"))
+                authorize("/api/parent", hasAnyRole("DOCTOR", "ADMIN"))
+                authorize("/api/case", hasAnyRole("DOCTOR", "ASSISTANT", "PARENT","ADMIN"))
+                authorize("/ws/**", hasAnyRole("DOCTOR", "ASSISTANT", "PARENT","ADMIN"))
+                authorize("/api/child", hasAnyRole("DOCTOR", "ADMIN"))
+                authorize("/api/family", hasAnyRole("DOCTOR", "ADMIN", "ASSISTANT", "PARENT"))
+                authorize("/api/praxis", hasAnyRole("DOCTOR", "ADMIN", "ASSISTANT"))
                 authorize(HttpMethod.PUT, "/api/parent/{familyId}/addChild", hasAnyRole("PARENT"))
             }
             addFilterBefore(jwtAuthfilter, UsernamePasswordAuthenticationFilter::class.java)
@@ -38,7 +45,7 @@ class SecurityConfig(
         return http.build()
     }
 
-    @Bean
+    /*@Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = listOf("http://localhost:3000")
@@ -47,4 +54,6 @@ class SecurityConfig(
         source.registerCorsConfiguration("/**", configuration)
         return source
     }
+    */
+     */
 }
