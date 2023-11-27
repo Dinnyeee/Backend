@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer
 import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.cors.CorsConfiguration
@@ -25,12 +26,13 @@ class SecurityConfig(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http.cors(Customizer.withDefaults())
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         http {
             csrf { disable() }
             authorizeHttpRequests {
                 authorize("/auth/**", permitAll)
                 authorize(HttpMethod.OPTIONS, "/**", permitAll)
-                authorize("/api/doctor", hasAnyRole("ADMIN"))
+                authorize("/api/doctor", hasAnyRole("ADMIN", "DOCTOR"))
                 authorize("/api/assistant", hasAnyRole("DOCTOR", "ADMIN"))
                 authorize("/api/parent", hasAnyRole("DOCTOR", "ADMIN"))
                 authorize("/api/case", hasAnyRole("DOCTOR", "ASSISTANT", "PARENT","ADMIN"))

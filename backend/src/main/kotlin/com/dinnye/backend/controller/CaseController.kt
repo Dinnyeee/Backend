@@ -20,7 +20,7 @@ class CaseController(
 ) {
 
     @GetMapping
-    fun getAll(@RequestHeader token: String): ResponseEntity<List<CaseGetDto>> {
+    fun getAll(@RequestHeader("Authorization") token: String): ResponseEntity<List<CaseGetDto>> {
         return ResponseEntity.ok(caseService.getAll(token).map { mapper.mapToGet(it) })
     }
 
