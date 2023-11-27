@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CaseRepository: JpaRepository<Case, Long> {
+    fun findAllByChildFamilyId(familyId: Long): List<Case>
+    fun findAllByPraxisId(praxisId: Long): List<Case>
 }

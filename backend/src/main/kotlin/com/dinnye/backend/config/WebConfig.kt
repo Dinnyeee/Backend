@@ -9,11 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @Configuration
 @EnableWebMvc
 @EnableConfigurationProperties(ChatConfigurationProperties::class)
-class WebConfig : WebMvcConfigurer {
+class WebConfig(private val chatConfigurationProperties: ChatConfigurationProperties) : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
             .allowedMethods("GET", "POST", "PUT", "DELETE")
-            .allowedOrigins("http://localhost:3000")
+            .allowedOrigins(chatConfigurationProperties.allowedOrigin)
     }
-
 }

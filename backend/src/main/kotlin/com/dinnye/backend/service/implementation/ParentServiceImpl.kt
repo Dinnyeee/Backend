@@ -4,7 +4,6 @@ import com.dinnye.backend.db.model.Child
 import com.dinnye.backend.db.model.Family
 import com.dinnye.backend.db.model.Parent
 import com.dinnye.backend.db.repository.ParentRepository
-import com.dinnye.backend.dto.child.ChildPostDto
 import com.dinnye.backend.service.interfaces.ChildService
 import com.dinnye.backend.service.interfaces.FamilyService
 import com.dinnye.backend.service.interfaces.ParentService
@@ -64,7 +63,7 @@ class ParentServiceImpl(
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun addChild(token: String, child: Child): Parent {
-        val email = jwtService.extractUsername(token)
+        val email = jwtService.extractEmail(token)
         val parentId = userService.getByEmail(email).id!!
 
         return parentRepository.update(parentId) {

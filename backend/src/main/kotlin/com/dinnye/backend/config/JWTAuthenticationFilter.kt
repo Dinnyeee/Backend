@@ -6,8 +6,6 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.ServletException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -35,7 +33,7 @@ class JwtAuthenticationFilter(
             return
         }
         val token: String = authHeader.substring(7) // after bearer
-        username = jwtService.extractUsername(token)
+        username = jwtService.extractEmail(token)
         if (username != null && SecurityContextHolder.getContext().authentication == null) {
             val userDetails: UserDetails = userDetailsService.loadUserByUsername(username)
             if (jwtService.isTokenValid(token, userDetails)) {

@@ -26,6 +26,11 @@ annotation class IgnoreAuditing
 
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
+@Mapping(target = "authorities", ignore = true)
+annotation class IgnoreAuthorities
+
+@Target(AnnotationTarget.FUNCTION)
+@Retention(AnnotationRetention.RUNTIME)
 @Mapping(target = "id", ignore = true)
 annotation class IgnoreId
 

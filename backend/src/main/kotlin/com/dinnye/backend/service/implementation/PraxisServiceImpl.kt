@@ -1,7 +1,9 @@
 package com.dinnye.backend.service.implementation
 
+import com.dinnye.backend.db.model.Doctor
 import com.dinnye.backend.db.model.Praxis
 import com.dinnye.backend.db.repository.PraxisRepository
+import com.dinnye.backend.service.interfaces.FamilyService
 import com.dinnye.backend.service.interfaces.PraxisService
 import com.dinnye.backend.util.findByIdOrThrow
 import com.dinnye.backend.util.update
@@ -12,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class PraxisServiceImpl(
     private val praxisRepository: PraxisRepository,
+    private val jwtService: JwtService,
+    private val familyService: FamilyService,
 ): PraxisService {
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
@@ -35,4 +39,24 @@ class PraxisServiceImpl(
 
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun delete(id: Long) = praxisRepository.deleteById(id)
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    override fun removeFamily(token: String, familyId: Long) {
+        val user = jwtService.extractUser(token)
+        if (user is Doctor) {
+            praxisRepository.update(user.praxis?.id!!) {
+                this.families.removeIf { it.id == familyId }
+            }
+        }
+    }
+
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    override fun addFamily(token: String, familyId: Long) {
+        val user = jwtService.extractUser(token)
+        if (user is Doctor) {
+            praxisRepository.update(user.praxis?.id!!) {
+                this.families.add(familyService.get(familyId))
+            }
+        }
+    }
 }

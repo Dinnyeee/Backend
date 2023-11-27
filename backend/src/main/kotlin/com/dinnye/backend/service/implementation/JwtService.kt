@@ -1,25 +1,25 @@
 package com.dinnye.backend.service.implementation
 
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.stereotype.Service
+import com.dinnye.backend.service.interfaces.UserService
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
-import io.jsonwebtoken.SignatureAlgorithm
-import java.security.Key
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.security.core.userdetails.UserDetails
-import kotlin.collections.HashMap
+import org.springframework.stereotype.Service
+import java.security.Key
 import java.util.*
 import java.util.function.Function
 
 @Service
-class JwtService {
+class JwtService(private val userService: UserService) {
 
     @Value("\${secret}")
     private val SECRET: String? = null
 
-    fun extractUsername(token: String): String {
+    fun extractEmail(token: String): String {
         return extractClaim(token, Claims::getSubject)
     }
 
@@ -27,6 +27,8 @@ class JwtService {
         val claims = extractAllClaims(token)
         return claimsResolver.apply(claims)
     }
+
+    fun extractUser(token: String) = userService.getByEmail(extractEmail(token))
 
     fun generateToken(userDetails: UserDetails): String {
         return generateToken(HashMap(), userDetails)
@@ -43,7 +45,7 @@ class JwtService {
     }
 
     fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
-        val username = extractUsername(token)
+        val username = extractEmail(token)
         return (username == userDetails.username && !isTokenExpired(token))
     }
 
