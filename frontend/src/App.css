@@ -1,0 +1,220 @@
+.App {
+  text-align: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.myToolbar{
+  justify-content: center;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+.container {
+  max-width: 720px;
+}}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+}}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.mycard{
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  margin: 30px;
+}
+.mycard-case-form{
+  display: flex;
+  padding: 50px;
+}
+.mycard-case-form .description{
+  min-width: 400px;
+}
+
+
+.myform{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.myform div{
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  
+}
+.myform Button{
+  margin-top: 30px;
+  
+}
+
+
+.form-input{
+  margin: 20px;
+}
+
+.field {
+  margin-top: 20;
+    margin-bottom: 20;
+    display:'block';
+}
+
+.admin-parent{
+  margin-top:20px;
+}
+.admin-parent  .add-new-button{
+  margin-bottom:30px;
+}
+
+.cases-parent{
+  margin-top: 20px;
+}
+.search-field{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-field-doctor{
+   margin-bottom: 20px;
+   margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.book-appointment-container{
+  width: max-content;
+  display: flex;
+  justify-content:space-around;
+  margin:20px;
+  padding:20px;
+}
+
+.fix-center-card{
+  display: flex;
+  height:90vh;
+  justify-content: center;
+  align-items: center;
+}
+.date-picker-container{
+  width:max-content;
+  margin:30px;  
+}
+.time-picker-container {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+
+.time-picker-form-field{
+  margin-bottom: 30px !important;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+
+.MuiDialogActions-root{
+  visibility: hidden;
+}
+
+.book-button-save {
+  margin-bottom: 10px;
+}
+
+.buttons-in-form{
+  margin:10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-box{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.MuiBox-root{
+  display: flex;
+  justify-content: center;
+}
+.MuiPaper-root{
+  width: max-content;
+}
+
+.doctor-appointments-table {
+  display: flex;
+  justify-content: center;
+  width: max-content!important;
+  margin-top:30px;
+}
+
+.button-and-table-doctor-appointment{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.button-and-table-doctor-appointment .button{
+  margin-bottom: 20px !important;
+}
+
+.add-new-button{
+  margin-bottom:5px!important;
+  margin-top:20px!important;
+}
+
+.title-of-form{
+  text-align: center;
+}
+
+.case-detailed-container{
+  display: flex;
+  justify-content: center;
+  margin-top:30px;
+}
+
+
+
+.detailed-case-paper{
+  padding:30px;
+  width:50%;
+}
+
+.prio-status-setter{
+  display: flex;
+  justify-content: space-evenly;
+}
+ .prio-status-setter h3{
+  margin-left:10px;
+ }

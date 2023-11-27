@@ -1,0 +1,60 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.23.4",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@gsebdev/react-simple-datepicker": "^1.0.21",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/lab": "^5.0.0-alpha.153",
+    "@mui/material": "^5.14.18",
+    "@mui/x-date-pickers": "^6.18.2",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.2",
+    "date-fns": "^2.30.0",
+    "dayjs": "^1.11.10",
+    "metro-react-native-babel-preset": "^0.69.0",
+    "next": "^14.0.3",
+    "path-browserify": "^1.0.1",
+    "pusher-js": "^8.3.0",
+    "react": "^18.2.0",
+    "react-calendar": "^4.6.1",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-router-dom": "^6.19.0",
+    "react-scripts": "5.0.1",
+    "validator": "^13.11.0",
+    "web-vitals": "^2.1.4"
+  },
+  "peerDependencies": {
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
