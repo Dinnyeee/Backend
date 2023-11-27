@@ -6,6 +6,7 @@ import com.dinnye.backend.dto._case.CasePostDto
 import com.dinnye.backend.dto._case.CasePutDto
 import com.dinnye.backend.mapper.CaseMapper
 import com.dinnye.backend.service.interfaces.CaseService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
@@ -23,8 +24,9 @@ class CaseController(
 
     @GetMapping
     fun getAll(auth: Authentication?): ResponseEntity<List<CaseGetDto>> {
-        (auth?.principal as User?)?.let {
-            return ResponseEntity.ok(caseService.getAllByEmail(it.email ?: "").map { mapper.mapToGet(it) })
+        auth?.asUser()?.let { user ->
+            return ResponseEntity.ok(caseService.getAllByEmail(user.email ?: "")
+                .map { mapper.mapToGet(it) })
         } ?: return ResponseEntity.ok(listOf())
     }
 

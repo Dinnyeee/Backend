@@ -5,6 +5,7 @@ import com.dinnye.backend.db.model.User
 import com.dinnye.backend.exception.BackendExceptions
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 import java.net.URI
 import java.time.LocalDateTime
@@ -38,3 +39,4 @@ fun created(id: Long): ResponseEntity<Unit> {
     return ResponseEntity.created(URI.create(uri)).build()
 }
 
+fun Authentication?.asUser(): User? = this?.principal as User?
