@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/parent")
 class ParentController (
     private val parentService: ParentService,
