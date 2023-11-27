@@ -1,4 +1,4 @@
-package com.dinnye.backend.configuration
+package com.dinnye.backend.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.bind.ConstructorBinding

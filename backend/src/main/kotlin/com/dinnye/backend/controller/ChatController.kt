@@ -1,6 +1,6 @@
 package com.dinnye.backend.controller
 
-import com.dinnye.backend.configuration.ChatConfigurationProperties
+import com.dinnye.backend.config.ChatConfigurationProperties
 import com.dinnye.backend.dto.message.MessageGetDto
 import com.dinnye.backend.dto.message.MessagePostDto
 import com.dinnye.backend.mapper.MessageMapper
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/ws/message")
 class ChatController(
-    private val config: ChatConfigurationProperties,
-    private val messageService: MessageService,
-    private val messageMapper: MessageMapper
+        private val config: ChatConfigurationProperties,
+        private val messageService: MessageService,
+        private val messageMapper: MessageMapper
 ) {
 
     @PostMapping
