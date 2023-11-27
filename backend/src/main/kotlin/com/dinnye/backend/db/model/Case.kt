@@ -10,21 +10,30 @@ import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 
 @Entity
-@Table(name = "case")
+@Table(name = "case_table")
 class Case: BaseEntity() {
 
     @Column(name = "description", nullable = false)
-    val description: String = ""
+    var description: String? = null
+
+    @Column(name = "title", nullable = false)
+    var title: String? = null
+
+    @Column(name = "priority", nullable = false)
+    var priority: Priority = Priority.LOW
+
+    @Column(name = "status", nullable = false)
+    var status: Status = Status.NEW
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")
-    val praxis: Praxis? = null
+    var praxis: Praxis? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "child_id")
-    val child: Child? = null
+    var child: Child? = null
 
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "appointment_id", referencedColumnName = "id")
-    val appointment: Appointment? = null
+    var appointment: Appointment? = null
 }

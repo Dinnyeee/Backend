@@ -13,8 +13,8 @@ import java.util.*
 class Appointment: BaseEntity() {
 
     @Column(name = "date")
-    val date: Date? = null
+    var date: Date? = null
 
     @OneToOne(mappedBy = "appointment", optional = false, cascade = [CascadeType.MERGE])
-    val case: Case? = null
+    var case: Case? = null
 }

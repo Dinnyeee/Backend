@@ -1,6 +1,8 @@
 server:
   port: 8080
 
+secret: d1b5513f1cd32fbb45cf152aacd85e1d7174d22120d0761b253a9107e619e8c1
+
 spring:
   config:
     activate:
@@ -23,3 +25,11 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
     changeLog: "classpath:db/changelog/changelog-master.yaml"
+
+backend:
+  chat-app:
+    allowed-origin: "http://localhost:3000"
+    appId: "1702394"
+    key: "d59e879f73837467b4fe"
+    secret: "b5a6032bb0c054699e57"
+    cluster: "eu"

@@ -7,25 +7,29 @@ import jakarta.persistence.FetchType
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import java.util.*
 
 
 @Entity
 @Table(name = "child")
 class Child: BaseEntity() {
 
-    @Column(name = "taj", nullable = false, unique = true)
-    val taj: String? = null
+    @Column(name = "taj", nullable = false)
+    var taj: String? = null
 
     @Column(name = "name", nullable = false)
-    val name: String? = null
+    var name: String? = null
 
     @Column(name = "nickname", nullable = false)
-    val nickname: String? = null
+    var nickname: String? = null
+
+    @Column(name = "birthday", nullable = false)
+    var birthday: Date? = null
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
-    val family: Family? = null
+    var family: Family? = null
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "child", cascade = [CascadeType.ALL])
-    val cases: List<Case> = emptyList()
+    val cases: MutableList<Case> = mutableListOf()
 
 }
