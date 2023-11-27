@@ -40,6 +40,17 @@ class CaseServiceImpl(
         }
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
+    override fun getAllByEmail(email: String): List<Case> {
+        val user = userService.getByEmail(email)
+        return when(user.role) {
+            Role.PARENT -> (user as Parent).family?.let { caseRepository.findAllByChildFamilyId(it.id!!) } ?: emptyList()
+            Role.DOCTOR -> (user as Doctor).praxis?.let { caseRepository.findAllByPraxisId(it.id!!) } ?: emptyList()
+            Role.ASSISTANT -> (user as Assistant).praxis?.let { caseRepository.findAllByPraxisId(it.id!!) } ?: emptyList()
+            else -> emptyList()
+        }
+    }
+
     @Suppress("DuplicatedCode")
     @Transactional(isolation = Isolation.SERIALIZABLE)
     override fun update(entity: Case): Case {

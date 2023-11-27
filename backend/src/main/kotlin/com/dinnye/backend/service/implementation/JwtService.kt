@@ -58,7 +58,6 @@ class JwtService(private val userService: UserService) {
     }
 
     private fun extractAllClaims(token: String): Claims {
-        println(token)
         return Jwts.parserBuilder()
             .setSigningKey(getSignInKey())
             .build()

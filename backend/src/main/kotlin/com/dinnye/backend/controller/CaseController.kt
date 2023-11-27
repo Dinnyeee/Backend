@@ -1,5 +1,6 @@
 package com.dinnye.backend.controller
 
+import com.dinnye.backend.db.model.User
 import com.dinnye.backend.dto._case.CaseGetDto
 import com.dinnye.backend.dto._case.CasePostDto
 import com.dinnye.backend.dto._case.CasePutDto
@@ -8,6 +9,7 @@ import com.dinnye.backend.service.interfaces.CaseService
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 
 
@@ -20,8 +22,10 @@ class CaseController(
 ) {
 
     @GetMapping
-    fun getAll(@RequestHeader("Authorization") token: String): ResponseEntity<List<CaseGetDto>> {
-        return ResponseEntity.ok(caseService.getAll(token).map { mapper.mapToGet(it) })
+    fun getAll(auth: Authentication?): ResponseEntity<List<CaseGetDto>> {
+        (auth?.principal as User?)?.let {
+            return ResponseEntity.ok(caseService.getAllByEmail(it.email ?: "").map { mapper.mapToGet(it) })
+        } ?: return ResponseEntity.ok(listOf())
     }
 
     @GetMapping("/{id}")
