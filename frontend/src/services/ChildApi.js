@@ -35,3 +35,15 @@ export const updateChild = async (child) => {
         console.error("Error updating child", error);
     }
 }
+
+export const deleteChild = async (id) => {
+    try {
+        const response = await instance.delete(`/child/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting child", error);
+    }
+}
+
+
+

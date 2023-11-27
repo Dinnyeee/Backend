@@ -9,6 +9,8 @@ export const getAllAssistants = async () => {
     }
 }
 
+
+
 export const getAssistantById = async (id) => {
     try{
         const response = await instance.get(`/assistant/${id}`);

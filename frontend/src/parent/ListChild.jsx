@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Grid from '@mui/material/Grid';
 import { Button, IconButton } from '@mui/material';
@@ -13,42 +13,47 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 import EditChild from './EditChild';
+import { deleteChild, getAllChildren } from 'services/ChildApi';
 
-
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 
 export const ListChild = () =>{
    
   const navigate = useNavigate();
 
-   const navigateToAdmin = () => {
+   const navigateToAddChild = () => {
     navigate('/addchild');
   }
-    const [children, setChildren] = useState([  // WE SHOULD GET THE DATA FROM A CONTROLLER
-        { id: 1, name: "Mario", taj:1231  },
-        { id: 2, name: "David", taj:1231  },
-        { id: 3, name: "Marta", taj:1231  },
-        { id: 4, name: "Mache", taj:1231  },
-    ])
+
+  const handleEdit = (id) => {
+    navigate('/editchild/'+id);
+  }
+
+  useEffect(() => {
+    const getChildren = async () => {
+      try{
+        const result = await getAllChildren();
+        console.log(result);
+        setChildren(result);
+      } catch(error){
+        console.error('Error getAllChildren data', error);
+      }
+    }; 
+    getChildren();
+  }, [])
+
+    const [children, setChildren] = useState([])
 
   const handleAddChildClicked = (e) => {
-        navigateToAdmin();
+        navigateToAddChild();
     }
 
    const  handleDelete = (id) => {
       const newList = children.filter((child) => child.id !== id);
-      setChildren(newList);
-      //TODO controller needs to be called to make the removal permanent
+      deleteChild(id).then(()=> {setChildren(newList)})
    }
 
-   const  handleEdit = (id) => {
-      <EditChild props={id}/>
-      
-   }
+   
 
 return (
 

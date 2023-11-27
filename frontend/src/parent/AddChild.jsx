@@ -21,6 +21,7 @@ export default function AddChild(){
     const navigateToHome = () => { 
         navigate('/adminparent');
   }
+
      const handleSubmit = (e) => {
         e.preventDefault()
         setNameError(false)
@@ -42,10 +43,8 @@ export default function AddChild(){
         if(name && taj && birth){
             console.log(name, taj);
             let child = {
-                id: 1,
                 name: name,
                 nickname: "Dórika",
-                family: null,
                 taj: taj,
                 birthday: birth
             }

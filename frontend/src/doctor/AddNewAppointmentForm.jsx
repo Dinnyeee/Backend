@@ -18,8 +18,9 @@ export const AddNewAppointmentForm = (props) => {
     const [value, setValue] = React.useState(dayjs('2022-04-17T08:00'));
 
     const handleAdding=(e)=>{
-        //TODO create date from selectedDate and value and create a new appointment for that
     }
+
+    
 
     const isWeekend = (date) => {
         const day = date.day();

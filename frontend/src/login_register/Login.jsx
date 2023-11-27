@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { Grid, Card, TextField, Button } from "@mui/material";
 import isEmail from 'validator/lib/isEmail';
+import { login } from "services/AuthApi";
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export const Login = (props) => {
     const [role, setRole] = useState('');
 
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         setEmailError(false)
         setPassError(false)
@@ -26,8 +27,16 @@ export const Login = (props) => {
             setPassError(true);
         }
         
-
-        if(email && role && pass){
+        if(email && pass){
+            console.log("Hello there!!")
+        
+            const LoginJSON = {
+            'email': email,
+            'password': pass   
+            }
+         await login(LoginJSON);       
+        
+            
             //DO SOME MAGIC, API CALLING CREATING NEW USER
             //THEN NAVIGATE TO CORRECT PAGE
         }

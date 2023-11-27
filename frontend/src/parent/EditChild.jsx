@@ -25,7 +25,6 @@ export default function EditChild(props){
     useEffect(() => {
     const getChild = async () => {
       try{
-        //const docById = await get
         const result = await getChildById(152);
         console.log(result);
         setChild(result);
@@ -114,6 +113,7 @@ export default function EditChild(props){
                                     variant='outlined'
                                     value={child.birthday}
                                     required
+                                    error={birthError}
                                     type='date'
                                     onChange={(e) => {setBirth(e.target.value);}}
 

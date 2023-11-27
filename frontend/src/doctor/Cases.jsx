@@ -62,15 +62,19 @@ export const Cases = (props) => {
       try{
         const result = await getAllCases();
         
-        let filteredList;
-        if(familyValue !== ''){
-          filteredList = result.filter(r=>r.family.name)
+        let filteredList = result;
+        if(priority !== ''){
+          filteredList = result.filter(r=>r.priority == priority);
         }
-        setCases(result.filter(c => c.status));
+        if(status !== ''){
+          filteredList = filteredList.filter(r=> r.status == status)
+        }
+        setCases(filteredList);
       } catch(error){
         console.error('Error getAllCases data', error);
       }
     }; 
+      getRes();
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
 
@@ -79,7 +83,6 @@ export const Cases = (props) => {
     const newList = cases.filter((family) => family.id !== id);
     deleteCase(id).then(() =>setCases(newList));
  }
-
   return (
     <div>
      <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
@@ -121,9 +124,9 @@ export const Cases = (props) => {
               label="Status"
               onChange={handleChange_1}
             >
-                <MenuItem value={10}>NEW</MenuItem>
-                <MenuItem value={20}>IN PROGRESS</MenuItem>
-                <MenuItem value={30}>CLOSED</MenuItem>
+                <MenuItem value={"NEW"}>NEW</MenuItem>
+                <MenuItem value={"IN PROGRES"}>IN PROGRESS</MenuItem>
+                <MenuItem value={"CLOSED"}>CLOSED</MenuItem>
             </Select>
         </FormControl>
 

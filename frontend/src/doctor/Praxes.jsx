@@ -1,16 +1,18 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 import DoctorResponsiveAppBar from './DoctorResponsiveAppBar';
-import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import {  Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import Tooltip from '@mui/material/Tooltip';
+import { getAllFamilies, getAllPraxisFamilies } from "services/FamilyApi";
+import { getAssistantById, getAllAssistants } from "services/AssistantApi";
 
 
 
@@ -53,8 +55,58 @@ export const Praxes = (props) => {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
+
+     useEffect(() => {
+    const fetchMyFamilies = async () => {
+      try{
+        const result = await getAllPraxisFamilies();
+        console.log(result);
+        setFamilies(result);
+      } catch(error){
+        console.error('Error getAllPraxisFamilies data', error);
+      }
+    }; 
+
+    const fetchMyAssistants = async (id) => {
+      try{
+        const result = await getAssistantById(id);
+        console.log(result);
+        setAssistants(result);
+      } catch(error){
+        console.error('Error getAssistantById data', error);
+      }
+    }; 
+
+  const fetchAllFamilies = async () => {
+    try{
+      const res = await getAllFamilies();
+      console.log(res);
+      setAllFamilies(res);
+    }catch (error){
+        console.error('Error getAllFamilies data', error);
+
+    }
+  }
+
+  const fetchAllAssistants = async () => {
+    try{
+      const res = await getAllAssistants();
+      console.log(res);
+      setAllAssistants(res);
+    }catch (error){
+        console.error('Error getAllAssistants data', error);
+
+    }
+  }
+    fetchMyFamilies();
+    fetchMyAssistants();
+    fetchAllFamilies();
+    fetchAllAssistants();
+  }, [])
+
     const handleRemoveFamily = (id) => {
-        //TODO MAGIC SERVICE-EN KERESZTÜL TÖRÖLNI A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A A FRISS LISTÁKKAL
+
+      //TODO MAGIC SERVICE-EN KERESZTÜL TÖRÖLNI A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A A FRISS LISTÁKKAL
     }
     const handleAddFamily = (id) => {
         //TODO MAGIC SERVICE-EN KERESZTÜL HOZZÁADNI  A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A FRISS LISTÁKKAL
@@ -66,36 +118,12 @@ export const Praxes = (props) => {
         //TODO MAGIC SERVICE-EN KERESZTÜL HOZZÁADNI  A PRAXISBÓL AZ ASSZISZTENST, MAJD VISSZATÉRNI A FRISS LISTÁKKAL
     }
 
-    const [familyValue, setFamilyValue] = React.useState('');
-    const [assistantValue, setAssistantValue] = React.useState('');
-    const [inputValue, setInputValue] = React.useState('');
+    
 
-    const [families, setFamily] = useState([
-      { id:1, name: "Fabian"},
-      { id:2, name: "Fekete"},
-      { id:3, name: "Peter"},
-      { id:4, name: "Nemeth"},
-    ])
-    const [allfamilies, setAllFamily] = useState([
-      { id:1, name: "Fabian"},
-      { id:2, name: "Fekete"},
-      { id:3, name: "Peter"},
-      { id:4, name: "Nemeth"},
-      { id:5, name: "Auuuu"},
-    ])
-    const [assistants, setAssistant] = useState([
-      { id:1, name: "Fabian"},
-      { id:2, name: "Fekete"},
-      { id:3, name: "Peter"},
-      { id:4, name: "Nemeth"},
-    ])
-    const [allassistants, setAllAssistant] = useState([
-      { id:1, name: "Fabian"},
-      { id:2, name: "Fekete"},
-      { id:3, name: "Peter"},
-      { id:4, name: "Nemeth"},
-      { id:5, name: "Auuuu"},
-    ])
+    const [families, setFamilies] = useState([])
+    const [allfamilies, setAllFamilies] = useState([])
+    const [assistants, setAssistants] = useState([])
+    const [allassistants, setAllAssistants] = useState([])
 
     return (
       <div>

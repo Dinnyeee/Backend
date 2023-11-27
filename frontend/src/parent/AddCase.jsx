@@ -1,9 +1,11 @@
 import { Grid, Card, TextField, FormControl, InputLabel, MenuItem, Select, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import { useNavigate } from "react-router-dom";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import styled from "@emotion/styled";
+import { getAllChildren } from "services/ChildApi";
+import { createCase } from "services/CaseApi";
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -21,19 +23,29 @@ const VisuallyHiddenInput = styled('input')({
 export default function AddCase(){
     const navigate = useNavigate();
 
-    const [child, setChild] = useState('');
+    const [child, setChild] = useState({});
+    const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [file, setFile] = useState('');
 
     const [childError, setChildError] = useState(false); 
+    const [titleError, setTitleError] = useState(false); 
     const [descriptionError, setDescriptionError] = useState(false); 
 
-    const [children, setChildren] = useState([  // WE SHOULD GET THE DATA FROM A CONTROLLER
-        { id: 1, name: "Mario", taj:1231  },
-        { id: 2, name: "David", taj:1231  },
-        { id: 3, name: "Marta", taj:1231  },
-        { id: 4, name: "Mache", taj:1231  },
-    ])
+    const [children, setChildren] = useState([])
+
+    useEffect(() => {
+    const getChildren = async () => {
+      try{
+        const result = await getAllChildren();
+        console.log(result);
+        setChildren(result);
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
+    getChildren();
+  }, [])
 
 
     const navigateToCases = () => { 
@@ -50,11 +62,21 @@ export default function AddCase(){
         if(description == ''){
             setDescriptionError(true);
         }
+        if(title == ''){
+            setTitleError(true);
+        }
 
 
-        if(child && description){
-            console.log(child, description);
-            navigateToCases();
+        if(title && child && description){
+            console.log(child, description, title);
+            let c = {
+                title: title,
+                description: description,
+                nickname: "nick",
+                childId: child.id,
+            }
+            createCase(c).then(()=>{navigateToCases()})
+            
 
         }
        
@@ -88,14 +110,27 @@ return(
                                     id="demo-simple-select"
                                     value={child}
                                     label="Child"
+                                    error={childError}
                                     onChange={(e) =>{setChild(e.target.value);}}
                                 >
-                                    {children.map((c) => (
+                                     {children.map((c) => (
                                     <MenuItem value={c.name}>{c.name}</MenuItem>)
                                     )}
+                                   
                                 </Select>
                              </FormControl>
 
+                            </div>
+
+                            <div className="title">
+                                <TextField 
+                                    label="Title"
+                                    minRows={3}
+                                    variant='outlined'
+                                    required
+                                    error={titleError}
+                                    onChange={(e) => {setTitle(e.target.value);}}
+                                />
                             </div>
                     
                             <div className="description">

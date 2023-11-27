@@ -1,37 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ResponsiveAppBar from "./ResponsiveAppBar";
-import { Autocomplete, Button, FormControl, Grid, IconButton, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Button, Grid, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { Visibility } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { getAllCases } from "services/CaseApi";
+
 
 
 export const MyAppointments = () => {
   const navigate= useNavigate();
 
-
-  const options = ['Option 1', 'Option 2'];
-  const [childValue, setChildValue] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
-
-  const [priority, setPrio] = React.useState('');
-  const [status, setStatus] = React.useState('');
-
-  const handleChange = (event) => {
-    setPrio(event.target.value);
-  };
+   const handleViewDetail =(e) => {
+    navigate("/detailedcase");
+  }
 
   const handleAddNewCase = (e) => {
     navigate('/bookappointment');
   }
 
+   useEffect(() => {
+    const getData = async () => {
+      try{
+        const result = await getAllCases();
+        console.log(result);
+        setCases(result.filter(c => c.appointmentDate !==null));
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
+    getData();
+  }, [])
 
-  const cases = [
-    { id:1, name: "Kovács", date: '2023-12-02', status: "new", priority: "TOP" },
-    { id:2, name: "Kiss", date: '2023-10-22', status: "inprogress", priority: "low" },
-    { id:3, name: "Shwarz", date: '2023-11-12', status: "new", priority: "medium" },
-    { id:4, name: "Bali", date: '2023-11-02', status: "new", priority: "TOP" },
-  ]
+
+  const [cases, setCases] = useState([])
   return (
     <div className="myappointments-parent">
      <ResponsiveAppBar/>
@@ -84,27 +86,27 @@ export const MyAppointments = () => {
             <TableCell align="left"><b>Case</b></TableCell>
             <TableCell align="left"><b>Child</b></TableCell>
             <TableCell align="left"><b>Date</b></TableCell>
-            <TableCell align="left"><b>Time</b></TableCell>
+            <TableCell align="left"><b>Status</b></TableCell>
             <TableCell align="left"><b>Details</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {cases.map((child) => (
+          {cases.map((c) => (
             <TableRow
-              key={child.id}
+              key={c.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {child.id}
+                {c.id}
               </TableCell>
-              <TableCell align="left">{"Case Title"}</TableCell>
-              <TableCell align="left">{child.name}</TableCell>
-              <TableCell align="left">{child.date}</TableCell>
+              <TableCell align="left">{c.title}</TableCell>
+              <TableCell align="left">{c.child.name}</TableCell>
+              <TableCell align="left">{c.appointmentDate}</TableCell>
               <TableCell align="left">
-                  {child.status}
+                  {c.status}
                 </TableCell>
               <TableCell align="left">
-                 <IconButton>
+                 <IconButton onClick={handleViewDetail}>
                   <Visibility fontSize="small"/>
                  </IconButton>
               </TableCell>
