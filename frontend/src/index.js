@@ -65,7 +65,7 @@ const router = createBrowserRouter([
     element: <Cases/>
   },
   {
-    path: "/detailedcase",
+    path: "/detailedcase/:id",
     element: <DetailedCase/>
   },
   {
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     element: <AddChild/>
   },
    {
-    path: "/editchild",
+    path: "/editchild/id",
     element: <EditChild/>
   },
   

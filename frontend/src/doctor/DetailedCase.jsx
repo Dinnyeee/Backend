@@ -2,36 +2,42 @@ import React, { useEffect, useState } from "react";
 import DoctorResponsiveAppBar from "./DoctorResponsiveAppBar";
 import { Card, CardActions, CardContent, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from "@mui/material";
 import { getCaseById, updateCase } from "services/CaseApi";
+import {useParams} from "react-router-dom";
 
 export const DetailedCase = (props) => {
 
+    const {id} = useParams();
+    const [caseDetails, setCaseDetails] = useState([]);
+
     useEffect(() => {
-    const getData = async () => {
+    
+        getData(id);
+  }, []);   
+  
+  const getData = async (i) => {
       try{
-        const result = await getCaseById();
+        const result = await getCaseById(i);
         console.log(result);
         setCaseDetails(result);
       } catch(error){
         console.error('Error getDetails data', error);
       }
     }
-        getData();
-  }, []);     
 
-    const [caseDetails, setCaseDetails] = useState({});
+    
 
     const handleChangeInPrio=(e)=>{
         let updatedValue={};
         updatedValue =e.target.value;
         const newCaseDetails = {
-        id:caseDetails.id,
-        title:caseDetails.title, 
-        description: caseDetails.description,
-        appointmentDate: caseDetails.appointmentDate,
-        createdAt: caseDetails.createdAt,
-        child: caseDetails.child,
-        priority: updatedValue,
-        status: caseDetails.status,
+        id :caseDetails.id,
+        title :caseDetails.title, 
+        description : caseDetails.description,
+        appointmentDate : caseDetails.appointmentDate,
+        createdAt : caseDetails.createdAt,
+        child : caseDetails.child,
+        priority : updatedValue,
+        status : caseDetails.status,
         }
         updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));  
     }
@@ -45,7 +51,7 @@ export const DetailedCase = (props) => {
         description: caseDetails.description,
         appointmentDate: caseDetails.appointmentDate,
         createdAt: caseDetails.createdAt,
-        patient: caseDetails.child.name,
+        patient: caseDetails.name,
         priority: caseDetails.priority,
         status: updatedValue,
         }
@@ -62,7 +68,7 @@ export const DetailedCase = (props) => {
                      <Typography variant="h5" component="div" sx={{ fontSize: 48, mb :1.5 }}>
                             Case: {caseDetails.title}
                      </Typography>
-                        <h3>Patient:</h3><p>{caseDetails.child.name}</p>
+                        <h3>Patient:</h3><p>{caseDetails}</p>
                         <div className="prio-status-setter">
                         <div>
                         <h3>Priority:</h3>

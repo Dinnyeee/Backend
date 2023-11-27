@@ -5,14 +5,15 @@ import { Visibility } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { getAllCases } from "services/CaseApi";
+import dayjs from "dayjs";
 
 
 
 export const MyAppointments = () => {
   const navigate= useNavigate();
 
-   const handleViewDetail =(e) => {
-    navigate("/detailedcase");
+   const handleViewDetail =(id) => {
+    navigate("/detailedcase/"+id);
   }
 
   const handleAddNewCase = (e) => {
@@ -58,22 +59,7 @@ export const MyAppointments = () => {
         
       
 
-      {/*  <FormControl sx={{ width: 250 }}>
-            <InputLabel id="demo-simple-select-label">Status</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={status}
-              label="Status"
-              onChange={(e) => setStatus(e.target.value)}
-            >
-                <MenuItem value={"New"}>New</MenuItem>
-                <MenuItem value={"In Progress"}>In Progress</MenuItem>
-                <MenuItem value={"Closed"}>Closed</MenuItem>
-                <MenuItem value={"All"}>All</MenuItem>
-            </Select>
-        </FormControl>
-  */}
+      
 
 </div>
     
@@ -101,12 +87,12 @@ export const MyAppointments = () => {
               </TableCell>
               <TableCell align="left">{c.title}</TableCell>
               <TableCell align="left">{c.child.name}</TableCell>
-              <TableCell align="left">{c.appointmentDate}</TableCell>
+              <TableCell align="left">{dayjs(c.appointmentDate).format('MM.DD HH:mm')}</TableCell>
               <TableCell align="left">
                   {c.status}
                 </TableCell>
               <TableCell align="left">
-                 <IconButton onClick={handleViewDetail}>
+                 <IconButton onClick={()=> handleViewDetail(c.id)}>
                   <Visibility fontSize="small"/>
                  </IconButton>
               </TableCell>

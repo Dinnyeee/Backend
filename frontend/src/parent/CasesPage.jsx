@@ -5,40 +5,49 @@ import { Height, Visibility } from "@mui/icons-material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from "react-router-dom";
 import { getAllCases } from "services/CaseApi";
+import dayjs from "dayjs";
+import { getAllChildren } from "services/ChildApi";
 
 
 
 export const CasesPage = (props) => {
 
-    const navigate= useNavigate();
+  const [cases, setCases] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [childValue, setChildValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');  
+  const [status, setStatus] = React.useState('');
+
+  const navigate= useNavigate();
 
   useEffect(() => {
-    const getData = async () => {
+    getCases();
+    getChildrenOption();
+    
+  }, [childValue,inputValue])
+
+  const getCases = async () => {
       try{
-        //const docById = await get
         const result = await getAllCases();
-        console.log(result);
         setCases(result);
       } catch(error){
         console.error('Error getAllCases data', error);
       }
     }; 
-    getData();
-  }, [])
 
-  const options = ['Option 1', 'Option 2'];
-  const [childValue, setChildValue] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
+    const getChildrenOption = async () => {
+      try{
+        const result = await getAllChildren();
+        setOptions(result);
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
 
-  const [priority, setPrio] = React.useState('');
-  const [status, setStatus] = React.useState('');
+  
 
-  const handleChange = (event) => {
-    setPrio(event.target.value);
-  };
-
-  const handleViewDetail =(e) => {
-    //navigate("/detailedcase");
+  const handleViewDetail =(id) => {
+    navigate("/detailedcase/"+id);
   }
 
   const handleAddNewCase = (e) => {
@@ -46,11 +55,8 @@ export const CasesPage = (props) => {
   }
 
 
-  const [cases, setCases] = useState([]);
   return (
     <div className="cases-parent">
-     
-
       <Grid
             container
             spacing={0}
@@ -59,7 +65,6 @@ export const CasesPage = (props) => {
             justifyContent="center"
             style={{ minHeight: '80vh' }}
         >
-
             <Grid item xs={3}>
 
 <div className="search-field">
@@ -68,21 +73,23 @@ export const CasesPage = (props) => {
           New case
         </Button>
 
-        <Autocomplete 
-            
-            value={childValue}
-            onChange={(event, newValue) => {
-              setChildValue(newValue);
-            }}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            id="controllable-states-demo"
-            options={options}
-            sx={{ width: 250 }}
-            renderInput={(params) => <TextField {...params} label="Child" />}
-      />
+        
+
+       <FormControl sx={{ width: 250 }}>
+            <InputLabel id="demo-simple-select-label">Child</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={childValue}
+              label="Child"
+              onChange={(e) => setChildValue(e.target.value)}
+            >
+               {
+                  options?.map((o) => (
+                 <MenuItem value={o}>{o.name}</MenuItem>
+              ))}
+            </Select>
+        </FormControl>
 
       
 
@@ -119,19 +126,19 @@ export const CasesPage = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cases.map((child) => (
+          {cases.map((c) => (
             <TableRow
-              key={child.id}
+              key={c.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {child.id}
+                {c.id}
               </TableCell>
-              <TableCell align="left">{"CASE TITLE"}</TableCell>
-              <TableCell align="left">{child.name}</TableCell>
-              <TableCell align="left">{child.date}</TableCell>
-              <TableCell align="left">{child.status}</TableCell>
-              <TableCell align="left">{"YYYY.MM.DD.HH:MM"}</TableCell>
+              <TableCell align="left">{c.title}</TableCell>
+              <TableCell align="left">{c.child.name}</TableCell>
+              <TableCell align="left">{dayjs(c.createdAt).format('MM.DD HH:mm')}</TableCell>
+              <TableCell align="left">{c.status}</TableCell>
+              <TableCell align="left">{dayjs(c.appointmentDate).format('MM.DD HH:mm')}</TableCell>
               <TableCell align="left">
                   <IconButton onClick={handleViewDetail}>
                     <Visibility fontSize="small"/>
