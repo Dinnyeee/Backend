@@ -58,6 +58,19 @@ export const Cases = (props) => {
     navigate("/detailedcase");
   }
   const handleSearch = () => {
+    const getRes = async () => {
+      try{
+        const result = await getAllCases();
+        
+        let filteredList;
+        if(familyValue !== ''){
+          filteredList = result.filter(r=>r.family.name)
+        }
+        setCases(result.filter(c => c.status));
+      } catch(error){
+        console.error('Error getAllCases data', error);
+      }
+    }; 
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
 
