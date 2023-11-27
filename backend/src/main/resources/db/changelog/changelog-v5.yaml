@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1700954277763-3
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: birthday
+                  type: DATETIME
+            tableName: child
+  - changeSet:
+      id: 1700954277763-4
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: birthday
+            defaultNullValue: 2015-02-01 00:00:00
+            tableName: child
+  - changeSet:
+      id: 1700954277763-5
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: priority
+                  type: SMALLINT
+              - column:
+                  name: status
+                  type: SMALLINT
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+            tableName: case_table
+  - changeSet:
+      id: 1700954277763-6
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: priority
+            defaultNullValue: '0'
+            tableName: case_table
+  - changeSet:
+      id: 1700954277763-8
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: status
+            defaultNullValue: '0'
+            tableName: case_table
+  - changeSet:
+      id: 1700954277763-10
+      author: nemet (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addNotNullConstraint:
+            columnName: title
+            defaultNullValue: N/A
+            tableName: case_table
+

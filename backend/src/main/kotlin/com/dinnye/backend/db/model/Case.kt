@@ -16,6 +16,15 @@ class Case: BaseEntity() {
     @Column(name = "description", nullable = false)
     var description: String? = null
 
+    @Column(name = "title", nullable = false)
+    var title: String? = null
+
+    @Column(name = "priority", nullable = false)
+    var priority: Priority = Priority.LOW
+
+    @Column(name = "status", nullable = false)
+    var status: Status = Status.NEW
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = [CascadeType.MERGE])
     @JoinColumn(name = "praxis_id")
     var praxis: Praxis? = null

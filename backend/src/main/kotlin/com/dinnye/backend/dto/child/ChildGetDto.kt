@@ -13,6 +13,7 @@ data class ChildGetDto @Default constructor (
     val taj: String? = null,
     val name: String? = null,
     val nickname: String? = null,
+    val birthday: Date? = null,
     val family: FamilyInfoDto? = null,
-    val cases: List<CaseInfoDto> = emptyList()
+    val cases: List<CaseInfoDto> = emptyList(),
 ) : Serializable
