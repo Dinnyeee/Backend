@@ -51,7 +51,7 @@ function App() {
   return (
   
     <div>
-        <DetailedCase></DetailedCase>
+        <Login></Login>
     </div>
   );
 }

@@ -108,12 +108,12 @@ return(
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={child}
+                                    value={child.name}
                                     label="Child"
                                     error={childError}
                                     onChange={(e) =>{setChild(e.target.value);}}
                                 >
-                                     {children.map((c) => (
+                                     {children?.map((c) => (
                                     <MenuItem value={c.name}>{c.name}</MenuItem>)
                                     )}
                                    

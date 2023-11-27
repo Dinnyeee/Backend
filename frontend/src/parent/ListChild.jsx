@@ -84,7 +84,7 @@ return (
           </TableRow>
         </TableHead>
         <TableBody>
-          {children.map((child) => (
+          {children?.map((child) => (
             <TableRow
               key={child.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

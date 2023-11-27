@@ -91,7 +91,7 @@ export default function BookAppointment(){
                         label="Case"
                         onChange={(e) => setSelectedCase(e.target.value)}
                         >
-                          { cases.map((c)=>{
+                          { cases?.map((c)=>{
                               <MenuItem value={c}>{"c.title"}</MenuItem>
                          })}
                                    

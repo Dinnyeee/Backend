@@ -49,10 +49,10 @@ export const Login = (props) => {
                 navigate("/parent");
                 break;
             case "ASSISTANT":
-                navigate("/administration");
+                navigate("/doctorstart");
                 break;
             case "ADMIN":
-                navigate("/doctorstart");
+                navigate("/administration");
                 break;
             default:
                 

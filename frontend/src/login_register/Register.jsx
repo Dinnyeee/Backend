@@ -22,7 +22,7 @@ export const Register = (props) => {
         navigate("/login") ;
     }
 
-     const handleSubmit = (e) => {
+     const handleSubmit = async(e) => {
         e.preventDefault();
          setNameError(false)
         setEmailError(false)
@@ -43,24 +43,28 @@ export const Register = (props) => {
             'role': role
             }       
 
-          /*  await register(ReginJSON);
-            const LoginJSON = {
-            'email': email,
-            'password': pass   
-            }
-           await login(LoginJSON);*/
+            register(ReginJSON);
+             const r = sessionStorage.getItem('role');
+        switch(r){
+            case "DOCTOR":
+                navigate("/doctorstart");
+                break;
+            case "PARENT": 
+                navigate("/parent");
+                break;
+            case "ASSISTANT":
+                navigate("/administration");
+                break;
+            case "ADMIN":
+                navigate("/doctorstart");
+                break;
+            default:
+                
+                 break;
         }
-    
-        
-        
+        }
     }
-
-     
-        
-      
-       
-        
-
+ 
     return (
 
          <div> 
@@ -113,7 +117,7 @@ export const Register = (props) => {
                                             onChange={(e) => setRole(e.target.value)}
                                             >
                                                 <MenuItem value={"DOCTOR"}>Doctor</MenuItem>
-                                                <MenuItem value={"ASSISSTANT"}>Assistant</MenuItem>
+                                                <MenuItem value={"ASSISTANT"}>Assistant</MenuItem>
                                                 <MenuItem value={"PARENT"}>Parent</MenuItem>
                                             </Select>
                                     </FormControl>

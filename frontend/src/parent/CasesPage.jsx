@@ -34,7 +34,6 @@ export const CasesPage = (props) => {
   useEffect(() => {
     getCases();
     getChildrenOption();
-
     
   }, [childValue,inputValue])
 
@@ -57,6 +56,10 @@ export const CasesPage = (props) => {
     }; 
 
   
+    const selectedChildOption = async(e)=>{
+      getChildrenOption()
+      setChildValue(e.target.value)
+    }
 
   const handleViewDetail =(id) => {
     navigate("/detailedcase/"+id);
@@ -94,10 +97,10 @@ export const CasesPage = (props) => {
               id="demo-simple-select"
               value={childValue}
               label="Child"
-              onChange={(e) => setChildValue(e.target.value)}
+              onChange={(e) => selectedChildOption(e)}
             >
               {
-                options.map((option, index) => (
+                options?.map((option, index) => (
                   <MenuItem key={index} value={option}>
                     {option.name}  {/* Display the property you want here */}
                   </MenuItem>
@@ -141,7 +144,7 @@ export const CasesPage = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cases.map((c) => (
+          {cases?.map((c) => (
             <TableRow
               key={c.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

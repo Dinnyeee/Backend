@@ -67,7 +67,7 @@ export const Praxes = (props) => {
       try{
         const result = await getAllPraxisFamilies();
         console.log(result);
-        setFamilies(result);
+        setFamilies(result.filter());
       } catch(error){
         console.error('Error getAllPraxisFamilies data', error);
       }
@@ -116,6 +116,7 @@ export const Praxes = (props) => {
 
     const handleRemoveFamily = (id) => {
 
+
       //TODO MAGIC SERVICE-EN KERESZTÜL TÖRÖLNI A PRAXISBÓL A CSALÁDOT, MAJD VISSZATÉRNI A A FRISS LISTÁKKAL
     }
     const handleAddFamily = (id) => {
@@ -156,7 +157,7 @@ export const Praxes = (props) => {
               <TableHead>
               </TableHead>
               <TableBody>
-                {families.map((family) => (
+                {families?.map((family) => (
                   <TableRow
                     key={family.id}
                     sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
@@ -185,7 +186,7 @@ export const Praxes = (props) => {
               <TableHead>
               </TableHead>
               <TableBody>
-                {allfamilies.map((family) => (
+                {allfamilies?.map((family) => (
                   <TableRow
                     key={family.id}
                     sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
@@ -219,7 +220,7 @@ export const Praxes = (props) => {
                 <TableHead>
                 </TableHead>
                 <TableBody>
-                  {families.map((assistant) => (
+                  {families?.map((assistant) => (
                     <TableRow
                       key={assistant.id}
                       sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}
@@ -247,7 +248,7 @@ export const Praxes = (props) => {
                 <TableHead>
                 </TableHead>
                 <TableBody>
-                  {allassistants.map((assistant) => (
+                  {allassistants?.map((assistant) => (
                     <TableRow
                       key={assistant.id}
                       sx={{ '&:last-assistant td, &:last-assistant th': { border: 0 } }}

@@ -7,8 +7,14 @@ import {useParams} from "react-router-dom";
 export const DetailedCase = (props) => {
 
     const {id} = useParams();
+  /*  const [createdAt, setCaseDetails] = useState({});
+    const [updatedAt, setCaseDetails] = useState({});
+    const [description, setCaseDetails] = useState({});
+    const [praxis, setCaseDetails] = useState({});
+    const [child, setCaseDetails] = useState({});
     const [caseDetails, setCaseDetails] = useState({});
-
+   
+*/ const [caseDetails, setCaseDetails] = useState([]);
 
     useEffect(() => {
         console.log("res"+caseDetails);
@@ -30,25 +36,23 @@ export const DetailedCase = (props) => {
     const handleChangeInPrio = async(e) => {
         let updatedValue={};
         updatedValue ={priority:e.target.value};
-        const newCaseDetails = {}
         setCaseDetails(caseDetails =>({
             ...caseDetails,
             ...updatedValue
         }))
     
-        await updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));  
+        await updateCase(caseDetails)  
     }
 
     const handleChangeInStatus = async (e) => {
          let updatedValue={};
         updatedValue ={status:e.target.value};
-        const newCaseDetails = {}
         setCaseDetails(caseDetails =>({
             ...caseDetails,
             ...updatedValue
         }))
     
-        await updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));
+        await updateCase(caseDetails)
     }
 
     return (
@@ -59,7 +63,7 @@ export const DetailedCase = (props) => {
                     <CardContent>                  
                     
                      <Typography variant="h5" component="div" sx={{ fontSize: 48, mb :1.5 }}>
-                            Case: {caseDetails.title}
+                            Case: {caseDetails?.title}
                      </Typography>
                         <h3>Patient:</h3><p>{caseDetails}</p>
                         <div className="prio-status-setter">
@@ -71,7 +75,7 @@ export const DetailedCase = (props) => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={caseDetails.priority}
+                                    value={caseDetails?.priority}
                                     label="Priority"
                                     onChange={(newValue => handleChangeInPrio(newValue))}
                                     >
@@ -92,7 +96,7 @@ export const DetailedCase = (props) => {
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={caseDetails.status}
+                                    value={caseDetails?.status}
                                     label="Status"
                                     onChange={(newValue => handleChangeInStatus(newValue))}
                                     >
@@ -104,9 +108,9 @@ export const DetailedCase = (props) => {
                             </div>
                             </div>
                       
-                        <h3>Description:</h3><p>{caseDetails.description}</p>
-                        <h3>Opened:</h3><p>{caseDetails.createdAt}</p>
-                        <h3>Appointment:</h3><p>{caseDetails.appointmentDate}</p>
+                        <h3>Description:</h3><p>{caseDetails?.description}</p>
+                        <h3>Opened:</h3><p>{caseDetails?.createdAt}</p>
+                        <h3>Appointment:</h3><p>{caseDetails?.appointmentDate}</p>
                      </CardContent>
                      <CardActions>
                         
