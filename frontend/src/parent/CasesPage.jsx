@@ -13,7 +13,18 @@ import { getAllChildren } from "services/ChildApi";
 export const CasesPage = (props) => {
 
   const [cases, setCases] = useState([]);
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([{
+      birthday: '',
+      cases: [],
+      createdAt: '',
+      family: {
+        id: '',
+        name: ''
+      },
+      taj: '',
+      updatedAt: '',
+    }]
+  );
   const [childValue, setChildValue] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');  
   const [status, setStatus] = React.useState('');
@@ -23,6 +34,7 @@ export const CasesPage = (props) => {
   useEffect(() => {
     getCases();
     getChildrenOption();
+
     
   }, [childValue,inputValue])
 
@@ -84,10 +96,13 @@ export const CasesPage = (props) => {
               label="Child"
               onChange={(e) => setChildValue(e.target.value)}
             >
-               {
-                  options?.map((o) => (
-                 <MenuItem value={o}>{o.name}</MenuItem>
-              ))}
+              {
+                options.map((option, index) => (
+                  <MenuItem key={index} value={option}>
+                    {option.name}  {/* Display the property you want here */}
+                  </MenuItem>
+                ))
+              }
             </Select>
         </FormControl>
 
