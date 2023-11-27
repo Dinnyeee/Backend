@@ -3,6 +3,7 @@ import instance from './BaseURL';
 export const getAllCases = async () => {
     try{
         const response = await instance.get('/case');
+        console.log("Data: " + response.data);
         return response.data;
     }catch(error){
         console.error('Error fetching all cases', error);

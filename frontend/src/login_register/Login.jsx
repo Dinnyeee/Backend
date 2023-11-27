@@ -36,10 +36,12 @@ export const Login = (props) => {
             }
          await login(LoginJSON);       
         
-            
+            const role = sessionStorage.getItem('role');
             //DO SOME MAGIC, API CALLING CREATING NEW USER
             //THEN NAVIGATE TO CORRECT PAGE
-        }
+            console.log("ROLEEE " + role)
+        
+        console.log("role: " + role)
         //TODO log in API - based on result navigate to appropriate site
         //get the role of the received user and then...
         switch(role){
@@ -54,7 +56,7 @@ export const Login = (props) => {
                 break;
             default: break;
         }
-    }
+    }}
 
     const navigateToHome  = (e) => {
         navigate("/doctorstart")
@@ -113,5 +115,5 @@ export const Login = (props) => {
                 </Grid>
              </Grid>
         </div>
-    );
+    )
 }

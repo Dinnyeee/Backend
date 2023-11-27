@@ -12,30 +12,33 @@ import { getDoctorById } from "services/DoctorApi";
 
 
 
-export const Cases = (props) => {
+export function Cases(props){
+  const [cases, setCases] = useState([])
+  const [families, setFamilies] = React.useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      try{
-        //const docById = await get
-        const result = await getAllCases();
-        console.log(result);
-        setCases(result);
-      } catch(error){
-        console.error('Error getAllCases data', error);
-      }
-    }; 
+  const getData = async () => {
+    try{
+      const result = await getAllCases();
+      console.log(" getallcases eredménye: "+result);
+      setCases(result);
+    } catch(error){
+      console.error('Error getAllCases data', error);
+    }
+  }; 
 
   const fetchFamilies = async () => {
     try{
       const res = await getAllFamilies();
-      console.log(res);
+      console.log("getallfamilies eredménye: "+res);
       setFamilies(res);
     }catch (error){
         console.error('Error getAllFamilies data', error);
 
     }
   }
+
+
+  useEffect(() => {
     getData();
     fetchFamilies();
   }, [])
@@ -46,7 +49,6 @@ export const Cases = (props) => {
 
   const [priority, setPrio] = React.useState('');
   const [status, setStatus] = React.useState('');
-  const [families, setFamilies] = React.useState([]);
 
   const handleChange_1 = (event) => {
     setStatus(event.target.value);
@@ -78,7 +80,7 @@ export const Cases = (props) => {
     //TODO send data and fetch the search result!! and update the list of cases based on that
   }
 
-  const [cases, setCases] = useState([])
+  
   const  handleDelete = (id) => {
     const newList = cases.filter((family) => family.id !== id);
     deleteCase(id).then(() =>setCases(newList));
@@ -99,22 +101,7 @@ export const Cases = (props) => {
             <Grid item xs={3}>
 
 <div className="search-field-doctor">
-        <Autocomplete 
-            
-            value={familyValue}
-            onChange={(event, newValue) => {
-              setFamilyValue(newValue);
-            }}
-            inputValue={inputValue}
-            onInputChange={(event, newInputValue) => {
-              setInputValue(newInputValue);
-            }}
-            id="controllable-states-demo"
-            options={families.map(f=>f.name)}
-            sx={{ width: 250, margin:1 }}
-            renderInput={(params) => <TextField {...params} label="Family" />}
-      />
-
+       
         <FormControl sx={{ width: 250, margin:1}}>
             <InputLabel id="demo-simple-select-label">Status</InputLabel>
             <Select
@@ -166,7 +153,7 @@ export const Cases = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cases.map((family) => (
+          {cases?.map((family) => (
             <TableRow
               key={family.id}
               sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
