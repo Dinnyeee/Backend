@@ -26,7 +26,7 @@ function TestComponent () {
     const [loginka, setLogin] = useState({email: '', password: ''});
 
     useEffect(() => {
-        //fetchDoctors();
+        fetchDoctors();
 
         /*const LoginJSON = {
             'email': 'doctor2@example.com',
