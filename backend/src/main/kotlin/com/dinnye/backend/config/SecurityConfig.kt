@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
+import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
@@ -22,11 +23,12 @@ class SecurityConfig(
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
+        http.cors(Customizer.withDefaults())
         http {
             csrf { disable() }
-            cors { configurationSource = corsConfigurationSource() }
             authorizeHttpRequests {
                 authorize("/auth/**", permitAll)
+                authorize(HttpMethod.OPTIONS, "/**", permitAll)
                 authorize("/api/doctor", hasAnyRole("DOCTOR"))
                 authorize("/api/assistant", hasAnyRole("ASSISTANT"))
                 authorize(HttpMethod.PUT, "/api/parent/{familyId}/addChild", hasAnyRole("PARENT"))
