@@ -5,20 +5,23 @@ import com.dinnye.backend.dto.family.FamilyPostDto
 import com.dinnye.backend.dto.family.FamilyPutDto
 import com.dinnye.backend.mapper.FamilyMapper
 import com.dinnye.backend.service.interfaces.FamilyService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.Authentication
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/family")
 class FamilyController (
     private val familyService: FamilyService,
@@ -26,8 +29,12 @@ class FamilyController (
 ) {
 
     @GetMapping
-    fun getAll(@RequestHeader token: String): ResponseEntity<List<FamilyGetDto>> {
-        return ResponseEntity.ok(familyService.getAll(token).map { mapper.mapToGet(it) })
+    fun getAll(auth: Authentication?): ResponseEntity<List<FamilyGetDto>> {
+        return ResponseEntity.ok(
+            auth?.asUser()?.let {
+                user ->  familyService.getAll(user.email ?: "").map { mapper.mapToGet(it) }
+            } ?: emptyList()
+        )
     }
 
     @GetMapping("/{id}")

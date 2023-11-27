@@ -1,25 +1,21 @@
 package com.dinnye.backend.controller
 
+import com.dinnye.backend.db.model.User
 import com.dinnye.backend.dto._case.CaseGetDto
 import com.dinnye.backend.dto._case.CasePostDto
 import com.dinnye.backend.dto._case.CasePutDto
 import com.dinnye.backend.mapper.CaseMapper
 import com.dinnye.backend.service.interfaces.CaseService
+import com.dinnye.backend.util.asUser
 import com.dinnye.backend.util.created
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.security.core.Authentication
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/case")
 class CaseController(
     private val caseService: CaseService,
@@ -27,8 +23,11 @@ class CaseController(
 ) {
 
     @GetMapping
-    fun getAll(@RequestHeader token: String): ResponseEntity<List<CaseGetDto>> {
-        return ResponseEntity.ok(caseService.getAll(token).map { mapper.mapToGet(it) })
+    fun getAll(auth: Authentication?): ResponseEntity<List<CaseGetDto>> {
+        auth?.asUser()?.let { user ->
+            return ResponseEntity.ok(caseService.getAllByEmail(user.email ?: "")
+                .map { mapper.mapToGet(it) })
+        } ?: return ResponseEntity.ok(listOf())
     }
 
     @GetMapping("/{id}")

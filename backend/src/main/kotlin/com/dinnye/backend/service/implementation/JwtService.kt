@@ -18,6 +18,8 @@ class JwtService(private val userService: UserService) {
 
     @Value("\${secret}")
     private val SECRET: String? = null
+    @Value("\${jwt.expiration}")
+    private val EXPIRATION: Long = 1800000
 
     fun extractEmail(token: String): String {
         return extractClaim(token, Claims::getSubject)
@@ -39,7 +41,7 @@ class JwtService(private val userService: UserService) {
             .setClaims(extraClaims)
             .setSubject(userDetails.username)
             .setIssuedAt(Date(System.currentTimeMillis()))
-            .setExpiration(Date(System.currentTimeMillis() + 86400000)) // 1 day
+            .setExpiration(Date(System.currentTimeMillis() + EXPIRATION))
             .signWith(getSignInKey(), SignatureAlgorithm.HS256)
             .compact()
     }

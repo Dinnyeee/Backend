@@ -12,7 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebConfig(private val chatConfigurationProperties: ChatConfigurationProperties) : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedOrigins(chatConfigurationProperties.allowedOrigin)
+            .allowedHeaders("*")
     }
 }
