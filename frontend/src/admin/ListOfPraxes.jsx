@@ -1,18 +1,35 @@
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';import { useNavigate } from 'react-router-dom';
-const React = require("react");
+import { getAllPraxises } from 'services/PraxisApi';
+import { useEffect } from 'react';
 const { Grid, Button, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, IconButton } = require("@mui/material");
 const { useState } = require("react");
+const React = require("react");
+
 
 export default function ListOfPraxes(){
 
     const navigate = useNavigate();
-    const [praxes ,setPraxes] = useState([
-        {id:1, doctor:"Dr.Kovács", name:"XI.kerület"},
-        {id:2, doctor:"Dr.Péter", name: "V.kerület"},
-        {id:3, doctor:"Dr.Fekete", name: "Erzsébet városrész"},
-    ])
+    const [praxes ,setPraxes] = useState([])
+
+
+        useEffect(() => {
+        getPraxes();
+      }, []);
+
+     const getPraxes = async () => {
+      try{
+        const result = await getAllPraxises();
+        console.log(result);
+        setPraxes(result);
+      } catch(error){
+        console.error('Error getAllPraxises data', error);
+      }
+    }; 
+
+  
+
     const handleAddPraxisClicked =(e) => {
       navigate("/addpraxis");
     }
@@ -51,7 +68,7 @@ export default function ListOfPraxes(){
           </TableRow>
         </TableHead>
         <TableBody>
-          {praxes.map((p) => (
+          {praxes?.map((p) => (
             <TableRow
               key={p.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

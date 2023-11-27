@@ -17,32 +17,22 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 
 function AdminResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const navigate= useNavigate();
 
-  const navigateToHome = () => {
-    navigate('/administration');
-  }
-  const navigateToAdmin = () => {
-    navigate('/admin');
-  }
-  const navigateToAppointments = () => {
-    navigate('/myappointments');
-  }
-  const navigateToLogin = () => {
-    navigate('/');
+  const LogOut=()=>{
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    navigate('/login');
   }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
  
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
 
   return (
     <AppBar position="static">
@@ -100,7 +90,7 @@ function AdminResponsiveAppBar() {
                   <Typography textAlign="right">
                       
                      
-                    <Button onClick={navigateToLogin} sx={{ my: 2,  display: 'block' }}> 
+                    <Button onClick={LogOut} sx={{ my: 2,  display: 'block' }}> 
                         Log out 
                      </Button>
                     
@@ -131,7 +121,7 @@ function AdminResponsiveAppBar() {
               
              
 
-              <Button variant="text"  sx={{color: 'white'}} onClick={navigateToLogin}> 
+              <Button variant="text"  sx={{color: 'white'}} onClick={LogOut}> 
              Log out   
               </Button>
             

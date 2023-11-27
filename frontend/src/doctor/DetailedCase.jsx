@@ -7,7 +7,7 @@ import {useParams} from "react-router-dom";
 export const DetailedCase = (props) => {
 
     const {id} = useParams();
-    const [caseDetails, setCaseDetails] = useState([]);
+    const [caseDetails, setCaseDetails] = useState({});
 
 
     useEffect(() => {
