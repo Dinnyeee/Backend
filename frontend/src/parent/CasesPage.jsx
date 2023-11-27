@@ -102,10 +102,10 @@ export const CasesPage = (props) => {
               label="Status"
               onChange={(e) => setStatus(e.target.value)}
             >
-                <MenuItem value={"New"}>New</MenuItem>
-                <MenuItem value={"In Progress"}>In Progress</MenuItem>
-                <MenuItem value={"Closed"}>Closed</MenuItem>
-                <MenuItem value={"All"}>All</MenuItem>
+                <MenuItem value={"NEW"}>New</MenuItem>
+                <MenuItem value={"IN_PROGRESS"}>In Progress</MenuItem>
+                <MenuItem value={"CLOSED"}>Closed</MenuItem>
+                <MenuItem value={"ALL"}>All</MenuItem>
             </Select>
         </FormControl>
 

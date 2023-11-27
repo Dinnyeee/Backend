@@ -7,7 +7,7 @@ import {useParams} from "react-router-dom";
 export const DetailedCase = (props) => {
 
     const {id} = useParams();
-    const [caseDetails, setCaseDetails] = useState({name: "faijf", id: 2451});
+    const [caseDetails, setCaseDetails] = useState([]);
 
 
     useEffect(() => {
@@ -27,36 +27,28 @@ export const DetailedCase = (props) => {
 
     
 
-    const handleChangeInPrio=(e)=>{
+    const handleChangeInPrio = async(e) => {
         let updatedValue={};
-        updatedValue =e.target.value;
-        const newCaseDetails = {
-        id :caseDetails.id,
-        title :caseDetails.title, 
-        description : caseDetails.description,
-        appointmentDate : caseDetails.appointmentDate,
-        createdAt : caseDetails.createdAt,
-        child : caseDetails.child,
-        priority : updatedValue,
-        status : caseDetails.status,
-        }
-        updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));  
+        updatedValue ={priority:e.target.value};
+        const newCaseDetails = {}
+        setCaseDetails(caseDetails =>({
+            ...caseDetails,
+            ...updatedValue
+        }))
+    
+        await updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));  
     }
 
-    const handleChangeInStatus=(e)=>{
-        let updatedValue={};
-        updatedValue =e.target.value;
-        const newCaseDetails = {
-        id:caseDetails.id,
-        title:caseDetails.title, 
-        description: caseDetails.description,
-        appointmentDate: caseDetails.appointmentDate,
-        createdAt: caseDetails.createdAt,
-        patient: caseDetails.name,
-        priority: caseDetails.priority,
-        status: updatedValue,
-        }
-        updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));
+    const handleChangeInStatus = async (e) => {
+         let updatedValue={};
+        updatedValue ={status:e.target.value};
+        const newCaseDetails = {}
+        setCaseDetails(caseDetails =>({
+            ...caseDetails,
+            ...updatedValue
+        }))
+    
+        await updateCase(newCaseDetails).then(()=>setCaseDetails(newCaseDetails));
     }
 
     return (

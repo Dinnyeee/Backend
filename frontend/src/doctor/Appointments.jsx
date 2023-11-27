@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { getAllCases } from "services/CaseApi";
+import { getAllCases, updateCase } from "services/CaseApi";
 import dayjs from "dayjs";
 
 
@@ -28,7 +28,7 @@ export const Appointments = (props) => {
     const getCases = async () => {
       try{
         const result = await getAllCases();
-        setCases(result);
+        setCases(result.filter(a => a.appointmentDate != null));
       } catch(error){
         console.error('Error getAllCases data', error);
       }
@@ -37,11 +37,11 @@ export const Appointments = (props) => {
   }, [])
 
   const [cases, setCases] = useState([])
-    const  handleDelete = (id) => {
-      const newList = cases.filter((family) => family.id !== id);
-      let updateCase = cases.filter((c) => c.id == id)[0];
-      updateCase.appointmentDate = null;
-      updateCase(updateCase).then(() => setCases(newList));
+      const  handleDelete = async(id) => {
+      const newList = cases.filter((c) => c.id !== id);
+      let ToUpdateCase = cases.filter((c) => c.id == id)[0];
+      ToUpdateCase.appointmentDate = null;
+      await updateCase(ToUpdateCase).then(() => setCases(newList));
    }
     
     return (
@@ -56,8 +56,6 @@ export const Appointments = (props) => {
             style={{ minHeight: '50vh' }}
         >
             <Grid item xs={3}>
-      
-           
             </Grid>
 
        <div className="button-and-table-doctor-appointment">
@@ -67,8 +65,7 @@ export const Appointments = (props) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><b>Id</b></TableCell>
-            <TableCell align="left"><b>Case</b></TableCell>
+            <TableCell><b>Case</b></TableCell>
             <TableCell align="left"><b>Patient</b></TableCell>
             <TableCell align="left"><b>Date</b></TableCell>
             <TableCell align="left"><b>Time</b></TableCell>
@@ -82,12 +79,11 @@ export const Appointments = (props) => {
               sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {c.id}
+                {c.title}
               </TableCell>
-              <TableCell align="left">{c.family}</TableCell>
-              <TableCell align="left">{c.family}</TableCell>
-              <TableCell align="left">{dayjs(c.date).format('MM.dd')}</TableCell>
-              <TableCell align="left">{dayjs(c.date).format('HH:mm')}</TableCell>
+              <TableCell align="left">{c.child.name}</TableCell>
+              <TableCell align="left">{dayjs(c.appointmentDate).format('MM.DD')}</TableCell>
+              <TableCell align="left">{dayjs(c.appointmentDate).format('HH:mm')}</TableCell>
               <TableCell align="center">
                 <IconButton aria-label="delete" size="small" onClick={() => handleDelete(c.id)}>
                     <DeleteIcon fontSize="small" />

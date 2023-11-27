@@ -50,20 +50,19 @@ function a11yProps(index: number) {
 
 export const Praxes = (props) => {
    
-  const[isAssistant, setIfAssistant] = useState(false); 
-
-        if (sessionStorage.getItem("role") == "ASSISSTANT"){
-          setIfAssistant(true);
-         } 
-        
-    
- 
-    
+  const[isAssistant, setIfAssistant] = useState("visible"); 
+  
     const [value, setValue] = React.useState(0);
 
     
 
      useEffect(() => {
+
+      if (sessionStorage.getItem("role") == "ASSISSTANT"){
+          setIfAssistant("hidden");
+          
+      } 
+
     const fetchMyFamilies = async () => {
       try{
         const result = await getAllPraxisFamilies();
@@ -209,7 +208,7 @@ export const Praxes = (props) => {
 
    
 
-        <CustomTabPanel value={value} index={1}>
+        <CustomTabPanel value={value} index={1} Visibility={isAssistant}>
           <Grid container>
             <TableContainer component={Paper} sx={{ width: 400 }} >
               <Table aria-label="simple table" sx={{ width: 400 }} >

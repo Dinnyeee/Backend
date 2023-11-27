@@ -85,6 +85,16 @@ export function Cases(props){
     const newList = cases.filter((c) => c.id !== id);
    deleteCase(id).then(() =>setCases(newList));
  }
+
+ function appointmentString(d){
+  console.log("A Date tartalma: "+d);
+    if(d =="Invalid Date")
+    return "-----------";
+
+    return d;
+ }
+
+
   return (
     <div>
      <DoctorResponsiveAppBar></DoctorResponsiveAppBar>
@@ -112,7 +122,7 @@ export function Cases(props){
               onChange={handleChange_1}
             >
                 <MenuItem value={"NEW"}>NEW</MenuItem>
-                <MenuItem value={"IN PROGRES"}>IN PROGRESS</MenuItem>
+                <MenuItem value={"IN_PROGRESS"}>IN PROGRESS</MenuItem>
                 <MenuItem value={"CLOSED"}>CLOSED</MenuItem>
                 <MenuItem value={"ALL"}>ALL</MenuItem>
             </Select>
@@ -145,7 +155,7 @@ export function Cases(props){
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell><b>Id</b></TableCell>
+            <TableCell><b>Case</b></TableCell>
             <TableCell align="right"><b>Patient</b></TableCell>
             <TableCell align="right"><b>Opened</b></TableCell>
             <TableCell align="right"><b>Status</b></TableCell>
@@ -161,7 +171,7 @@ export function Cases(props){
               sx={{ '&:last-family td, &:last-family th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {c.id}
+                {c.title}
               </TableCell>
               <TableCell align="right">{c.child.name}</TableCell>
               <TableCell align="right">{dayjs(c.createdAt).format('YYYY/MM/DD hh:MM')}</TableCell>
@@ -171,7 +181,7 @@ export function Cases(props){
               <TableCell align="right">
                   {c.priority}
                 </TableCell>
-              <TableCell align="right">{dayjs(c.appointmentDate).format('YYYY/MM/DD hh:MM')}</TableCell>
+              <TableCell align="right">{appointmentString(dayjs(c.appointmentDate).format('YYYY/MM/DD hh:MM'))}</TableCell>
 
               <TableCell align="right">
                  <IconButton onClick={()=>handleViewDetail(c.id)}>

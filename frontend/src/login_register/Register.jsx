@@ -11,6 +11,7 @@ export const Register = (props) => {
     const [pass, setPass] = useState('');
     const [name, setName] = useState('');
     const [role, setRole] = useState('');
+    
     const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
     const [passError, setPassError] = useState(false);
@@ -21,55 +22,44 @@ export const Register = (props) => {
         navigate("/login") ;
     }
 
-     const Register = async(e) => {
+     const handleSubmit = (e) => {
         e.preventDefault();
-        const ReginJSON = {
-            'name': name,
-            'email': email,
-            'password': pass,
-            'role': role
-        }
-        console.log("submit json " + ReginJSON);
-        await register(ReginJSON);
-
-        }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(email);
-        
-        setNameError(false)
+         setNameError(false)
         setEmailError(false)
         setRoleError(false)
         setPassError(false)
         
-        if(name == ''){
-            setNameError(true);
-        }
-
-        if(email == '' || !isEmail(email)){
-            setEmailError(true);
-        }
-
-        if(pass == ''){
-            setPassError(true);
-        }
-        
-        if(role == ''){
-            setRoleError(true);
-        }
+        if(name == ''){ setNameError(true);}
+        if(email == '' || !isEmail(email)){setEmailError(true);}
+        if(pass == ''){setPassError(true);}
+        if(role == ''){ setRoleError(true); }
 
         if(name && email && role && pass){
-            //DO SOME MAGIC, API CALLING CREATING NEW USER
-            //THEN NAVIGATE TO CORRECT PAGE
-            console.log(name)
-            console.log(email)
-            console.log(role)
-            console.log(pass)
-            
-            Register();
+
+            const ReginJSON = {
+            'name': name,
+            'email': email,
+            'password': pass,
+            'role': role
+            }       
+
+          /*  await register(ReginJSON);
+            const LoginJSON = {
+            'email': email,
+            'password': pass   
+            }
+           await login(LoginJSON);*/
         }
+    
+        
+        
     }
+
+     
+        
+      
+       
+        
 
     return (
 
@@ -122,9 +112,9 @@ export const Register = (props) => {
                                             error={roleError}
                                             onChange={(e) => setRole(e.target.value)}
                                             >
-                                                <MenuItem value={"Doctor"}>Doctor</MenuItem>
-                                                <MenuItem value={"Assistant"}>Assistant</MenuItem>
-                                                <MenuItem value={"Parent"}>Parent</MenuItem>
+                                                <MenuItem value={"DOCTOR"}>Doctor</MenuItem>
+                                                <MenuItem value={"ASSISSTANT"}>Assistant</MenuItem>
+                                                <MenuItem value={"PARENT"}>Parent</MenuItem>
                                             </Select>
                                     </FormControl>
 
@@ -142,7 +132,7 @@ export const Register = (props) => {
                                 
 
                                 <div className='buttons-in-form'>
-                                    <Button variant='contained' color='secondary' type='submit' onClick={handleSubmit} >Sign up</Button>  
+                                    <Button variant='contained' color='secondary' type='submit'>Sign up</Button>  
                                     <Button variant='outlined' color="secondary" onClick={navigateToLogin}>Already have an account? Log in here.</Button>
                                 </div>
                             </form>
@@ -150,5 +140,5 @@ export const Register = (props) => {
                 </Grid>
              </Grid>
         </div>
-    );
+    )
 }
